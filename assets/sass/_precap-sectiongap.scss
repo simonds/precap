@@ -1,0 +1,196 @@
+
+.SectionGap {
+    height: 54px;
+    margin: 10px 50px;
+
+    .PrecapButton.AddSectionHereButton {
+        display: block;
+        width:  55px;
+        height: 54px;
+        margin: 0 auto;
+        background: #ddd;
+        @include border-radius();
+        cursor: pointer;
+        @include opacity(0);
+        @include single-transition(opacity, .25s, ease-in-out);
+
+        span {
+            position: absolute;
+            top:  17px;
+            left: 17px;
+            display: block;
+            width:  20px;
+            height: 20px;
+            background-image:url(../images/precap-sprite.png);
+            background-color:transparent;
+            background-repeat:no-repeat;
+            background-position:-180px -173px;
+            overflow: hidden;text-indent: 100%;white-space: nowrap;
+        }
+
+        &:hover {background: #ccc;}
+        &:active {background: #444;}
+        &:hover span {background-position:-180px -193px;}
+        &:active span {background-position:-180px -193px;}
+    }
+    &:hover .AddSectionHereButton {
+        @include opacity(1);
+    }
+    &.BarVisible .AddSectionHereButton {display: none!important;}
+
+    .AddSectionHereBar {
+        height: 54px;
+        // margin: 0 54px;
+        background: #e5e5e5;
+        position: absolute;
+        width: 100%;
+        @include border-radius();
+        @include box-shadow(rgba(0, 0, 0, 0.6) 0px 1px 2px);
+
+        .CloseButton {
+            display: block;
+            position: absolute;
+            top: 17px;
+            left: 13px;
+            width:  22px;
+            height: 22px;
+            cursor: pointer;
+            background-image:url(../images/precap-sprite.png);
+            background-color:transparent;
+            background-repeat:no-repeat;
+            background-position: -172px -115px;
+            overflow: hidden;text-indent: 100%;white-space: nowrap;
+    
+            &:hover {
+                background-position: -172px -137px;
+            }
+        }
+    }
+    .AddSectionHereBar .SectionTypes {
+        // margin: 0 auto;
+        // width: 400px;
+        width: 100%;
+        height: 54px;
+        display: inline-block;
+        text-align: center;
+
+        .ButtonWrapper {
+            display: inline-block;
+            margin-right: 14px;
+            cursor: pointer;
+
+            .PrecapButton {
+                > span {
+                    text-align: center;
+                    font-size: 12px;
+                    color: #444;
+                    text-decoration: none!important;
+                    text-shadow: none;
+                }
+            
+                .Icon {
+                    display: block;
+                    margin: 8px auto 0;
+                    background-image:url(../images/precap-sprite.png);
+                    background-color:transparent;
+                    background-repeat:no-repeat;
+                    overflow: hidden;text-indent: 100%;white-space: nowrap;
+                }
+            }
+
+            &.Note {
+                margin-right: 35px;
+                .Icon {
+                    width:  22px;
+                    height: 29px;
+                    background-position: -0px -115px;
+                }
+                &:hover .Icon {
+                    background-position: -0px -144px;
+                }
+            }
+
+            &.List {
+                margin-right: 25px;
+                .Icon {
+                    width:  24px;
+                    height: 29px;
+                    background-position: -148px -115px;
+                }
+                &:hover .Icon {
+                    background-position: -148px -144px;
+                }
+            }
+
+            &.Location {
+                margin-right: 22px;
+                .Icon {
+                    width:  20px;
+                    height: 29px;
+                    background-position: -53px -115px;
+                }
+                &:hover .Icon {
+                    background-position: -53px -144px;
+                }
+            }
+
+            &.Group {
+                margin-right: 22px;
+                .Icon {
+                    width:  31px;
+                    height: 29px;
+                    background-position: -22px -115px;
+                }
+                &:hover .Icon {
+                    background-position: -22px -144px;
+                }
+            }
+
+            &.Timeline {
+                margin-right: 21px;
+                .Icon {
+                    width:  26px;
+                    height: 29px;
+                    background-position: -102px -115px;
+                }
+                &:hover .Icon {
+                    background-position: -102px -144px;
+                }
+            }
+
+            &.PhotoSet {
+                margin-right: 20px;
+                .Icon {
+                    width:  29px;
+                    height: 29px;
+                    background-position: -73px -115px;
+                }
+                &:hover .Icon {
+                    background-position: -73px -144px;
+                }
+            }
+
+            &.FileSet {
+                margin-right: 0px;
+                .Icon {
+                    width:  20px;
+                    height: 29px;
+                    background-position: -128px -115px;
+                }
+                &:hover .Icon {
+                    background-position: -128px -144px;
+                }
+            }
+
+            .Text {
+                font-size: 11px;
+                color: #777;
+                font-weight: 400;
+            }
+            &:hover .Text {
+                color: #222;
+            }
+        }
+    }
+}
+

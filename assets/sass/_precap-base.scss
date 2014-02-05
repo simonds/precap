@@ -1,0 +1,20 @@
+@mixin input-placeholder {
+	&:-moz-placeholder { @content; }
+	&::-moz-placeholder { @content; }
+	&:-ms-input-placeholder { @content; }
+	&::-webkit-input-placeholder { @content; } 
+}
+
+$default-border-radius: 3px;
+$experimental-support-for-svg: true;
+
+// Theming Defaults
+$textFontFamily: "ProximaNova", "Helvetica Neue", Helvetica, Arial, sans;
+$headerFontFamily: "ProximaNova", "Helvetica Neue", Helvetica, Arial, sans;
+$textFontSize: 15px;
+$textFontWeight: 300;
+$mediumFontWeight: 600; 
+$boldFontWeight: 600;
+$blackFontWeight: 700;
+$sectionHeaderFontWeight: 600;
+$precapNameFontWeight: 600;

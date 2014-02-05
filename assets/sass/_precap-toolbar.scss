@@ -1,0 +1,134 @@
+
+.Toolbar {
+	background: #e6e6e6;
+	width:  86px;
+	position: absolute;
+	left: 823px;
+	top: 48px;
+	@include box-shadow(inset rgba(0, 0, 0, 0.9) 0px 0px 3px 1px);
+	@include border-radius();
+	z-index: 800;
+
+	.ActionButtons {
+		padding-bottom: 12px;
+	}
+
+	.ActionButtons .Trigger {
+		display: block;
+		padding-top: 14px;
+
+		.PrecapButton {
+			outline: none;
+			border: none;
+			width: 100%;
+			text-align: center;
+			background: transparent;
+			font-family: $textFontFamily;
+			cursor: pointer;
+			@include box-shadow(none);
+
+			.Icon {
+				display: block;
+				margin: 0 auto;
+				background-image:url(../images/precap-sprite.png);
+				background-color:transparent;
+				background-repeat:no-repeat;
+				overflow: hidden;text-indent: 100%;white-space: nowrap;
+				}
+
+			> span {
+				font-size: 12px;
+				// font-family: "Gotham", "Helvetica Neue", Helvetica, Arial, sans;
+				font-weight: 300;
+				color: #666;
+				text-shadow: #eee 0px 1px 0px;
+				}
+				.Trigger:hover .Label {
+					color: #000;
+					}
+		}
+
+		/* Send Button */
+		> .SendButton {
+			// border-bottom: 1px solid #aaa;			
+			// padding-bottom: 12px;
+
+			.Icon {
+				width:  34px;
+				height: 41px;
+				background-position: -34px -23px;
+				}
+			&:hover .Icon,
+			&:active .Icon,
+			&.Active .Icon {
+				background-position: -34px -64px;
+				}
+		}
+
+		/* New Precap Button */
+		> .NewPrecapButton {
+			// border-top: 1px solid #fff;
+			.Icon {
+				width:  34px;
+				height: 33px;
+				background-position: 0px -23px;
+				}
+			&:hover .Icon,
+			&:active .Icon {
+				background-position: 0px -56px;
+				}
+		}
+
+		/* My Precaps Button */
+		> .MyPrecapsButton {
+			.Icon {
+				width:  32px;
+				height: 43px;
+				background-position: -68px -23px;
+				}
+			&:hover .Icon,
+			&:active .Icon,
+			&.Active .Icon {
+				background-position: -68px -66px;
+				}
+		}
+
+		/* Directory Button */
+		> .DirectoryButton {
+			// border-bottom: 1px solid #aaa;
+			padding-bottom: 12px;
+			.Icon {
+				width:  52px;
+				height: 37px;
+				background-position: -100px -23px;
+				}
+			&:hover .Icon, 
+			&:active .Icon,
+			&.Active .Icon {
+				background-position: -100px -60px;
+				}
+		}
+
+		/* Settings Button */
+		> .SettingsButton {
+			padding-top: 0px;
+
+			span {font-weight:400;}
+		}
+
+		& .PrecapButton.Disabled {
+			cursor: default;
+			@include opacity(0.4);
+
+			&:hover span {
+				text-decoration: none;
+				cursor: default;
+				}
+		}
+	}
+}
+.Canvas-Right .Toolbar {
+	right: auto;
+	left: 0px;
+	}
+

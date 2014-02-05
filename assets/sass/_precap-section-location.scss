@@ -1,0 +1,43 @@
+
+section.Location {
+	.MapsOfflineNotice {
+		font-style: italic;
+		color: crimson;
+	}
+	.MapContainer {
+		height: 240px;
+		border: 1px solid #bbb;
+		/* background: url(http://dummyimage.com/692x200/eee/ffffff&text=MAP); */
+		background: #eee;
+		}
+
+	& .LocationAddress {
+		margin-bottom: 6px;
+		font-family: $textFontFamily;
+		font-size: $textFontSize;
+		color: #444;
+		background: transparent;
+		font-weight: $textFontWeight;
+		border: 0;
+		border-bottom: 1px dashed transparent;
+		outline: none;
+		width: 100%;
+
+		&.Active,
+		// &:hover,
+		&:focus {
+			border-bottom-color: #008CF8;
+		}
+
+		&.Populated {
+			@include input-placeholder {
+				color: #444;
+			}
+		}
+		// &.Instructive {
+		// 	@include input-placeholder {
+		// 		color: #aaa;
+		// 	}
+		// }
+	}
+}

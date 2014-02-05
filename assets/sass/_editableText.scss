@@ -1,0 +1,18 @@
+.EditableText {
+	cursor: text;
+	border-bottom: 1px dashed transparent;
+	white-space: pre-wrap;		
+	
+	&.Active {
+		// background-color: #e6f3ff;
+		border-bottom-color: #008CF8;
+	}
+
+	&.Active,
+	&:hover {
+		// border-bottom-color: #008CF8;
+		}
+	&:focus {
+		outline: none;
+		}
+}

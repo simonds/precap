@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Precap Prototype</title>
+<link rel="shortcut icon" href="favicon.ico"/>
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="precap-touch-icon-retina.png"/>
+<meta name="apple-mobile-web-app-title" content="Precap"/>
+
+<link href="/assets/stylesheets/precap-compiled.css" media="screen, projection, print" rel="stylesheet" type="text/css"/>
+<!--[if IE]>
+<link href="/assets/stylesheets/precap-ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+<!-- We will concat/minify/etc soon -->
+<script src="/assets/js/libraries/mootools-core-1.4.5-nocompat.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/libraries/mootools-more-1.4.0.1-nocompat.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="/assets/js/libraries/Fx.Spring.js" type="text/javascript" charset="utf-8"></script> -->
+<script src="/assets/js/libraries/Spinner.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/libraries/moment.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/libraries/mousetrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/libraries/howler/howler.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=true" type="text/javascript" charset="utf-8"></script>
+<script src="//api.filepicker.io/v1/filepicker.js"></script>
+
+<!-- Fake Data -->
+<!-- <script src="/testdata.js" type="text/javascript" charset="utf-8"></script> -->
+
+<script src="/assets/js/Precap.Core.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/EditableText.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/TimeRanger.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Precap.App.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Precap.Button.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Precap.Checkbox.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Precap.TextInput.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Precap.Toolbar.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Precap.SectionGap.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Section/Base.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Section/Note.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Section/Timeline.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Section/Location.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Section/List.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Section/AssetSet.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Section/PhotoSet.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Section/FileSet.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Section/Group.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Precap.Document.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Precap.BSheet.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Precap.Send.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/Precap.DocumentChooser.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	// We'll get this from the session one way or another.
+	var user = {
+		id: 123
+	};
+
+	window.addEvent('domready', function() {
+		new Precap.App({
+			user: user
+			,onReady: function(precap){
+				// (function(){
+				// 	precap.loadMyPrecapsView();
+				// }).delay(500);
+			}
+		});
+	});
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

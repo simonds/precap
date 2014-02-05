@@ -1,0 +1,192 @@
+.Section .AddAsset {
+	display: table;
+	float: left;
+	margin: 0 10px 10px 0;
+	width:  165px;
+	height: 165px;
+	background: #ddd;
+	@include border-radius();
+	cursor: pointer;
+	font-size: 165px;
+	font-weight: 700;
+	line-height: 1;
+	color: #fff;
+	text-align: center;
+
+	span.Text {
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	&:hover,
+	&:active,
+	&.Over {
+		background: #ddd;
+		color: #aaa;
+		// .Icon {
+		// 	background-position:-71px -346px;
+		// }
+	}
+
+	&:active {
+		background: #444;
+		color: #222;
+	}
+
+	&.Loading {
+		font-size: 14px;
+		font-weight: 300;
+	}
+}
+
+
+section.PhotoSet {
+	.Photos {
+		overflow: hidden;
+		.Photo {
+			float: left; 
+			margin: 0 10px 10px 0;
+			width:  165px;
+			height: 165px;
+			border-radius: 			3px; 
+			-moz-border-radius: 	3px;
+			-webkit-border-radius: 	3px;
+			overflow: hidden;
+			cursor: pointer;
+			cursor: zoom-in;
+			cursor: -moz-zoom-in;
+			cursor: -webkit-zoom-in; 
+			}
+	}
+}
+.PrecapPopover.AssetViewer {
+	padding-bottom: 5px;
+	position: fixed;
+
+	.Inner {
+		height: 100%;
+		width: 100%;
+
+		.Photo {
+			height: 100%;
+			width: 100%;
+			cursor: zoom-out;
+			cursor: -moz-zoom-out;
+			cursor: -webkit-zoom-out; 
+
+			img {
+				max-width: 100%;
+				max-height: 100%;
+			}
+		}
+		footer {
+			display: table;
+			position: relative;
+			height: 18px;
+			padding: 8px 0;
+			width: 100%;
+
+			.Caption {
+				display: table-cell;
+				vertical-align: bottom;
+			}
+			.ActionsContainer {
+				display: table-cell;
+				vertical-align: middle;
+				width: 250px;
+				text-align: right;
+
+				.DeleteConfirmText {
+					font-family: $headerFontFamily;
+					font-weight: 600;
+					}						
+				.PrecapButton {
+					margin-left: 10px;
+
+					&.Active span {
+						color: #c02b00!important;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+section.FileSet {
+	.Files {
+		overflow: hidden;
+
+		.File {
+			float: left;
+			margin: 0 10px 10px 0;
+			width:  165px;
+			height: 165px;
+			background: #eee;
+			border-radius: 			3px; 
+			-moz-border-radius: 	3px;
+			-webkit-border-radius: 	3px;
+			cursor: pointer;
+
+			&:hover {
+				background: #ddd;
+				}
+			&:active {
+				background: #444;
+				}
+			.Icon {
+				display: block;
+				position: absolute;
+				top: 20px;
+				left: 45px;
+				width:  73px;
+				height: 93px;
+				background-image:url(../images/precap-sprite.png);
+				background-color:transparent;
+				background-repeat:no-repeat;
+				background-position: left -253px;
+				}
+			&:hover .Icon,
+			&:active .Icon {
+				background-position: -73px -253px;
+				}
+
+			.Ext {
+				position: absolute;
+				padding-top: 50%;
+				top: 0px;
+				right: 0px;
+				left: 0px;
+				text-align: center;
+				font-size: 17px;
+				font-weight: 700;
+				color: #aaa;
+				}
+			&:hover .Ext {color: #fff} 
+			&:active .Ext {color: #444}
+
+			.FileName {
+				position: absolute;
+				right: 0px;
+				left: 0px;
+				bottom: 18px;
+				padding: 0 5px;
+				text-align: center;
+				font-weight: 400;
+				color: #aaa;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+
+				&.Active {
+					text-overflow: clip;
+				}
+			}
+			&:hover .FileName {color: #444;}
+			&:active .FileName {color: #aaa;}
+		}
+	}
+}
+
+
+

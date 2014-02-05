@@ -1,0 +1,93 @@
+.PrecapInput {
+	display: inline-block;
+	width: 100%;
+	@include border-radius();
+	@include box-shadow(inset 0px 1px 3px rgba(0,0,0,0.7));
+	}
+	.PrecapInput input {
+		position: absolute;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0;
+		font-family: $textFontFamily;
+		font-size: $textFontSize;
+		color: #444;
+		background: transparent;
+		padding: 4px 6px 4px;
+		font-weight: 300;
+		border: 0;
+		outline: none !important;
+		}
+	.PrecapInput.Buttons input {right: 76px;}
+	.PrecapInput .Inner {
+		position: absolute;
+		top: 6px;
+		right: 7px;
+		bottom: 7px;
+		left: 6px;
+		}
+	.PrecapInput textarea {
+		background: transparent;
+		width: 100%;
+		height: 100%;
+		font-family: $textFontFamily;
+		color: #444;
+		font-size: $textFontSize;
+		// padding: 6px 6px 4px;
+		font-weight: 300;
+		border: none;
+		resize: none;
+		outline: none;
+		}
+	.PrecapInput .PrecapButton.Do {
+		position: absolute;
+		height: 23px;
+		width: 51px;
+		right: 3px;
+		bottom: 3px;
+		}
+	.PrecapInput .PrecapButton.CloseX_M {
+		position: absolute;
+		right: 58px;
+		bottom: 5px;
+		}
+
+
+
+/* Preset Sizes */
+.PrecapInput.OneLine {
+	height: 29px;
+	}
+.PrecapInput.MultiLine {
+	height: 100px;
+	}
+
+
+
+.SearchInput {
+	background: #fff;
+	border: 1px solid #ccc;
+	@include border-radius();
+	padding: 3px 3px 3px;
+	line-height: 1;
+	}
+	.SearchInput .Icon {
+		float: left;
+		display: block;
+		margin-right: 4px;
+		width:  17px;
+		height: 17px;
+		background-image:url(../images/precap-sprite.png);
+		background-color:transparent;
+		background-repeat:no-repeat;
+		background-position:left -89px;
+		overflow: hidden;text-indent: 100%;white-space: nowrap;
+		}
+	.SearchInput input {
+		top: 1px;
+		border: none;
+		outline: 0;
+		font-family: $textFontFamily;
+		font-size: 13px;
+		}

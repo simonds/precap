@@ -1,0 +1,94 @@
+
+section.Section {
+	padding: 0 54px;
+
+	h2 {
+		font-size: 20px;
+		font-family: $headerFontFamily;
+		font-weight: $sectionHeaderFontWeight;
+		margin-bottom: 5px;
+		line-height: 1;
+		// letter-spacing: -0.02em;
+		}
+	.DeleteConfirmBox {
+		background: white;
+		position: absolute;
+		width: 400px;
+		height: 30px;
+		line-height: 1;
+		right: 14px;
+		top: -6px;
+		text-align: right;
+		.PrecapButton span {vertical-align: auto;}
+		.DeleteConfirmText {
+			font-family: $headerFontFamily;
+			font-weight: 600;
+			}
+
+		.Text {
+			padding-left: 12px;
+			padding-top: 8px;
+			}
+
+		.Active span {
+			color: #c02b00;
+			}
+
+	}
+	.PrecapButton.SectionMove,
+	.PrecapButton.SectionDelete {
+		display: block;
+		position: absolute;
+        @include opacity(0);
+        @include single-transition(opacity, .25s, ease-in-out);
+		}
+	.PrecapButton.SectionMove {
+		top: -10px;
+		left: 15px;
+		} 
+	.PrecapButton.SectionDelete {
+		right: 14px;			
+		top: -6px;
+	}
+	// .PrecapButton.SectionDelete {
+	// 	right: 14px;
+	// 	}
+	&:hover .PrecapButton.SectionMove,
+	&:hover .PrecapButton.SectionDelete {
+		// display: block;
+		@include opacity(1);
+		}
+	
+	.ContentFooter {
+		display: table;
+		padding-top: 10px;
+		width: 100%;
+
+		.Left, 
+		.Right {
+			display: table-cell;
+			width: 50%;
+			}
+		.Right {
+			text-align: right;
+			}
+
+		.PrecapButton {
+			display: inline-block;
+
+			span {
+				font-weight: 600;
+				}
+		}
+	}
+}
+
+
+section.Footer {
+	margin: 0 54px 10px;
+	padding: 20px 0 0;
+
+	.ArchivePrecapTrigger {
+		float: right;
+		}
+}

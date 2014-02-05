@@ -1,0 +1,133 @@
+
+.DocumentChooser {
+	.HeaderControls {
+		.PrecapMenuButton {
+			background: #fff;
+			border: 1px solid #ccc;
+			@include border-radius();
+			padding: 5px 6px 4px;
+			line-height: 1;
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 124px;
+
+			.Icon {
+				float: right;
+				display: block;
+				width:  10px;
+				height: 8px;
+				top: 3px;
+				background-image:url(../images/precap-sprite.png);
+				background-color:transparent;
+				background-repeat:no-repeat;
+				background-position:left -107px;
+				overflow: hidden;text-indent: 100%;white-space: nowrap;
+				}
+			.Label {color: #999;}
+			.SortedByType {
+				color: #333;
+				font-weight: 600;
+				}
+		}
+		.SearchInput {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 160px;
+			}
+
+		.PrecapListViewButtons {
+			position: absolute;
+			background: pink;
+			right: 155px;
+			top: 4px;
+			height: 18px;
+			width: 84px;
+			}
+	}
+
+	.PrecapListView {
+		// background: #fff;
+		// position: absolute;
+		// top: 56px;
+		// right: 16px;
+		// bottom: 16px;
+		// left: 16px;
+		// @include box-shadow(inset rgba(0, 0, 0, 0.8) 0px 0px 5px);
+
+		>.Archive {
+			display: block;
+			}
+
+		.PrecapList {
+			// position: absolute;
+			// top: 2px;
+			// right: 2px;
+			// bottom: 2px;
+			// left: 2px;
+			overflow: auto;
+
+			.PrecapListItem {
+				cursor: pointer;
+				// height: 74px;
+				border-bottom: 1px solid #ccc;
+				display: table;
+				width: 100%;
+				padding: 12px 0;
+			
+				&:hover {
+					background: #eee;
+					}
+				&.Alternate {
+					background: #eee;
+					}
+	
+				.Info, .Action {
+					display: table-cell;
+					vertical-align: middle;
+					}
+				.Info {
+					padding-left: 10px;
+					}
+				.Action {
+					width: 80px;
+					text-align: right;
+					padding-right: 10px;
+					}
+				.PrecapName {
+					// position: absolute;
+					// top: 18px;
+					// left: 10px;
+					// right: 50px;
+					font-size: 20px;
+					line-height: 1;
+					font-weight: 400;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					}
+				.PrecapDetails {
+					font-size: 13px;
+					color: #999;
+					// position: absolute;
+					// top: 44px;
+					// left: 10px;
+					}
+				.Action .PrecapButton.ArchiveButton_L,
+				.Action .PrecapButton.GearButton_L,
+				.Action .PrecapButton.DeleteButton_L {
+					display: none;
+					// position: absolute;
+					// right: 12px;
+					// top: 24px;
+					}
+				&:hover .Action .PrecapButton.ArchiveButton_L,
+				&:hover .Action .PrecapButton.GearButton_L,
+				&:hover .Action .PrecapButton.DeleteButton_L {display: inline-block;}
+			}
+
+		}
+	}
+}
+

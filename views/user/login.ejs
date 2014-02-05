@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+
+<div class="container">
+	<% if (flashInfo != "") { %><div class="alert alert-info"><%= flashInfo %></div><% } %>
+	<% if (flashError != "") { %><div class="alert alert-danger"><%= flashError %></div><% } %>
+
+	<div class="col-sm-4" style="margin: auto;">
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h3 class="panel-title">Please sign in</h3>
+	    </div>
+	    <div class="panel-body">
+			<form action="/login" method="POST">
+			<input type="hidden" name="referer" value="<%= referer %>" />
+			<input type="hidden" name="csrf" value="<%= _csrf %>" />
+
+			<input type="text" class="form-control" name="email" placeholder="Email address" value="" />
+			<input type="password" class="form-control" name="password" placeholder="Password" value="" />
+
+			<div><input type="checkbox" name="remember" value="true" /> Remember me</div>
+			<div><button class="btn btn-lg btn-primary btn-block">Log in</button></div>
+
+			</form>
+		</div>
+	  </div>
+	</div>
+
+</div>

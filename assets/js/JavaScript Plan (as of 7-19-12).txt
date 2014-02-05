@@ -1,0 +1,52 @@
+JavaScript Plan (as of 7-19-12)
+
+
+
+Parts:
+	PrecapApplication.js
+		.loadPrecap()
+		.unloadPrecap()
+
+	Precap.js
+		.addModule(type, location)
+		.removeModule()
+		.associateContact(contact)
+		.disassociateContact(contact)
+		.reorderModules(order)
+
+	[Precap Modules]
+		Location.js
+			.renderLocationOnMap()
+			.save()
+		Timeline.js
+			.save()
+			.addLine()
+			.removeLine()
+		Note.js
+			.save()
+		ContactGroup.js
+			.addContact()
+			.removeContact()
+			.reorderContacts(order)
+			.viewContact(contactId)
+		List.js
+		PhotoSet.js
+		FileGroup.js
+
+	[Utilities]
+		MDPopover.js
+		EditableText.js
+			[maxLength]
+			[multiLine]
+			[inactiveClass]
+			[activeClass]
+
+			.enableEdit()
+			.disableEdit()
+			.getValue()
+			.setValue()
+
+
+
+
+

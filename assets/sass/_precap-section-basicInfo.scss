@@ -1,0 +1,21 @@
+
+section.BasicInfo {
+	padding: 0 54px;
+
+	.Name {
+		font-size: 30px;
+		font-family: $headerFontFamily;
+		font-weight: $precapNameFontWeight;
+		margin-bottom: 14px;
+		margin-right: 150px;
+		}
+	.Date {
+		position: absolute;
+		top: 12px;
+		right: 54px;
+		cursor: pointer;
+		}
+	.Description {
+		line-height: 1.4;
+		}
+}

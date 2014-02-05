@@ -1,0 +1,164 @@
+
+.DocumentChooser {
+	position: absolute;
+	width: 433px;
+	height: 610px;
+	left: 368px;
+	top: 10px;
+	background: red;
+	-moz-border-radius:    3px;
+	-webkit-border-radius: 3px;
+	border-radius:         3px;
+	z-index: 10000;
+	box-shadow: rgba(0, 0, 0, 1) 0px 0px 20px;
+	-webkit-box-shadow: rgba(0, 0, 0, 1) 0px 0px 20px;
+	-moz-box-shadow: rgba(0, 0, 0, 1) 0px 0px 20px;
+	background: #d6d6d6;
+	@include background(image-url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Q2ZDZkNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlZWVlZWUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+"),
+		linear-gradient(left, #d6d6d6 0%, #eeeeee 100%)
+		);
+	}
+	/* Pointer nipple */
+	.DocumentChooser:before {
+		content:"";
+		position: absolute;
+		left: 100%;
+		top: 212px;
+		width: 0;
+		height: 0;
+		border-top: 18px solid transparent;
+		border-left: 26px solid #888;
+		border-bottom: 18px solid transparent;
+		}
+	.DocumentChooser:after {
+		content:"";
+		position: absolute;
+		left: 100%;
+		top: 210px;
+		width: 0;
+		height: 0;
+		border-top: 18px solid transparent;
+		border-left: 26px solid #eee;
+		border-bottom: 18px solid transparent;
+		}
+	/* /Pointer nipple */
+
+	.DocumentChooser .Header {
+		position: absolute;
+		top: 16px;
+		right: 16px;
+		left: 16px;
+		}
+		.DocumentChooser .Header .CloseX_L {
+			top: 2px;
+			}
+		.DocumentChooser .Header .PrecapMenuButton {
+			background: #fff;
+			border: 1px solid #ccc;
+			border-radius: 			3px; 
+			-moz-border-radius: 	3px;
+			-webkit-border-radius: 	3px;
+			padding: 5px 6px 4px;
+			line-height: 1;
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 124px;
+			}
+			.DocumentChooser .Header .PrecapMenuButton .Icon {
+				float: right;
+				display: block;
+				width:  10px;
+				height: 8px;
+				top: 3px;
+				background-image:url(../images/precap-sprite.png);
+				background-color:transparent;
+				background-repeat:no-repeat;
+				background-position:left -107px;
+				overflow: hidden;text-indent: 100%;white-space: nowrap;
+				}
+			.DocumentChooser .Header .PrecapMenuButton .Label {color: #999;}
+			.DocumentChooser .Header .PrecapMenuButton .SortedByType {
+				color: #333;
+				font-weight: 600;
+				}
+		.DocumentChooser .Header .SearchInput {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 160px;
+			}
+
+		.DocumentChooser .Header .PrecapListViewButtons {
+			position: absolute;
+			right: 155px;
+			top: 4px;
+			height: 18px;
+			width: 84px;
+			}
+		.DocumentChooser.List .Header .PrecapListViewButtons {right: 155px;}
+		.DocumentChooser.Archive .Header .PrecapListViewButtons {right: 180px;}
+
+			.DocumentChooser .Header .PrecapListViewButtons .PrecapButton {margin-right: 12px;}
+			.DocumentChooser .Header .PrecapListViewButtons .ArchiveButton_S {margin-right: 0;}
+
+	.DocumentChooser .PrecapListView {
+		background: #fff;
+		position: absolute;
+		top: 56px;
+		right: 16px;
+		bottom: 16px;
+		left: 16px;
+		box-shadow: inset rgba(0, 0, 0, 0.8) 0px 0px 5px;
+		-webkit-box-shadow: inset rgba(0, 0, 0, 0.8) 0px 0px 5px;
+		-moz-box-shadow: inset rgba(0, 0, 0, 0.8) 0px 0px 5px;
+		}
+		.DocumentChooser .PrecapListView.Archive {
+			display: block;
+			}
+		.DocumentChooser .PrecapList {
+			position: absolute;
+			top: 2px;
+			right: 2px;
+			bottom: 2px;
+			left: 2px;
+			overflow: auto;
+			}
+			.PrecapListItem {
+				cursor: pointer;
+				height: 74px;
+				border-bottom: 1px solid #ccc;
+				}
+			.PrecapListItem.Alternate {
+				background: #eee;
+				}
+				.PrecapList .PrecapName {
+					position: absolute;
+					top: 18px;
+					left: 20px;
+					right: 50px;
+					font-size: 24px;
+					line-height: 1;
+					font-weight: 600;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					}
+				.PrecapList .PrecapDetails {
+					font-size: 13px;
+					color: #999;
+					position: absolute;
+					top: 44px;
+					left: 20px;
+					}
+				.PrecapList .PrecapButton.ArchiveButton_L,
+				.PrecapList .PrecapButton.GearButton_L,
+				.PrecapList .PrecapButton.DeleteButton_L {
+					display: none;
+					position: absolute;
+					right: 12px;
+					top: 24px;
+					}
+					.PrecapList .PrecapListItem:hover .PrecapButton.ArchiveButton_L,
+					.PrecapList .PrecapListItem:hover .PrecapButton.GearButton_L,
+					.PrecapList .PrecapListItem:hover .PrecapButton.DeleteButton_L {display:block;}

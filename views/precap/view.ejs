@@ -1,0 +1,47 @@
+
+
+<!-- Obviously we need to concat/minify/etc this stuff -->
+<script src="js/libraries/mootools-core-1.4.5-nocompat.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/libraries/mootools-more-1.4.0.1-nocompat.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="js/libraries/Fx.Spring.js" type="text/javascript" charset="utf-8"></script> -->
+
+<script src="js/libraries/Spinner.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/libraries/DatePicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/libraries/moment.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/libraries/mousetrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/libraries/howler/howler.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=true" type="text/javascript" charset="utf-8"></script>
+<script src="//api.filepicker.io/v1/filepicker.js"></script>
+
+<script src="js/Precap.Core.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/EditableText.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/TimeRanger.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Precap.App.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Precap.Button.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Precap.Checkbox.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Precap.DatePicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Precap.TextInput.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Precap.Toolbar.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Precap.SectionGap.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Section/Base.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Section/Note.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Section/Timeline.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Section/Location.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Section/List.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Section/AssetSet.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Section/PhotoSet.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Section/FileSet.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Section/Group.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Precap.Document.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Precap.BSheet.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Precap.Send.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/Precap.DocumentChooser.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+
+	var userId = '<%= user.id %>';
+
+	window.addEvent('domready', function() {
+		new Precap.App(userId);
+	});
+</script>

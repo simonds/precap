@@ -1,0 +1,37 @@
+
+section.List {
+	.ListList {
+		position: relative;
+		}
+	.ListItem {
+		clear: left; 
+		margin-top: 8px;
+		display: table;
+		width: 100%;
+		}
+	.ListCheckbox {
+		display: table-cell;
+		vertical-align: top;
+		width: 20px;
+		}
+	.ListItemText {
+		padding-left: 8px;
+		display: table-cell;
+		vertical-align: bottom;
+		cursor: pointer;
+
+		&.Clone{
+			@include box-shadow();
+			@include border-radius();
+			font-size: 1.1em;
+			padding: 4px;
+			}
+		&.Active {
+			cursor: text;
+			}
+	}
+	input[type='checkbox'] {
+		vertical-align: baseline;
+		font-size: larger;
+		}
+}

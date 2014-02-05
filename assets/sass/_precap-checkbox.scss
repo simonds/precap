@@ -1,0 +1,33 @@
+
+.PrecapCheckbox {
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 1px;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 1px;
+	-moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 1px;
+	background: #fff;
+	@include border-radius(4px, 4px);
+	border: 1px solid #aaa;
+	line-height: 16px;
+	overflow: hidden;
+	text-align: center;
+	text-indent: 100%;
+	}
+.PrecapCheckbox:hover {
+	background-color: #ddd;
+	text-indent: 0;
+	color: #aaa;
+	}
+.PrecapCheckbox:active {
+	background-color: #444;
+	border-color: #444;
+	color: #777;
+	text-indent: 0;
+	}
+.PrecapCheckbox.Checked {
+	background-color: #444;
+	border-color: #444;
+	color: #fff;
+	text-indent: 0;
+	}

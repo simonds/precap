@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="shortcut icon" href="favicon.ico"/>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="precap-touch-icon-retina.png"/>
+<meta name="apple-mobile-web-app-title" content="Precap"/>
+<link href="/assets/stylesheets/precap-compiled.css" media="screen, projection, print" rel="stylesheet" type="text/css"/>
+<!--[if IE]>
+<link href="/assets/stylesheets/precap-ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+<script src="/assets/js/libraries/mootools-core-1.4.5-nocompat.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/libraries/mootools-more-1.4.0.1-nocompat.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/miscellany/csshelpers.js" type="text/javascript" charset="utf-8"></script>
+
+<style type="text/css">
+
+</style>		
+
+<title>Cannon/Pearce Wedding - Precap</title>
+
+<script type="text/javascript">
+	window.addEvent('domready', function() {
+		csshelpers.doAll();
+	});
+</script>
+
+</head>
+
+<body>
+	<div class="Canvas">
+		<div class="PrecapLogo">Precap</div>
+
+		<!-- Toolbar (Precap.Toolbar.js) -->
+		<div class="Toolbar" id="Toolbar">
+			<ul class="ActionButtons">
+				<li class="Trigger" id="Send">
+					<button>
+						<div class="Icon">&#160;</div>
+						<span class="Label">send</span>
+					</button>
+				</li>
+				<li class="Trigger" id="NewPrecap">
+					<button>
+						<div class="Icon">&#160;</div>
+						<span class="Label">new precap</span>
+					</button>
+				</li>
+				<li class="Trigger" id="MyPrecaps">
+					<button>
+						<div class="Icon">&#160;</div>
+						<span class="Label">my precaps</span>
+					</button>
+				</li>
+				<li class="Trigger" id="Directory">
+					<button>
+						<div class="Icon">&#160;</div>
+						<span class="Label">directory</span>
+					</button>
+				</li>
+				<li class="Trigger" id="Settings">
+					<button>
+						<span class="Label">settings</span>
+					</button>
+				</li>
+			</ul>
+		</div>
+		<!-- /Toolbar (Precap.Toolbar.js) -->
+
+
+		<!-- Document Chooser (Precap.DocumentChooser.js)-->
+		<div class="DocumentChooser">
+			<div class="Header">
+				<div class="PrecapButton Size-Icon Enabled CloseX_L" title="Close this menu"><span>X</span></div>
+
+				<!-- List View -->
+				<div class="PrecapMenuButton">
+					<div class="Icon">></div>
+					<span class="Label">Sorted by: <span class="SortedByType">Name</span></span>
+				</div>
+
+				<!-- Archive View -->
+				<div class="SearchInput HideMe">
+					<div class="Icon">&#160;</div>
+					<input type="Text" placeholder="Search"/>
+				</div>
+
+				<div class="PrecapListViewButtons">
+					<div class="PrecapButton Size-Icon Enabled ListButton_S Active" title="List view"><span>L</span></div><div 
+					class="PrecapButton Size-Icon Enabled CalendarButton_S" title="Calendar view"><span>C</span></div><div
+					class="PrecapButton Size-Icon Enabled ArchiveButton_S" title="Precap Archive"><span>A</span></div>
+				</div>
+			</div>
+
+			<div class="PrecapListView">
+				<ul class="PrecapList">
+					<li class="PrecapListItem">
+						<div class="PrecapName">Avista Board Luncheon</div>
+						<div class="PrecapDetails">March 15, 2013 &#8212; Davenport Hotel</div>
+						<div class="PrecapButton Size-Icon Enabled ArchiveButton_L" title="Archive this Precap...">&#160;</div>
+					</li>
+					<li class="PrecapListItem Alternate">
+						<div class="PrecapName">Joe and Mary's Wedding</div>
+						<div class="PrecapDetails">March 19, 2013 &#8212; Manito Country Club</div>
+						<div class="PrecapButton Size-Icon Enabled ArchiveButton_L" title="Archive this Precap...">&#160;</div>
+					</li>
+					<li class="PrecapListItem">
+						<div class="PrecapName">United Way Fundraiser Dinner</div>
+						<div class="PrecapDetails">March 21, 2013 &#8212; United Way Headquarters</div>
+						<div class="PrecapButton Size-Icon Enabled ArchiveButton_L" title="Archive this Precap...">&#160;</div>
+					</li>
+					<li class="PrecapListItem Alternate">
+						<div class="PrecapName">Smith Family Reunion Dinner Party</div>
+						<div class="PrecapDetails">March 22, 2013 &#8212; Smith Residence</div>
+						<div class="PrecapButton Size-Icon Enabled ArchiveButton_L" title="Archive this Precap...">&#160;</div>
+					</li>
+					<li class="PrecapListItem">
+						<div class="PrecapName">Smith Family Reunion</div>
+						<div class="PrecapDetails">March 25, 2013 &#8212; Corbin Park</div>
+						<div class="PrecapButton Size-Icon Enabled ArchiveButton_L" title="Archive this Precap...">&#160;</div>
+					</li>
+					<li class="PrecapListItem Alternate">
+						<div class="PrecapName">Product Shoot for Mary Taylor Line</div>
+						<div class="PrecapDetails">April 3, 2013 &#8212; Studio</div>
+						<div class="PrecapButton Size-Icon Enabled ArchiveButton_L" title="Archive this Precap...">&#160;</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="PrecapCalendarView"><!-- calendar goes here --></div>
+
+			<div class="PrecapListView Archive HideMe">
+				<ul class="PrecapList">
+					<li class="PrecapListItem">
+						<div class="PrecapName">Avista Board Luncheon</div>
+						<div class="PrecapDetails">March 15, 2013 &#8212; Davenport Hotel</div>
+						<div class="PrecapButton Size-Icon Enabled GearButton_L" title="Actions for this Precap...">&#160;</div>
+					</li>
+					<li class="PrecapListItem Alternate">
+						<div class="PrecapName">Joe and Mary's Wedding</div>
+						<div class="PrecapDetails">March 19, 2013 &#8212; Manito Country Club</div>
+						<div class="PrecapButton Size-Icon Enabled GearButton_L" title="Actions for this Precap...">&#160;</div>
+					</li>
+					<li class="PrecapListItem">
+						<div class="PrecapName">United Way Fundraiser Dinner</div>
+						<div class="PrecapDetails">March 21, 2013 &#8212; United Way Headquarters</div>
+						<div class="PrecapButton Size-Icon Enabled GearButton_L" title="Actions for this Precap...">&#160;</div>
+					</li>
+					<li class="PrecapListItem Alternate">
+						<div class="PrecapName">Smith Family Reunion Dinner Party</div>
+						<div class="PrecapDetails">March 22, 2013 &#8212; Smith Residence</div>
+						<div class="PrecapButton Size-Icon Enabled GearButton_L" title="Actions for this Precap...">&#160;</div>
+					</li>
+					<li class="PrecapListItem">
+						<div class="PrecapName">Smith Family Reunion</div>
+						<div class="PrecapDetails">March 25, 2013 &#8212; Corbin Park</div>
+						<div class="PrecapButton Size-Icon Enabled GearButton_L" title="Actions for this Precap...">&#160;</div>
+					</li>
+					<li class="PrecapListItem Alternate">
+						<div class="PrecapName">Product Shoot for Mary Taylor Line</div>
+						<div class="PrecapDetails">April 3, 2013 &#8212; Studio</div>
+						<div class="PrecapButton Size-Icon Enabled GearButton_L" title="Actions for this Precap...">&#160;</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- /Document Chooser (Precap.DocumentChooser.js)-->
+
+
+		<!-- Directory (Precap.Directory.js) -->
+		<div class="Directory HideMe">
+			<div class="Header">
+				<div class="PrecapButton Size-Icon Enabled CloseX_L"><span>X</span></div>
+
+				<div class="SearchInput">
+					<div class="Icon">&#160;</div>
+					<input type="Text" placeholder="Search"/>
+				</div>
+
+				<div class="DirectoryActionButtons">
+					<div class="PrecapButton Size-Icon Enabled AddButton_S"><span>+</span></div>
+				</div>
+			</div>
+
+			<div class="DirectoryListView">
+				<ul class="DirectoryTabIndex">
+					<li>A</li>
+					<li>B</li>
+					<li class="Active">C</li>
+					<li>D</li>
+					<li>E</li>
+					<li>F</li>
+					<li>G</li>
+					<li>H</li>
+					<li>I</li>
+					<li>J</li>
+					<li>K</li>
+					<li>L</li>
+					<li>M</li>
+					<li>N</li>
+					<li>O</li>
+					<li>P</li>
+					<li>Q</li>
+					<li>R</li>
+					<li>S</li>
+					<li>T</li>
+					<li>U</li>
+					<li>V</li>
+					<li>W</li>
+					<li>X</li>
+					<li>Y</li>
+					<li>Z</li>
+				</ul>
+				<ul class="DirectoryList">
+					<li id="hcard-Albert-Harrison" class="vcard Contact Person DirectoryListItem" title="View this contact card...">
+						<div class="Avatar">&#160;</div>							
+						<span class="Name fn n">Albert Harrison</span>
+						<span class="Title">producer</span>
+						<span class="Email"><a class="email" href="mailto:albert@hiscompany.com?Subject=Re: [Precap Name] - ">albert@hiscompany.com</a></span>
+						<span class="Phone tel">212-123-1234</span>
+					</li>
+					<li id="hcard-Olivia-Colbert" class="vcard Contact Person DirectoryListItem" title="View this contact card...">
+						<div class="Avatar">&#160;</div>							
+						<span class="Name fn n">Olivia Colbert</span>
+						<span class="Title">stylist</span>
+						<span class="Email"><a class="email" href="mailto:o.email@colbertstyleinc.com?Subject=Re: [Precap Name] - ">o.email@colbertstyleinc</a></span>
+						<span class="Phone tel">212-123-1234</span>
+					</li>
+					<li id="hcard-Josh-Patrick" class="vcard Contact Person DirectoryListItem" title="View this contact card...">
+						<div class="Avatar">&#160;</div>							
+						<span class="Name fn n">Josh Patrick</span>
+						<span class="Title">assistant</span>
+						<span class="Email"><a class="email" href="mailto:joshassists@yahoo.com?Subject=Re: [Precap Name] - ">joshassists@yahoo.com</a></span>
+						<span class="Phone tel">212-123-1234</span>
+					</li>
+					<li id="hcard-Michael-Hieronymus" class="vcard Contact Person DirectoryListItem" title="View this contact card...">
+						<div class="Avatar">&#160;</div>							
+						<span class="Name fn n">Michael Hieronymus</span>
+						<span class="Title">make-up artist</span>
+						<span class="Email"><a class="email" href="mailto:michaelhieronymus@michaeldoesmakeup.com?Subject=Re: [Precap Name] - ">michaelhieronymus@michaeldoesmakeup.com</a></span>
+						<span class="Phone tel">212-123-1234</span>
+					</li>
+					<li id="hcard-ABC-Rentals" class="vcard Contact Organization DirectoryListItem" title="View this contact card...">
+						<div class="Avatar">&#160;</div>							
+						<span class="Name fn org">ABC Rentals</span>
+						<span class="PrimaryContact">Jonathan Thompson</span>
+						<span class="Email"><a class="email" href="mailto:JonathanThompson@abcrentals.com?Subject=Re: [Precap Name] - ">JonathanThompson@abcrentals.com</a></span>
+						<span class="Phone tel">212-123-1234</span>
+					</li>
+					<!--  -->
+					<li id="hcard-Olivia-Colbert" class="vcard Contact Person DirectoryListItem" title="View this contact card...">
+						<div class="Avatar">&#160;</div>							
+						<span class="Name fn n">Olivia Colbert</span>
+						<span class="Title">stylist</span>
+						<span class="Email"><a class="email" href="mailto:o.email@colbertstyleinc.com?Subject=Re: [Precap Name] - ">o.email@colbertstyleinc</a></span>
+						<span class="Phone tel">212-123-1234</span>
+					</li>
+					<li id="hcard-Josh-Patrick" class="vcard Contact Person DirectoryListItem" title="View this contact card...">
+						<div class="Avatar">&#160;</div>							
+						<span class="Name fn n">Josh Patrick</span>
+						<span class="Title">assistant</span>
+						<span class="Email"><a class="email" href="mailto:joshassists@yahoo.com?Subject=Re: [Precap Name] - ">joshassists@yahoo.com</a></span>
+						<span class="Phone tel">212-123-1234</span>
+					</li>
+					<li id="hcard-Michael-Hieronymus" class="vcard Contact Person DirectoryListItem" title="View this contact card...">
+						<div class="Avatar">&#160;</div>							
+						<span class="Name fn n">Michael Hieronymus</span>
+						<span class="Title">make-up artist</span>
+						<span class="Email"><a class="email" href="mailto:michaelhieronymus@michaeldoesmakeup.com?Subject=Re: [Precap Name] - ">michaelhieronymus@michaeldoesmakeup.com</a></span>
+						<span class="Phone tel">212-123-1234</span>
+					</li>
+					<li id="hcard-ABC-Rentals" class="vcard Contact Organization DirectoryListItem" title="View this contact card...">
+						<div class="Avatar">&#160;</div>							
+						<span class="Name fn org">ABC Rentals</span>
+						<span class="PrimaryContact">Jonathan Thompson</span>
+						<span class="Email"><a class="email" href="mailto:JonathanThompson@abcrentals.com?Subject=Re: [Precap Name] - ">JonathanThompson@abcrentals.com</a></span>
+						<span class="Phone tel">212-123-1234</span>
+					</li>
+				</ul>
+			</div>
+
+			<div class="ContactCardView HideMe">
+				<!-- ContactCard -->
+				<div class="ContactCard Vertical" id="hcard-Olivia-Colbert-12345">
+					<div class="PrecapButton Size-Icon Enabled BackBracket"><span><</span></div>
+					<div class="Avatar">&#160;</div>
+					<h1 class="Name">Olivia Colbert</h1>
+
+					<!-- 'view' version -->
+					<ul class="ContactDetails">
+						<li>
+							<label>title</label>
+							<span class="Value">stylist</span>
+						</li>
+						<li>
+							<label>company</label>
+							<span class="Value">Colbert Style Inc.</span>
+						</li>
+						<li>
+							<label>phone</label>
+							<span class="Value Phone tel">212-123-1234</span>
+						</li>
+						<li>
+							<label>email</label>
+							<span class="Value Email"><a class="email" href="mailto:o.email@colbertstyleinc.com?Subject=Re: [Precap Name] - ">o.email@colbertstyleinc.com</a></span>
+						</li>
+						<li>
+							<label>web</label>
+							<span class="Value Website">colbertstyleinc.com</span>
+						</li>
+						<li>
+							<label>twitter</label>
+							<span class="Value Twitter">@colbertstyle</span>
+						</li>
+					</ul>
+
+					<div class="ActionButtons">
+						<div class="PrecapButton Size-Medium Enabled Download"><span>Download</span></div>
+						<div class="PrecapButton Size-Medium Enabled Edit"><span>Edit</span></div>
+					</div>
+				</div>
+				<!-- /ContactCard -->
+			</div>
+		</div>
+		<!-- /Directory (Precap.Directory.js) -->
+
+
+		<!-- Precap -->
+		<article class="Precap HideMe" id="precap-12345">
+			<!-- BasicInfo -->
+			<section class="BasicInfo">
+				<h1 class="Name Editable" title="Edit the name of this precap...">Cannon-Pearce Wedding</h1>
+				<time class="Time Editable" title="Set a date for this precap..." datetime="2013-03-17">July 14, 2013</time>
+				<div class="Description Editable" title="Edit the description of this precap...">
+					<p>Wedding to be held at the beautiful Trezzi Orchards in the Green Bluff Area. A short ceremony attended by family and close friends, followed by a beautiful outdoor dinner and dancing/general good times, etc.</p>
+				</div>
+			</section>
+
+			<div class="SectionGap">
+				<div class="AddSectionHereButton" title="Add a new Section here..."><div class="Icon">+</div></div>
+			</div>
+
+			<!-- Note -->
+			<section class="Section Note">
+				<header>
+					<h2 class="Editable" title="Edit this title...">Dinner Menu</h2>
+				</header>
+				<div class="ContentContainer">
+					<div class="NoteBody Editable" title="Edit this note..." placeholder="Enter your note here">
+						<p>Lamb Souvlaki
+						<br/>Chicken Souvlaki
+						<br/>Basmati Rice
+						<br/>Babaganoush
+						<br/>Tzatziki
+						<br/>Hummus
+						<br/>Dolmas
+						<br/>Tabouleh Salad
+						<br/>Green Salad
+						</p>
+					</div>
+				</div>
+
+				<div class="PrecapButton SectionMove Size-Icon" title="Drag to move this Section..."></div>
+				<div class="PrecapButton SectionDelete Size-Icon DeleteButton_L" title="Delete this Section..."></div>
+			</section>
+
+			<div class="SectionGap">
+				<div class="AddSectionHereButton" title="Add a new Section here..."><div class="Icon">+</div></div>
+			</div>
+
+			<!-- Location -->
+			<section class="Section Location">
+				<header>
+					<h2 class="Editable" title="Edit the title for this Location...">Trezzi Farm - Ceremony and Reception</h2>	
+					<div class="LocationAddress Editable" title="Edit the address for this location...">17710 N. Dunn Road, Colbert, WA 99005</div>
+				</header>
+
+				<div class="ContentContainer">
+					<div class="LocationMap">
+						<!-- Map goes here. -->
+						<div class="MapContainer">
+							<img src="http://dummyimage.com/692x200/eee/ffffff&text=MAP">
+							<!--
+							<iframe
+								width="100%"
+								height="200"
+								frameborder="0" 
+								scrolling="no" 
+								marginheight="0" 
+								marginwidth="0" 
+								src="https://maps.google.com/maps?f=q
+									&amp;source=s_q
+									&amp;hl=en
+									&amp;geocode=
+									&amp;q=17710+N+Dunn+Road+Colbert,+WA+99005+(Trezzi+Farm)
+									&amp;aq=
+									&amp;sll=47.819387,-117.28001
+									&amp;sspn=0.014956,0.00957
+									&amp;g=17710+N+Dunn+Road+Colbert,+WA+99005
+									&amp;ie=UTF8
+									&amp;hq=
+									&amp;hnear=17710+N+Dunn+Rd,+Colbert,+Spokane,+Washington+99005
+									&amp;ll=47.819387,-117.28001
+									&amp;spn=0.014956,0.00957
+									&amp;t=m
+									&amp;z=11
+									&amp;iwloc=
+									&amp;output=embed">
+							</iframe>
+							-->
+						</div>					
+					</div>
+				</div>
+
+				<div class="PrecapButton SectionMove Size-Icon" title="Drag to move this Section..."></div>
+				<div class="PrecapButton SectionDelete Size-Icon DeleteButton_L" title="Delete this Section..."></div>
+			</section>
+
+			<div class="SectionGap">
+				<div class="AddSectionHereButton" title="Add a new Section here..."><div class="Icon">+</div></div>
+			</div>
+
+			<!-- Timeline -->
+			<section class="Section Timeline">
+				<header>
+					<h2 class="Editable" title="Edit the title for this timeline...">Pre-Wedding Timeline - BRIDE</h2>
+				</header>
+
+				<div class="ContentContainer">
+					<div class="Day">
+						<time class="Day-Date Editable" title="Edit the date for this timeline..." datetime="2013-03-17">Friday, March 17, 2013</time>
+						<ol>
+							<li class="TimelineItem">
+								<div class="TimeSlot Editable"><time datetime="2013-03-17T14:30+00:00" title="Change the start time for this item...">9:00am</time> &#150; <time datetime="2013-03-17T15:30+00:00" title="Change the end time for this item...">10:30am</time></div>
+								<span class="TimelineItemText Editable" title="Edit this timeline item...">Morning coffee with girlfriends at Rockwood bakery</span>
+							</li>
+							<li class="TimelineItem">
+								<div class="TimeSlot Editable"><time datetime="2013-03-17T15:30+00:00" title="Change the start time for this item...">10:30am</time> &#150; <time datetime="2013-03-17T17:00+00:00" title="Change the end time for this item...">1:30pm</time></div>
+								<span class="TimelineItemText Editable" title="Edit this timeline item...">Hair and nails with girlfriends at Lush Salon</span>
+							</li>
+							<li class="TimelineItem">
+								<div class="TimeSlot Editable"><time datetime="2013-03-17T17:00+00:00" title="Change the start time for this item...">1:30pm</time> &#150; <time datetime="2013-03-17T17:30+00:00" title="Change the end time for this item...">3:00pm</time></div>
+								<span class="TimelineItemText Editable" title="Edit this timeline item...">Dresses on, champange, relaxation</span>
+							</li>
+							<li class="TimelineItem">
+								<div class="TimeSlot Editable"><time datetime="2013-03-17T17:00+00:00" title="Change the start time for this item...">3:30pm</time> &#150; <time datetime="2013-03-17T17:30+00:00" title="Change the end time for this item...">4:00pm</time></div>
+								<span class="TimelineItemText Editable" title="Edit this timeline item...">Pre-wedding photos at Manito</span>
+							</li>
+							<li class="TimelineItem">
+								<div class="TimeSlot Editable"><time datetime="2013-03-17T17:00+00:00" title="Change the start time for this item...">5:00pm</time> &#150; <time datetime="2013-03-17T17:30+00:00" title="Change the end time for this item...">5:20pm</time></div>
+								<span class="TimelineItemText Editable" title="Edit this timeline item...">Ceremony</span>
+							</li>
+						</ol>
+						<!-- this may need some thinking... -->
+						<div class="NewTimelineItemGutter NewThingGutter">
+							<div class="Triggers">
+								<span class="StartTimeTrigger Editable" title="Set the start time for a new item...">Start Time</span> &#150; <span class="EndTimeTrigger Editable"  title="Set the end time for a new item...">End Time</span>
+							</div>
+							<span class="TimelineItemText Editable" title="Set the text for a new item...">New Event</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="PrecapButton SectionMove Size-Icon" title="Drag to move this Section..."></div>
+				<div class="PrecapButton SectionDelete Size-Icon DeleteButton_L" title="Delete this Section..."></div>
+			</section>
+
+			<div class="SectionGap">
+				<div class="AddSectionHereButton" title="Add a new Section here..."><div class="Icon">+</div></div>
+			</div>
+
+			<!-- Timeline -->
+			<section class="Section Timeline">
+				<header>
+					<h2 class="Editable" title="Edit the title for this timeline...">Trezzi Farms</h2>
+				</header>
+
+				<div class="ContentContainer">
+					<div class="Day">
+						<time class="Day-Date Editable" title="Edit the date for this timeline..." datetime="2013-03-17">Friday, March 17, 2013</time>
+						<ol>
+							<li class="TimelineItem">
+								<div class="TimeSlot Editable"><time datetime="2013-03-17T14:30+00:00" title="Change the start time for this item...">12:30pm</time><time class="Empty" datetime="2013-03-17T17:00+00:00" title="Set the end time for this item..."> &#150; End Time</time></div>
+								<span class="TimelineItemText Editable" title="Edit this timeline item...">Floral Arrives</span>
+							</li>
+							<li class="TimelineItem">
+								<div class="TimeSlot Editable"><time datetime="2013-03-17T15:30+00:00" title="Change the start time for this item...">10:30am</time><time datetime="2013-03-17T17:00+00:00" title="Change the end time for this item..."> &#150; 1:30pm</time></div>
+								<span class="TimelineItemText Editable" title="Edit this timeline item...">Hair and nails with girlfriends at Lush Salon</span>
+							</li>
+							<li class="TimelineItem">
+								<div class="TimeSlot Editable"><time datetime="2013-03-17T17:00+00:00" title="Change the start time for this item...">1:30pm</time><time datetime="2013-03-17T17:30+00:00" title="Change the end time for this item..."> &#150; 3:00pm</time></div>
+								<span class="TimelineItemText Editable" title="Edit this timeline item...">Dresses on, champange, relaxation</span>
+							</li>
+							<li class="TimelineItem">
+								<div class="TimeSlot Editable"><time datetime="2013-03-17T17:00+00:00" title="Change the start time for this item...">3:30pm</time><time datetime="2013-03-17T17:30+00:00" title="Change the end time for this item..."> &#150; 4:00pm</time></div>
+								<span class="TimelineItemText Editable" title="Edit this timeline item...">Pre-wedding photos at Manito</span>
+							</li>
+							<li class="TimelineItem">
+								<div class="TimeSlot Editable"><time datetime="2013-03-17T17:00+00:00" title="Change the start time for this item...">5:00pm</time><time datetime="2013-03-17T17:30+00:00" title="Change the end time for this item..."> &#150; 5:20pm</time></div>
+								<span class="TimelineItemText Editable" title="Edit this timeline item...">Ceremony</span>
+							</li>
+						</ol>
+						<!-- this may need some thinking... -->
+						<div class="NewTimelineItemGutter NewThingGutter">
+							<div class="Triggers">
+								<span class="StartTimeTrigger Editable" title="Set the start time for a new item...">Start Time</span> &#150; <span class="EndTimeTrigger Editable"  title="Set the end time for a new item...">End Time</span>
+							</div>
+							<span class="TimelineItemText Editable" title="Set the text for a new item...">New Event</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="PrecapButton SectionMove Size-Icon" title="Drag to move this Section..."></div>
+				<div class="PrecapButton SectionDelete Size-Icon DeleteButton_L" title="Delete this Section..."></div>
+			</section>
+
+			<div class="SectionGap">
+				<!-- <div class="AddSectionHereButton" title="Add a new Section here..."><div class="Icon">+</div></div> -->
+				<div class="AddSectionHereBar">
+					<div class="CloseButton">X</div>
+					<ul class="SectionTypeButtons">
+						<li class="AddSectionButton Note" title="Add a Note Section here..."><div class="Icon">|</div><div class="Text">Note</div></li>
+						<li class="AddSectionButton List" title="Add a List Section here..."><div class="Icon">|</div><div class="Text">List</div></li>
+						<li class="AddSectionButton Location" title="Add a Location Section here..."><div class="Icon">|</div><div class="Text">Location</div></li>
+						<li class="AddSectionButton People" title="Add a People Section here..."><div class="Icon">|</div><div class="Text">Group</div></li>
+						<li class="AddSectionButton Timeline" title="Add a Timeline Section here..."><div class="Icon">|</div><div class="Text">Timeline</div></li>
+						<li class="AddSectionButton PhotoSet" title="Add a PhotoSet Section here..."><div class="Icon">|</div><div class="Text">PhotoSet</div></li>
+						<li class="AddSectionButton FileSet" title="Add a Files Section here..."><div class="Icon">|</div><div class="Text">Files</div></li>
+					</ul>	
+				</div>
+			</div>
+
+			<!-- PeopleGroup -->
+			<section class="Section PeopleGroup">
+				<header>
+					<h2 class="Editable" title="Edit the title for this PeopleGroup...">Team</h2>
+				</header>
+
+				<div class="ContentContainer">
+					<ul class="PeopleGroupList">
+						<li id="hcard-Albert-Harrison" class="vcard Contact Person" title="View this contact card...">
+							<div class="Avatar">&#160;</div>							
+							<span class="Name fn n">Albert Harrison</span>
+							<span class="Title">producer</span>
+							<span class="Email"><a class="email" href="mailto:albert@hiscompany.com?Subject=Re: [Precap Name] - ">albert@hiscompany.com</a></span>
+							<span class="Phone tel">212-123-1234</span>
+						</li>
+						<li id="hcard-Olivia-Colbert" class="vcard Contact Person" title="View this contact card...">
+							<div class="Avatar">&#160;</div>							
+							<span class="Name fn n">Olivia Colbert</span>
+							<span class="Title">stylist</span>
+							<span class="Email"><a class="email" href="mailto:o.email@colbertstyleinc.com?Subject=Re: [Precap Name] - ">o.email@colbertstyleinc</a></span>
+							<span class="Phone tel">212-123-1234</span>
+						</li>
+						<li id="hcard-Josh-Patrick" class="vcard Contact Person" title="View this contact card...">
+							<div class="Avatar">&#160;</div>							
+							<span class="Name fn n">Josh Patrick</span>
+							<span class="Title">assistant</span>
+							<span class="Email"><a class="email" href="mailto:joshassists@yahoo.com?Subject=Re: [Precap Name] - ">joshassists@yahoo.com</a></span>
+							<span class="Phone tel">212-123-1234</span>
+						</li>
+						<li id="hcard-Michael-Hieronymus" class="vcard Contact Person" title="View this contact card...">
+							<div class="Avatar">&#160;</div>							
+							<span class="Name fn n">Michael Hieronymus</span>
+							<span class="Title">make-up artist</span>
+							<span class="Email"><a class="email" href="mailto:michaelhieronymus@michaeldoesmakeup.com?Subject=Re: [Precap Name] - ">michaelhieronymus@michaeldoesmakeup.com</a></span>
+							<span class="Phone tel">212-123-1234</span>
+						</li>
+						<li id="hcard-ABC-Rentals" class="vcard Contact Organization" title="View this contact card...">
+							<div class="Avatar">&#160;</div>							
+							<span class="Name fn org">ABC Rentals</span>
+							<span class="PrimaryContact">Jonathan Thompson</span>
+							<span class="Email"><a class="email" href="mailto:JonathanThompson@abcrentals.com?Subject=Re: [Precap Name] - ">JonathanThompson@abcrentals.com</a></span>
+							<span class="Phone tel">212-123-1234</span>
+						</li>
+					</ul>
+
+					<div class="NewPersonGutter NewThingGutter">
+						<div class="NewItemText" title="Add a new person to this group...">New Person</div>
+					</div>
+				</div>
+
+				<div class="PrecapButton SectionMove Size-Icon" title="Drag to move this Section..."></div>
+				<div class="PrecapButton SectionDelete Size-Icon DeleteButton_L" title="Delete this Section..."></div>
+			</section>
+
+			<div class="SectionGap">
+				<div class="AddSectionHereButton" title="Add a new Section here..."><div class="Icon">+</div></div>
+			</div>
+
+			<!-- List -->
+			<section class="Section List">
+				<header>
+					<h2 class="Editable" title="Edit the title for this List...">A Checklist</h2>
+				</header>
+
+				<div class="ContentContainer">
+					<ul class="ListList">
+						<li class="ListItem Complete">
+							<div class="PR-Checkbox ListCheckbox"><div class="Check">&#x2714;</div></div>
+							<div class="ListItemText Editable" title="Edit this item...">This is a list item. This is a list item. This is a list item. This is a list item.</div>
+						</li>
+						<li class="ListItem Complete">
+							<div class="PR-Checkbox ListCheckbox"><div class="Check">&#x2714;</div></div>
+							<div class="ListItemText Editable" title="Edit this item...">This is a list item. This is a list item. This is a list item. This is a list item.</div>
+						</li>
+						<li class="ListItem Complete">
+							<div class="PR-Checkbox ListCheckbox"><div class="Check">&#x2714;</div></div>
+							<div class="ListItemText Editable" title="Edit this item...">This is a list item. This is a list item. This is a list item. This is a list item.</div>
+						</li>
+						<li class="ListItem">
+							<div class="ListCheckbox"><div class="Checkbox">&#x2714;</div></div>
+							<div class="ListItemText Editable" title="Edit this item...">This is a list item. This is a list item. This is a list item. This is a list item.</div>
+						</li>
+					</ul>
+
+					<div class="NewTaskGutter NewThingGutter">
+						<div class="NewItemText" title="Add a new item to this list...">New Item</div>
+					</div>
+				</div>
+
+				<div class="PrecapButton SectionMove Size-Icon" title="Drag to move this Section..."></div>
+				<div class="PrecapButton SectionDelete Size-Icon DeleteButton_L" title="Delete this Section..."></div>
+			</section>
+
+			<div class="SectionGap">
+				<div class="AddSectionHereButton" title="Add a new Section here..."><div class="Icon">+</div></div>
+			</div>
+
+			<!-- Photoset -->
+			<section class="Section Photoset">
+				<header>
+					<h2 class="Editable" title="Edit the title for this PhotoSet...">Love the feel of these</h2>
+				</header>
+
+				<div class="ContentContainer">
+					<ul class="PhotoSetPhotos">
+						<li class="Photo" title="View this photo larger..."><img src="/assets/images/photoset_fpo/DSC_0445_sq_165.jpg" alt=""></li>
+						<li class="Photo" title="View this photo larger..."><img src="/assets/images/photoset_fpo/DSC_0450_sq_165.jpg" alt=""></li>
+						<li class="Photo" title="View this photo larger..."><img src="/assets/images/photoset_fpo/DSC_0535_sq_165.jpg" alt=""></li>
+						<li class="Photo" title="View this photo larger..."><img src="/assets/images/photoset_fpo/DSC_0934_sq_165.jpg" alt=""></li>
+						<li class="Photo" title="View this photo larger..."><img src="/assets/images/photoset_fpo/DSC_1143_sq_165.jpg" alt=""></li>
+						<li class="Photo" title="View this photo larger..."><img src="/assets/images/photoset_fpo/DSC_1717_sq_165.jpg" alt=""></li>
+						<li class="Photo" title="View this photo larger..."><img src="/assets/images/photoset_fpo/DSC_1927_sq_165.jpg" alt=""></li>
+						<li class="AddAsset" title="Add a new photo..."><div class="Icon">+</div></li>
+					</ul>
+				</div>
+
+				<div class="PrecapButton SectionMove Size-Icon" title="Drag to move this Section..."></div>
+				<div class="PrecapButton SectionDelete Size-Icon DeleteButton_L" title="Delete this Section..."></div>
+			</section>
+
+			<div class="SectionGap">
+				<div class="AddSectionHereButton" title="Add a new Section here..."><div class="Icon">+</div></div>
+			</div>
+
+			<!-- Files -->
+			<section class="Section FileSet">
+				<header>
+					<h2 class="Editable" title="Edit the title for this FileGroup...">Files</h2>
+				</header>
+
+				<div class="ContentContainer">
+					<ul class="Files">
+						<li class="File" title="Download this file...">
+							<div class="Icon">
+								<span class="Ext">PDF</span>
+							</div>
+							<div class="FileName Editable" title="Edit the name of this file...">Menu proposal from Jane</div>
+						</li>
+						<li class="File" title="Download this file...">
+							<div class="Icon">
+								<span class="Ext">DOC</span>
+							</div>
+							<div class="FileName Editable" title="Edit the name of this file...">List from Erin</div>
+						</li>
+						<li class="File" title="Download this file...">
+							<div class="Icon">
+								<span class="Ext">XLS</span>
+							</div>
+							<div class="FileName Editable" title="Edit the name of this file...">Budget</div>
+						</li>
+						<li class="AddAsset"><div class="Icon">+</div></li>
+					</ul>
+				</div>
+
+				<div class="PrecapButton SectionMove Size-Icon" title="Drag to move this Section..."></div>
+				<div class="PrecapButton SectionDelete Size-Icon DeleteButton_L" title="Delete this Section..."></div>
+			</section>
+
+			<div class="SectionGap">
+				<div class="AddSectionHereButton" title="Add a new Section here..."><div class="Icon">+</div></div>
+			</div>
+
+			<!-- Precap Footer -->
+			<section class="Section Footer">
+				<a href="javascript:void(0);" class="ArchivePrecapTrigger">archive this precap</a>
+				<a href="javascript:void(0);" class="DeletePrecapTrigger">delete this precap</a>
+			</section>
+		</article>
+		<!-- /Precap -->
+
+
+		<!-- Send View -->
+		<article class="SendView BSheet TwoColumn HideMe" id="SendView">
+			<header>
+				<h1>Send this precap...</h1>
+				<div class="ActionButtons">
+					<div class="PrecapButton Size-Xlarge Enabled Active Send"><span>Send</span></div>
+					<div class="PrecapButton Size-Xlarge Enabled Preview"><span>Preview</span></div>
+				</div>
+			</header>
+			<div class="PrecapButton Size-Icon Enabled CloseX_L" title="Cancel this send and return to precap"><span>X</span></div>
+
+			<div class="Column SectionsToInclude">
+				<h3>Sections to include:</h3>
+				<ul class="SectionsToIncludeList">
+					<li class="SectionLine Note Selected">
+						<div class="SelectionIndicator">v</div>
+						<div class="Icon">x</div>
+						<div class="SectionDetails">
+							<div class="Title">General Notes</div>
+							<div class="Detail">This is a note. It can be anything. Just text. Formatting includes bold, italic and automatic link</div>
+						</div>
+					</li>
+					<li class="SectionLine Location Selected">
+						<div class="SelectionIndicator">v</div>
+						<div class="Icon">x</div>
+						<div class="SectionDetails">
+							<div class="Title">Trezzi Farm - Ceremony and Reception</div>
+							<div class="Detail">17710 N. Dunn Road, Colbert, WA 99005</div>
+						</div>
+					</li>
+					<li class="SectionLine Timeline Selected">
+						<div class="SelectionIndicator">v</div>
+						<div class="Icon">x</div>
+						<div class="SectionDetails">
+							<div class="Title">Pre-Wedding Timeline - BRIDE</div>
+							<div class="Detail">Friday, March 17, 2013</div>
+						</div>
+					</li>
+					<li class="SectionLine People Unselected">
+						<div class="SelectionIndicator">v</div>
+						<div class="Icon">x</div>
+						<div class="SectionDetails">
+							<div class="Title">Team</div>
+							<div class="Detail">5 Contacts</div>
+						</div>
+					</li>
+					<li class="SectionLine List Selected">
+						<div class="SelectionIndicator">v</div>
+						<div class="Icon">x</div>
+						<div class="SectionDetails">
+							<div class="Title">Food Prep Checklist</div>
+							<div class="Detail">4 Items</div>
+						</div>
+					</li>
+					<li class="SectionLine PhotoSet Selected">
+						<div class="SelectionIndicator">v</div>
+						<div class="Icon">x</div>
+						<div class="SectionDetails">
+							<div class="Title">Love the feel of these</div>
+							<div class="Detail">7 Photos</div>
+						</div>
+					</li>
+					<li class="SectionLine FileSet Unselected">
+						<div class="SelectionIndicator">v</div>
+						<div class="Icon">x</div>
+						<div class="SectionDetails">
+							<div class="Title">Files</div>
+							<div class="Detail">3 Files</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="Column SendTo">
+				<h3>Send to:</h3>
+				<div class="Group">
+					<h5 class="GroupHead">People on this precap: <span class="AllNoneToggles"><a href="#" class="All">All</a> | <a href="#" class="None">None</a></span></h5>
+					<ul class="SendToList Col1">
+						<li><label><input type="checkbox">Albert Harrison</label></li>
+						<li><label><input type="checkbox">Olivia Colbert</label></li>
+						<li><label><input type="checkbox">Josh Patrick</label></li>
+						<li><label><input type="checkbox">Michael Hieronymus</label></li>
+						<li><label><input type="checkbox">ABC Rentals</label></li>
+					</ul>
+				</div>
+				<div class="Group">
+					<h5 class="GroupHead">Other Recipients:</h5>
+					<div class="PrecapInput OneLine Email Buttons">
+						<input placeholder="name@domain.com">
+						<div class="PrecapButton Size-Large Enabled  Add Do"><span>Add</span></div>
+					</div>
+					<ul class="SendToList Col1">
+						<li><div class="PrecapButton Size-Icon Enabled Active CloseX_S"><span>X</span></div> james@smithfieldhanson.com</li>
+						<li><div class="PrecapButton Size-Icon Enabled Active CloseX_S"><span>X</span></div> jme@borderboards.com</li>
+					</ul>
+				</div>
+				<div class="Group">
+					<h5 class="GroupHead">Subject:</h5>
+					<div class="PrecapInput OneLine Text">
+						<input placeholder="Precap &#8212; Cannon/Pearce Wedding" value="Precap &#8212; Cannon/Pearce Wedding">
+					</div>
+				</div>
+				<div class="Group">
+					<h5 class="GroupHead">Message:</h5>
+					<div class="PrecapInput MultiLine Text">
+						<div class="Inner"><textarea></textarea></div>
+					</div>
+				</div>
+			</div>
+		</article>
+		<!-- /Send View -->
+
+
+		<!-- Settings View -->
+		<article class="SettingsView BSheet NavTabs HideMe" id="SettingsView">
+			<header>
+				<h1>Settings</h1>
+				<div class="ActionButtons">
+					<div class="PrecapButton Size-Xlarge Enabled Active Save"><span>Save</span></div>
+				</div>
+			</header>
+			<div class="PrecapButton Size-Icon Enabled CloseX_L" title="Cancel this send and return to precap"><span>X</span></div>
+
+			<nav class="BSheetNav">
+				<ul id="SettingsNav">
+					<li>Account Basics</li>
+					<li class="Selected">My Info</li>
+					<li>Sending Preferences</li>
+				</ul>
+			</nav>
+			<section id="AccountBasics" class="Form ">
+				<div class="Line">
+					<label>user name</label>
+					<div class="PrecapInput OneLine Text">
+						<input placeholder="" value="bendelaney">
+					</div>
+				</div>
+				<div class="Line">
+					<label>email</label>
+					<div class="PrecapInput OneLine Text">
+						<input placeholder="" value="bendelaney@gmail.com">
+					</div>
+				</div>
+				<div class="Line">
+					<label>password</label>
+					<div class="PrecapInput OneLine Text">
+						<input placeholder="" value="" type="password">
+					</div>
+				</div>
+				<div class="Line">
+					<label>confirm password</label>
+					<div class="PrecapInput OneLine Text">
+						<input placeholder="" value="" type="password">
+					</div>
+				</div>
+			</section>
+			<section id="My Info" class="Form">
+				<!-- 
+				name * +
+				job title
+				time zone *
+				email * + 
+				website +
+				phone + 
+				address + 
+				facebook
+				twitter
+				-->
+				<div class="Line">
+					<label>name</label>
+					<ul class="FieldsList">
+						<li class="Field">
+							<div class="PrecapInput OneLine Text">
+								<input placeholder="" value="Ben Delaney">
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="Line">
+					<label>job title</label>
+					<ul class="FieldsList">
+						<li class="Field">
+							<div class="PrecapInput OneLine Text">
+								<input placeholder="" value="Founder">
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="Line">
+					<label>time zone</label>
+					<ul class="FieldsList">
+						<li class="Field">
+							<select class="PrecapInput-Select">
+								<option value="">Pacific Standard</option>
+							</select>
+						</li>
+					</ul>
+				</div>
+				<div class="Line">
+					<label>email</label>
+					<ul class="FieldsList">
+						<li class="Field">
+							<div class="PrecapInput OneLine Text">
+								<input placeholder="" value="bendelaney@gmail.com">
+							</div>
+						</li>
+					</ul>
+					<div class="NewItemText" title="Add another email address">Add another email address</div>
+				</div>
+				<div class="Line">
+					<label>website</label>
+					<ul class="FieldsList">
+						<li class="Field">
+							<div class="PrecapInput OneLine Text">
+								<input placeholder="" value="bendelaney.me">
+							</div>
+						</li>
+						<li class="Field">
+							<div class="PrecapInput OneLine Text">
+								<input placeholder="" value="bendelaney.me">
+							</div>
+						</li>
+					</ul>
+					<div class="NewItemText" title="Add another website">Add another website</div>
+				</div>
+				<div class="Line">
+					<label>phone</label>
+					<ul class="FieldsList">
+						<li class="Field">
+							<div class="PrecapInput OneLine Text">
+								<input placeholder="" value="509-123-1234">
+							</div>
+						</li>
+					</ul>
+					<div class="NewItemText" title="Add another phone number">Add another phone number</div>
+				</div>
+				<div class="Line">
+					<label>address</label>
+					<ul class="FieldsList">
+						<li class="Field">
+							<div class="PrecapInput MultiLine Text">
+								<textarea>12345 E Main Street</textarea>
+							</div>
+						</li>
+					</ul>
+					<div class="NewItemText" title="Add another address">Add another address</div>
+				</div>
+			</section>
+		</article>
+		<!-- /Send View -->
+
+	</div>
+	<div id="BodyMask HideMe">&#160;</div>
+	<div class="PrecapPopover Dialog HideMe">
+		<header>
+			<h1>Popover Title Goes Here</h1>
+		</header>
+		<div class="Content">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+		<footer>
+			<div class="PrecapButton Size-Large"><span>Test</span></div>
+		</footer>
+	</div>
+</body>
+</html>
