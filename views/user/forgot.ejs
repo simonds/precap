@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+
+<div class="container">
+	<% if (flashInfo != "") { %><div class="alert alert-info"><%= flashInfo %></div><% } %>
+	<% if (flashError != "") { %><div class="alert alert-danger"><%= flashError %></div><% } %>
+
+	<div class="col-sm-4" style="margin: auto;">
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h3 class="panel-title">Forgot Password</h3>
+	      <p>We will email you a link to reset your password.</p>
+	    </div>
+	    <div class="panel-body">
+			<form action="/user/forgot" method="POST">
+			<input type="hidden" name="referer" value="<%= referer %>" />
+			<input type="hidden" name="csrf" value="<%= _csrf %>" />
+
+			<input type="text" class="form-control" name="email" placeholder="Email address" value="" />
+
+			<div><button class="btn btn-lg btn-primary btn-block">Reset Password</button></div>
+
+			</form>
+		</div>
+	  </div>
+	</div>
+
+</div>

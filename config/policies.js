@@ -21,6 +21,10 @@ module.exports.policies = {
     'user': {
         '*': true,
         index: ['authenticated']
+    },
+
+    'auth': {
+        '*': true
     }
 
   /*

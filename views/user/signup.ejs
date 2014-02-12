@@ -1,0 +1,138 @@
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js"></script>
+
+<div class="container">
+	<% if (flashInfo != "") { %><div class="alert alert-info"><%- flashInfo %></div><% } %>
+	<% if (flashError != "") { %><div class="alert alert-danger"><%- flashError %></div><% } %>
+
+	<div class="col-sm-4" style="margin: auto;">
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <h3 class="panel-title">Sign Up</h3>
+	    </div>
+	    <div class="panel-body">
+			<form action="/signup" id="signupForm" method="POST">
+			<input type="hidden" name="referer" value="<%= referer %>" />
+			<input type="hidden" name="csrf" value="<%= _csrf %>" />
+
+			<div class="form-group">
+				<label for="firstName" class="control-label">First Name</label>
+				<input type="text" class="form-control" name="firstName" maxlength="50" placeholder="(required)" title="We need to know your first name." value="<%- reqFirstName %>" required />
+			</div>
+			<div class="form-group">
+				<label for="lastName" class="control-label">Last Name</label>
+				<input type="text" class="form-control" name="lastName" maxlength="50" placeholder="(required)" title="We need to know your last name." value="<%- reqLastName %>" required />
+			</div>
+			<div class="form-group">
+				<label for="email" class="control-label">Email address</label>
+				<input type="email" class="form-control" name="email" placeholder="(required)" title="We need to know your email address." value="<%- reqEmail %>" required />
+			</div>
+			<div class="form-group">
+				<label for="password" class="control-label">Password</label>
+				<input type="password" class="form-control" id="password" name="password" minlength="6" placeholder="(required, at least 6 characters)" title="A password is required." value="<%- reqPassword %>" required />
+			</div>
+			<div class="form-group">
+				<label for="passwordConfirm" class="control-label">Confirm Password</label>
+				<input type="password" class="form-control" name="passwordConfirm" minlength="6" placeholder="(required, at least 6 characters)" title="A matching password is required." value="<%- reqPasswordConfirm %>" required />
+			</div>
+			<div class="form-group">
+				<label for="address1" class="control-label">Street Address</label>
+				<input type="text" class="form-control" name="address1" placeholder="(required)" title="We need to know your address." value="<%- reqAddress1 %>" required />
+			</div>
+			<div class="form-group">
+				<label for="address2" class="control-label">Unit, Apt, etc.</label>
+				<input type="text" class="form-control" name="address2" value="<%- reqAddress2 %>" />
+			</div>
+			<div class="form-group">
+				<label for="city" class="control-label">City</label>
+				<input type="text" class="form-control" name="city" placeholder="(required)" title="We need to know your city." value="<%- reqCity %>" required />
+			</div>
+			<div class="form-group">
+				<label for="state" class="control-label">State</label>
+				<select class="form-control" name="state" title="We need to know your state." required> 
+					<option value="">Select a State (required)</option>
+					<%- geographyService.statesSelect(reqState) %>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="zip" class="control-label">Zip Code</label>
+				<input type="text" class="form-control" name="zip" placeholder="(required)" title="We need to know your zip code." value="<%- reqZip %>" required />
+			</div>
+			<div class="form-group"><button class="btn btn-lg btn-primary btn-block">Sign Up</button></div>
+
+			</form>
+		</div>
+	  </div>
+	</div>
+
+</div>
+
+<style>
+small {color: #a94442;}
+</style>
+
+<script>
+	$("#signupForm").validate({
+		onfocusout: true,
+		focusInvalid: true,
+		validClass: "has-success",
+		errorClass: "has-error",
+		errorElement: "small",
+		errorPlacement: function(error, element) {
+			// if the input has a prepend or append element, put the validation msg after the parent div
+			if(element.parent().hasClass('input-prepend') || element.parent().hasClass('input-append')) {
+				error.insertAfter(element.parent());		
+			// else just place the validation message immediatly after the input
+			} else {
+				error.insertAfter(element);
+			}
+		},
+		highlight: function(element, errorClass, validClass) {
+			$(element).parent().addClass(errorClass).removeClass(validClass);
+		},
+		unhighlight: function(element, errorClass, validClass) {
+		    $(element).parent().removeClass(errorClass).addClass(validClass);
+		},
+		rules: {
+			email: {
+				remote: "/user/checkemail"
+			},
+		    zip: {
+		    	pattern: /(^\d{5}$)|(^\d{5}-\d{4}$)/
+		    },
+			passwordConfirm: {
+				equalTo: "#password"
+			}
+		},
+
+		messages: {
+		    firstName: {
+		      maxlength: 'We\'re pretty sure nobody has ever had a first name over 50 characters long.'
+		    },
+		    lastName: {
+		      maxlength: 'We\'re pretty sure nobody has ever had a last name over 50 characters long.'
+		    },
+		    password: {
+		      maxlength: 'You need to use a password that is at least six characters long.'
+		    },
+			passwordConfirm: {
+				equalTo: "Both passwords must match."
+			},
+		    email: {
+      			email: "This doesn't appear to be a properly formatted email address.",
+      			remote: "This email address is already in use."
+    		},
+    		zip: {
+    			pattern: "This doesn't appear to be a valid US zip code."
+    		}
+  		},
+
+		submitHandler: function(form) {
+			form.submit();
+		}
+	});
+</script>
