@@ -1,6 +1,12 @@
 
 .DocumentChooser {
 	.HeaderControls {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 60%;
+		height: 40px;
+
 		.PrecapMenuButton {
 			background: #fff;
 			border: 1px solid #ccc;
@@ -31,20 +37,23 @@
 				}
 		}
 		.SearchInput {
-			position: absolute;
-			top: 0;
-			right: 0;
+			float: right;
 			width: 160px;
 			}
 
 		.PrecapListViewButtons {
-			position: absolute;
-			background: pink;
-			right: 155px;
 			top: 4px;
 			height: 18px;
 			width: 84px;
-			}
+			float: right;
+			margin-right: 6px;
+			overflow: hidden;
+
+			.PrecapButton {	
+				margin-left: 6px;
+				float: right;
+				}
+		}
 	}
 
 	.PrecapListView {
@@ -76,6 +85,13 @@
 				width: 100%;
 				padding: 12px 0;
 			
+				&.Selected {
+					@include background(linear-gradient(#008cf8 25%,#2b6ee1));
+
+					div {
+						color: #fff;
+						}
+				}
 				&:hover {
 					background: #eee;
 					}

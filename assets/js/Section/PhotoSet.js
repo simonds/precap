@@ -135,7 +135,6 @@ Precap.Section.PhotoSet = new Class({
                             tag: 'div'
                             ,className: 'Caption'
                             ,allowLineBreaks: false
-                            ,returnHTML: false
                             ,placeholderText: 'add a caption'
                             ,deactivateOn: ['enter']
                             ,onClean: function(thisObj, value) {

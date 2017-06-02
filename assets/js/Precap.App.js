@@ -33,7 +33,7 @@ Precap.App = new Class({
                 } else {
                     this._prepDocumentsData(documentsJSON);
 
-                    this.loadDocument(this._data.documents[0]);
+                    this.loadDocument(this._data.documents);
 
                     this.hideLoadingSpinner();
 
@@ -55,35 +55,40 @@ Precap.App = new Class({
     }
 
     ,_setupEvents: function() {
-        this.addEvent('document:loaded', function(){
-            this._document.loadMaps();
-        });
+        // this.addEvent('document:loaded', function(){
+        //     this._document.loadMaps();
+        // });
 
         // Toolbar events
         this._toolbar.addEvent('send', function(button){
             if (!button.isActive()) {
                 button.activate();
-                this.loadSendView();
+                this.openBSheet('send');
             } else {
-                this.viewBSheet();
+                this.displayBSheet();
             }
         }.bind(this));
         this._toolbar.addEvent('newPrecap', function(){
-            console.log('newPrecap')
+            console.log('newPrecap');
         });
         this._toolbar.addEvent('myPrecaps', function(button){
             if (!button.isActive()) {
                 button.activate();
-                this.loadMyPrecapsView();
+                this.openBSheet('myPrecaps');
             } else {
-                this.viewBSheet();
+                this.displayBSheet();
             }
         }.bind(this));
-        this._toolbar.addEvent('directory', function(){
-            console.log('directory')
-        });
+        this._toolbar.addEvent('directory', function(button){
+            if (!button.isActive()) {
+                button.activate();
+                this.openBSheet('directory');
+            } else {
+                this.displayBSheet();
+            }
+        }.bind(this));
         this._toolbar.addEvent('settings', function(){
-            console.log('settings')
+            console.log('settings');
         });
 
         // BSheet Events
@@ -133,6 +138,7 @@ Precap.App = new Class({
             new Element('div.PrecapLogo', {html: "Precap"})
         );
 
+
         this._documentBody.adopt(
             this._canvas
             ,this._bodyMask = new Element('div#BodyMask').fade('hide')
@@ -154,9 +160,9 @@ Precap.App = new Class({
         // store the new documentsJSON in our main _data property
         this._data.documents = documentsJSON;
         // decode the JSON section data
-        this._data.documents.each(function(doc){
-            doc.sections = JSON.decode(doc.sections);
-        });
+        //this._data.documents.each(function(doc){
+            //doc.sections = JSON.decode(doc.sections);
+        //});
     }
 
     ,_prepDocumentData: function(docData){
@@ -167,7 +173,7 @@ Precap.App = new Class({
         if (userId) {
             this._userDataRequest = new Request.JSON({
                 method: 'get'
-                ,url: '/user?id='+userId
+                ,url: '/user/'+userId
                 ,onSuccess: function(userJSON){
                     if (callback) callback.call(this, userJSON);
                 }.bind(this)
@@ -183,9 +189,10 @@ Precap.App = new Class({
     }
 
     ,getDocuments: function(callback){
+        var thisURL = new URI(document.URL);
         this._userDocumentsRequest = new Request.JSON({
             method: 'get'
-            ,url: '/precap'
+            ,url: '/precap/' + thisURL.get('file')
             ,noCache: false
             ,data: {userId: this._data.user.id}
             ,onSuccess: function(responseJSON){
@@ -262,7 +269,7 @@ Precap.App = new Class({
 
 
     // BSheets
-    ,_prepBSheet: function(){
+    ,_prepForBSheet: function(){
         var docCoords = this.getDocument().toElement().getCoordinates();
         var toolbarCoords = this._toolbar.toElement().getCoordinates();
 
@@ -275,7 +282,7 @@ Precap.App = new Class({
         );
     }
 
-    ,viewBSheet: function(noFx){
+    ,displayBSheet: function(noFx){
         if (noFx) {
             this._bSheetLoadFx.set(1000, 0);
         } else {
@@ -284,11 +291,11 @@ Precap.App = new Class({
         this._bSheetActive = true;
     }
 
-    ,closeBSheet: function(weAreBouncey){
+    ,closeBSheet: function(weAreBouncy){
         var bsheetCont = this._currentBSheet.toElement();
 
         var morphStyles = { opacity:0 };
-        if (weAreBouncey) morphStyles.left = [0,200];
+        if (weAreBouncy) morphStyles.left = [0,200];
 
         var closeMorph = new Fx.Morph(bsheetCont, {
             duration: 340
@@ -302,6 +309,29 @@ Precap.App = new Class({
         closeMorph.start(morphStyles);
     }
 
+    ,openBSheet: function(which){
+        var holdFx;
+        if (this._bSheetActive) {
+            this._cleanupBSheet();
+            holdFx = true;
+        }
+
+        switch(which){
+            case 'send':
+                this._currentBSheet = this.getSendView();
+                break;
+            case 'myPrecaps':
+                this._currentBSheet = this.getMyPrecapsView();
+                break;
+            case 'directory':
+                this._currentBSheet = this.getDirectoryView();
+                break;
+        }
+
+        this._prepForBSheet();
+        this.displayBSheet(holdFx);
+    }
+
     ,_cleanupBSheet: function(){
         this._currentBSheet.toElement().destroy();
         this._bSheetContainer.destroy();
@@ -309,7 +339,8 @@ Precap.App = new Class({
         if (this._sendView) delete this._sendView;
         if (this._myPrecapsView) delete this._myPrecapsView;
         if (this._settingsView) delete this._settingsView;
-        // this._bSheetContainer.destroy();
+        if (this._directoryView) delete this._directoryView;
+
         this._toolbar.getButtons().each(function(b){
             b.deactivate();
         });
@@ -353,30 +384,14 @@ Precap.App = new Class({
         return this._myPrecapsView;
     }
 
-    ,loadSendView: function() {
-        var holdFx;
-        if (this._bSheetActive) {
-            this._cleanupBSheet();
-            holdFx = true;
-        }
-        this._currentBSheet = this.getSendView();
-        this._prepBSheet();
-        this.viewBSheet(holdFx);
+    ,getDirectoryView: function(){
+        this._directoryView = this._directoryView || new Precap.Directory({
+            onClose: function(){
+                this.closeBSheet(1);
+            }.bind(this)
+        });
+        return this._directoryView;
     }
-
-    ,loadMyPrecapsView: function() {
-        var holdFx;
-        if (this._bSheetActive) {
-            this._cleanupBSheet();
-            holdFx = true;
-        }
-        this._currentBSheet = this.getMyPrecapsView();
-        this._prepBSheet();
-        this.viewBSheet(holdFx);
-    }
-
-    ,loadSettingsView: function() {}
-
 
 
     // Visual FX
@@ -395,7 +410,7 @@ Precap.App = new Class({
         var onBodyMaskShow = function() {
             this.removeEvent('bodyMask:complete', onBodyMaskShow);
             if (options.afterShow) {
-                options.afterShow.call(this);   
+                options.afterShow.call(this);
             }
         }.bind(this);
         this.addEvent('bodyMask:complete', onBodyMaskShow);
@@ -415,7 +430,7 @@ Precap.App = new Class({
                     beforeHide: options.beforeHide
                     ,afterHide: options.afterHide
                 });
-            }.bind(this)
+            }.bind(this);
             this._bodyMask.addEvent('click', clickToClose);
         }
 
@@ -478,6 +493,3 @@ Precap.App = new Class({
         this._howler.play();
     }
 });
-
-
-

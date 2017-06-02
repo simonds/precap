@@ -2,13 +2,15 @@ var mandrill = require('mandrill-api/mandrill');
 
 module.exports = {
 
-    send: function(message, result) {
+    send: function(message, from, callback) {
+        var _fromName = from ? from.name : "Precap";
+        var _fromEmail = from ? from.email : "no-reply@precap.net";
         var _message = {
             "html": message.html,
             "text": message.text,
             "subject": message.subject,
-            "from_email": "no-reply@precap.net",
-            "from_name": "Precap",
+            "from_email": _fromEmail,
+            "from_name": _fromName,
             "to": [{
                     "email": message.to.email,
                     "name": message.to.name,
@@ -36,19 +38,20 @@ module.exports = {
         };
         var mandrill_client = new mandrill.Mandrill(precapConf.mandrilApiKey);
         mandrill_client.messages.send({"message": _message, "async": false}, function(_result) {
-            result = _result;
+            callback(_result);
         }, function(e) {
-            result = e;
-        });
+            callback(require('util').inspect(e, {depth:null}))
 
-        return result;
+        });
     },
 
-    sendTemplate: function(message, result) {
+    sendTemplate: function(message, from, callback) {
+        var _fromName = from ? from.name : "Precap";
+        var _fromEmail = from ? from.email : "no-reply@precap.net";
         var _message = {
             "subject": message.subject,
-            "from_email": "no-reply@precap.net",
-            "from_name": "Precap",
+            "from_email": _fromEmail,
+            "from_name": _fromName,
             "to": [{
                     "email": message.to.email,
                     "name": message.to.name,
@@ -75,13 +78,12 @@ module.exports = {
             _message.to = precapConf.testEmail;
         };
         var mandrill_client = new mandrill.Mandrill(precapConf.mandrilApiKey);
+        var result = {};
         mandrill_client.messages.sendTemplate({"template_name": message.template_name, "template_content": message.template_content, "message": _message, "async": false}, function(_result) {
-            result = _result;
+            callback(_result[0]);
         }, function(e) {
-            result = e;
+            callback(require('util').inspect(e, {depth:null}))
         });
-
-        return result;
     },
 
     sendTest: function() {
@@ -100,7 +102,7 @@ module.exports = {
         });
     },
 
-    sendTemplateTest: function() {
+    sendTemplateTest: function(from, callback) {
         var message = {
             "subject": "example subject",
             "to": {
@@ -119,16 +121,42 @@ module.exports = {
                 }
             ]
         };
-        this.sendTemplate(message, function(result) {
-            console.log(result);
-            return result;
+        this.sendTemplate(message, from, function(result) {
+            callback(result);
         });
     },
 
-    sendWelcome: function(req, user) {
+    verifyEmail: function(req, user, callback) {
+        var fullURL = req.protocol + "://" + req.get('host') + "/verify/" + user.emailVerificationCode;
+        var message = {
+            "subject": "Verify Your Email Address",
+            "to": {
+                    "email": user.email,
+                    "name": user.fullName,
+            },
+            "template_name": "welcome-email",
+            "template_content": [
+                {
+                    "name": "header",
+                    "content": "<h1>You're Almost Ready To Use Precap</h1>"
+                },
+                {
+                    "name": "main",
+                    "content": "<p>" + user.firstName + ", before you can use Precap we need to verify your email address.</p><p>Please click on this link.</p><p><a href=\"" + fullURL + "/\">" + fullURL + "</a></p>"
+                }
+            ]
+        };
+        this.sendTemplate(message, null, function(result) {
+            callback(result);
+        });
+
+
+    },
+
+    sendWelcome: function(req, user, callback) {
         var fullURL = req.protocol + "://" + req.get('host');
         var message = {
-            "subject": "example subject",
+            "subject": "Welcome to Precap",
             "to": {
                     "email": user.email,
                     "name": user.fullName,
@@ -145,9 +173,33 @@ module.exports = {
                 }
             ]
         };
-        this.sendTemplate(message, function(result) {
-            console.log(result);
-            return result;
+        this.sendTemplate(message, null, function(result) {
+            callback(result);
+        });
+    },
+
+    sendPasswordReset: function(req, user, callback) {
+        var fullURL = req.protocol + "://" + req.get('host') + "/reset/" + user.emailVerificationCode;
+        var message = {
+            "subject": "Reset your password for Precap",
+            "to": {
+                    "email": user.email,
+                    "name": user.fullName,
+            },
+            "template_name": "welcome-email",
+            "template_content": [
+                {
+                    "name": "header",
+                    "content": "<h1>Reset your password</h1>"
+                },
+                {
+                    "name": "main",
+                    "content": "<p>" + user.firstName + ", in order to change your password you must first click this link.</p><p><a href=\"" + fullURL + "/\">" + fullURL + "</a></p>"
+                }
+            ]
+        };
+        this.sendTemplate(message, null, function(result) {
+            callback(result);
         });
 
     }

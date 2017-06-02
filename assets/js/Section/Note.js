@@ -26,7 +26,6 @@ Precap.Section.Note = new Class({
     ,_buildHeader: function() {
         this._title = new EditableText(this._data.name, {
             tag: 'h2'
-            ,returnHTML: false
             ,placeholderText: 'A Note Section'
             ,className: 'SectionTitle'
             ,deactivateOn: ['enter', 'tab']
@@ -48,7 +47,6 @@ Precap.Section.Note = new Class({
         this._noteBody = new EditableText(this._data.body, {
             tag: 'div'
             ,allowTabbing: true
-            ,returnHTML: false
             ,placeholderText: 'Type the body of your note here'
             ,className: 'NoteBody'
             ,keys: {

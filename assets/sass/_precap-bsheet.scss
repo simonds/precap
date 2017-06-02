@@ -1,12 +1,13 @@
 .BSheetContainer {
-	width: 700px;
+	width: 754px;
 	padding: 50px 54px 50px 0;
 }
 .BSheet {
 	color: #333;
-	width: 592px;
+	// width: 592px;
 	background: white;
 	padding: 50px 54px;
+	@include box-sizing(content-box);
 	@include box-shadow(rgba(0, 0, 0, 1) 2px 3px 22px);
 	
 	header {
@@ -18,6 +19,9 @@
 			font-size: 30px;
 			line-height: 1;
 			font-weight: $boldFontWeight;
+			// for BrandonText
+			// font-weight: 400;
+			// letter-spacing: -0.02em;
 			}
 		.ActionButtons {
 			position: absolute;
@@ -131,6 +135,7 @@
 		font-size: 18px;
 		font-family: $headerFontFamily;
 		font-weight: $boldFontWeight;
+		// font-weight: 400;
 		// letter-spacing: -0.02em;
 		}
 }

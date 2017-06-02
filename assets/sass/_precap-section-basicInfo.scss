@@ -8,13 +8,20 @@ section.BasicInfo {
 		font-weight: $precapNameFontWeight;
 		margin-bottom: 14px;
 		margin-right: 150px;
+		// letter-spacing: -0.015em;
 		}
 	.Date {
 		position: absolute;
 		top: 12px;
 		right: 54px;
 		cursor: pointer;
+		border: none;
+		outline: 0;
+		text-align: right;
+		&:focus {
+			outline: 0;
 		}
+	}
 	.Description {
 		line-height: 1.4;
 		}

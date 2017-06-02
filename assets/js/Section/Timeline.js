@@ -116,7 +116,6 @@ Precap.Section.Timeline = new Class({
             tag: 'h2'
             ,title: 'Edit the title for this timeline...'
             ,placeholderText: 'A New '+this._data.type
-            ,returnHTML: false
             ,className: 'SectionTitle'
             ,deactivateOn: ['enter']
             ,allowLineBreaks: false
@@ -201,7 +200,6 @@ Precap.Section.Timeline = new Class({
             )
             ,item.editable = new EditableText(item.text, {
                 className: 'TimelineItemText'
-                ,returnHTML: false
                 ,allowLineBreaks: false
                 ,placeholderText: 'Type a description here'
                 ,placeholderOnEmpty: false

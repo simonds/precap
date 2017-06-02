@@ -1,0 +1,1029 @@
+        <!-- Start CDN Library Load
+        <script src="//code.jquery.com/jquery-2.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js"></script>
+        <script src="//api.filepicker.io/v1/filepicker.js"></script>
+        <script src="//builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v1.3.0.js" type="text/javascript" charset="utf-8"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.4.0/ember.js" type="text/javascript" charset="utf-8"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/ember-data.js/1.0.0-beta.6/ember-data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/ember-resource.js/1.0/ember-resource.min.js" type="text/javascript" charset="utf-8"></script>
+
+        //cdn.jsdelivr.net/jquery/2.1.0/jquery.min.js
+        //cdn.jsdelivr.net/emberjs/1.4.0/ember.min.js
+
+        End CDN Library Load -->
+
+        <!-- Start Non-CDN Library Load -->
+        <script src="/js/libraries/jquery-2.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/jquery.easing.1.3.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/bootstrap-3.1.1.min.js"></script>
+        <script src="/js/libraries/jquery.validate-1.11.1.min.js"></script>
+        <script src="/js/libraries/jquery.validate-1.11.1.additional-methods.min.js"></script>
+        <script src="/js/libraries/filepicker-1.0.min.js"></script>
+        <script src="/js/libraries/handlebars-v1.3.0.js" type="text/javascript" charset="utf-8"></script>
+        <!-- <script src="/js/libraries/ember-1.4.js" type="text/javascript" charset="utf-8"></script> -->
+        <!-- <script src="/js/libraries/ember-data-1.0b6.js" type="text/javascript" charset="utf-8"></script> -->
+        <!-- <script src="/js/libraries/ember-resource-1.0.min.js" type="text/javascript" charset="utf-8"></script> -->
+        <!-- End Non-CDN Library Load -->
+
+        <!-- <script src="/js/ember/libraries/sails-adapter.js" type="text/javascript" charset="utf-8"></script> -->
+        <!-- <script src="/js/ember/libraries/debounce.js" type="text/javascript" charset="utf-8"></script> -->
+        <!-- <script src="/js/ember/libraries/autosaving.js" type="text/javascript" charset="utf-8"></script> -->
+        <!-- <script src="/js/ember/libraries/ember-animate.js" type="text/javascript" charset="utf-8"></script> -->
+
+        <script src="/js/libraries/spin/spin.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/moment.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/mousetrap.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/howler/howler.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/bootstrap/bootstrap-datetimepicker.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/jquery.scrollTo.min.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- <script src="/js/ember/libraries/ember-contenteditable-view.js" type="text/javascript" charset="utf-8"></script> -->
+        <!-- <script src="/js/ember/application.js" type="text/javascript" charset="utf-8"></script> -->
+
+        <script src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false" type="text/javascript" charset="utf-8"></script>
+
+        <link href="/stylesheets/bootstrap-datetimepicker.css" media="screen, projection, print" rel="stylesheet" type="text/css"/>
+        <link href="/stylesheets/precap-compiled.css" media="screen, projection, print" rel="stylesheet" type="text/css"/>
+
+        <script type="text/javascript">
+            // SHOULD BE ADDED TO application.js or wherever
+            (function(jQuery) {
+               jQuery.fn.clickout = function(callback) {
+                  var outside = 1, self = $(this);
+                  self.cb = callback;
+                  this.click(function() {
+                     outside = 0;
+                  });
+                  $(document).click(function() {
+                     outside && self.cb();
+                     outside = 1;
+                  });
+                  return $(this);
+               }
+            })(jQuery);            
+
+
+            var contactChooserSetup = function(sectionId){
+                var section         = $('#'+sectionId)[0];
+                var thisChooser     = $(section).children('.ContactChooser')[0];
+                    thisChooser     = $(thisChooser);
+                var newContactBtn   = $(section).find('.PrecapButton.NewItemText')[0];
+                    newContactBtn   = $(newContactBtn);
+                var newContactInputView = thisChooser.find('.NewContactInputView');
+                    newContactInputView = $(newContactInputView);
+                var createFormIsOpen = 0;
+
+                // prevent bad scrolling
+                thisChooser.on('mouseenter', function(event) {
+                    $(document.body).css('overflow', 'hidden');
+                }).on('mouseleave', function(event) {
+                    $(document.body).css('overflow', 'auto');
+                });
+
+                // the main actions
+                var openChooser = function(){
+                    createContactBtn.show();
+                    // apply the clickout event
+                    thisChooser.focus().on('blur', function(){
+                        if (!createFormIsOpen) {
+                            closeChooser();
+                        }
+                    });
+                };
+
+                var closeChooser = function(){
+                    thisChooser.animate({top: 30, opacity: 0}, 140, 'easeOutQuart', function(){
+                        thisChooser.hide();
+                        newContactBtn.show();
+                    });
+                    thisChooser.find('li.Contact').removeClass('Selected');
+                };
+
+                var openCreateContactForm = function(){
+                    newContactInputView.css('display','block').animate({padding: '1em', height: '100%'}, 140, 'easeOutQuart');
+                    cancelBtn.show();
+                    saveBtn.show();
+                    createContactBtn.fadeOut(140);
+                    doneBtn.fadeOut(140);
+                    createFormIsOpen = 1;
+                };
+
+                var closeCreateContactForm = function(justAdded){
+                    saveBtn.hide();
+                    cancelBtn.hide();
+                    newContactInputView.animate({padding:0, height: 0}, 140, 'easeOutQuart', function(){ $(this).css('display','none') });
+                    mask.animate({opacity:0}, 140, function(){ $(this).hide(); });
+                    checkMarkBox.removeClass('Rotate');
+                    if (!justAdded) {
+                        createContactBtn.fadeIn(140);
+                    }
+                    doneBtn.fadeIn(140);
+                    createFormIsOpen = 0;
+                };
+                //////////////////////////////////////////////////////////////////
+                // NOTE: not sure where these button actions actually go in "HandlebarsLand" :)
+
+                    // DONE
+                    var doneBtn = thisChooser.find('.DoneButton');
+                        doneBtn = $(doneBtn);
+                    doneBtn.on('click', function() {
+                        console.log('ADD THE SELECTED PEOPLE TO THE GROUP!');
+                        closeChooser();
+                    });
+
+                    // CREATE CONTACT
+                    var createContactBtn = thisChooser.find('.CreateContactButton');
+                        createContactBtn = $(createContactBtn);
+                    createContactBtn.on('click', function() {
+                        openCreateContactForm();
+                    });
+
+                    // CANCEL 
+                    var cancelBtn = thisChooser.find('.CancelButton');
+                        cancelBtn = $(cancelBtn);
+                    cancelBtn.on('click', function() {
+                        closeCreateContactForm();
+                    });
+
+                    // SAVE (new contact) 
+                    var mask = thisChooser.find('.Mask')[0];
+                        mask = $(mask);
+                    var checkMarkBox = thisChooser.find('.CheckMarkBox')[0];
+                        checkMarkBox = $(checkMarkBox);
+                    var saveBtn = thisChooser.find('.SaveNewContactButton')[0];
+                        saveBtn = $(saveBtn);
+                    saveBtn.on('click', function() {
+                        console.log('DO SAVE!');
+                        // ON SUCCESSFUL SAVE:
+                        mask.css('display', 'block').animate({opacity: 0.75}, 240, function(){
+                            checkMarkBox.addClass('Rotate');
+                            setTimeout(function(){
+                                createContactBtn.hide();
+                                closeCreateContactForm(1);
+                            }, 1000);
+                        });
+                    });
+
+                    thisChooser.on('click', 'li.Contact', function() {
+                        var btn = $(this);
+                        if (btn.hasClass('Selected')) {
+                            btn.removeClass('Selected');
+                        } else {
+                            btn.addClass('Selected');
+                        }
+                    });
+                /////////////////////////////////////////////////////////////////////
+
+
+                // show it!
+                $(newContactBtn).on('click', function(event) {
+                    // need both of these for the 'clickout' to work
+                    event.stopPropagation();
+                    event.preventDefault();
+
+                    newContactBtn.hide();
+                    thisChooser.show().animate({top: 0, opacity: 1}, 140, openChooser);
+                });    
+            }
+
+            $(document).ready(function(){
+                contactChooserSetup('Group-hs26odcf');
+            });
+        </script>
+
+        <div class="Canvas">
+            <div id="Toolbar" class="Toolbar">
+                <ul class="ActionButtons">
+                    <li class="Trigger">
+                        <div title="Send this precap..." id="" class="PrecapButton SendButton Enabled ">
+                            <i class="Icon">
+                            &nbsp;</i>
+                            <span>
+                            send</span>
+                        </div>
+                    </li>
+                    <li class="Trigger">
+                        <div title="Coming soon!" id="" class="PrecapButton NewPrecapButton Disabled">
+                            <i class="Icon">
+                            &nbsp;</i>
+                            <span>
+                            new precap</span>
+                        </div>
+                    </li>
+                    <li class="Trigger">
+                        <div title="View list of precaps..." id="" class="PrecapButton MyPrecapsButton Enabled ">
+                            <i class="Icon">
+                            &nbsp;</i>
+                            <span>
+                            my precaps</span>
+                        </div>
+                    </li>
+                    <li class="Trigger">
+                        <div title="View all contacts..." id="" class="PrecapButton DirectoryButton Enabled ">
+                            <i class="Icon">
+                            &nbsp;</i>
+                            <span>
+                            directory</span>
+                        </div>
+                    </li>
+                    <li class="Trigger">
+                        <div title="Coming soon!" id="" class="PrecapButton SettingsButton TextOnly Disabled">
+                            <span>
+                            settings</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+ 
+
+            <article class="Precap" id="Precap-53150cbacf2bee89d6000001" style="margin-top: 48px;">
+                <section class="Section BasicInfo">
+                    <h1 class="EditableText Name" contenteditable="false" title="Edit the name of this precap...">
+                        This is the Name of the precap
+                    </h1>
+                    <div title="Set a date for this precap..." class="Date">
+                        July 20th 2014
+                    </div>
+                    <input style="display: none;">
+                    <div class="EditableText Description" contenteditable="false" title="Edit the description of this precap...">
+                        Updates to the blog. Will this update the correct precap?
+                    </div>
+                </section>
+
+                <div class="UserDefinedSections">
+                    <div class="SectionGap" id="gap-hse9cpwy">
+                        <div title="Add a new Section here..." id="" class="PrecapButton AddSectionHereButton Size-Icon Enabled">
+                            <span>
+                            &nbsp;</span>
+                        </div>
+                        <div class="AddSectionHereBar" style="opacity: 0; top: 10px; visibility: hidden;">
+                            <ul class="SectionTypes">
+                                <li class="ButtonWrapper Note">
+                                    <div title="Add a Note section here..." id="" class="PrecapButton Note TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Note</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper List">
+                                    <div title="Add a List section here..." id="" class="PrecapButton List TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        List</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper Location">
+                                    <div title="Add a Location section here..." id="" class="PrecapButton Location TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Location</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper Timeline">
+                                    <div title="Add a Timeline section here..." id="" class="PrecapButton Timeline TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Timeline</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper Group">
+                                    <div title="Add a Group section here..." id="" class="PrecapButton Group TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Group</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper PhotoSet">
+                                    <div title="Add a PhotoSet section here..." id="" class="PrecapButton PhotoSet TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        PhotoSet</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper FileSet">
+                                    <div title="Add a FileSet section here..." id="" class="PrecapButton FileSet TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        FileSet</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div title="" id="" class="PrecapButton CloseButton Size-Icon Enabled">
+                                <span>
+                                x</span>
+                            </div>
+                        </div>
+                    </div>
+<!-- 
+                    <section class="Section Location" id="Location-hrzu1fbm">
+                        <header>
+                            <h2 class="EditableText SectionTitle" contenteditable="false" title="">
+                                Photoshoot Location
+                            </h2>
+                            <input type="text" placeholder="1100 W Mallon Ave, Spokane, WA 99260, USA" class="LocationAddress Populated" autocomplete="off">
+                        </header>
+                        <div class="ContentContainer">
+                            <div class="LocationMap">
+                                <div class="MapContainer" style="position: relative; background-color: rgb(229, 227, 223); overflow: hidden;">
+                                    <div class="gm-style" style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;">
+                                        <div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;">
+                                            <div style="position: absolute; left: 0px; top: 0px; z-index: 1; width: 100%; cursor: url(http://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8, default; -webkit-transform-origin: 0px 0px; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);">
+                                                <div style="position: absolute; left: 0px; top: 0px; width: 100%; z-index: 200;">
+                                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div>
+                                                </div>
+                                                <div style="position: absolute; left: 0px; top: 0px; width: 100%; z-index: 201;">
+                                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div>
+                                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;">
+                                                        <div style="position: absolute; left: 0px; top: 0px; z-index: -1;">
+                                                            <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
+                                                                <div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 175px; top: -129px;"></div>
+                                                                <div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 175px; top: 127px;"></div>
+                                                                <div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 431px; top: -129px;"></div>
+                                                                <div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 431px; top: 127px;"></div>
+                                                                <div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -81px; top: -129px;"></div>
+                                                                <div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -81px; top: 127px;"></div>
+                                                                <div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 687px; top: -129px;"></div>
+                                                                <div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 687px; top: 127px;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div style="width: 22px; height: 40px; overflow: hidden; position: absolute; left: 338px; top: 80px; z-index: 120; -webkit-animation: _gm8857 500ms 1;">
+                                                            <img src="http://mt.googleapis.com/vt/icon/name=icons/spotlight/spotlight-poi.png&amp;scale=2" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 22px; height: 40px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="position: absolute; left: 0px; top: 0px; width: 100%; z-index: 202;">
+                                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div>
+                                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;">
+                                                        <div class="gmnoprint" style="width: 22px; height: 40px; overflow: hidden; position: absolute; opacity: 0.01; left: 338px; top: 80px; z-index: 120;">
+                                                            <img src="http://mt.googleapis.com/vt/icon/name=icons/spotlight/spotlight-poi.png&amp;scale=2" draggable="false" usemap="#gmimap1" style="position: absolute; left: 0px; top: 0px; width: 22px; height: 40px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                            <map name="gmimap1" id="gmimap1">
+                                                                <area href="javascript:void(0)" log="miw" coords="8,0,5,1,4,2,3,3,2,4,2,5,1,6,1,7,0,8,0,14,1,15,1,16,2,17,2,18,3,19,3,20,4,21,5,22,5,23,6,24,7,25,7,27,8,28,8,29,9,30,9,33,10,34,10,40,11,40,11,34,12,33,12,30,13,29,13,28,14,27,14,25,15,24,16,23,16,22,17,21,18,20,18,19,19,18,19,17,20,16,20,15,21,14,21,8,20,7,20,6,19,5,19,4,18,3,17,2,16,1,14,1,13,0,8,0" shape="poly" title="Photoshoot Location" style="cursor: pointer;">
+                                                            </map>
+                                                        </div>
+                                                    </div>
+                                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div>
+                                                </div>
+                                                <div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;">
+                                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
+                                                        <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
+                                                            <div style="width: 256px; height: 256px; position: absolute; left: 175px; top: -129px;"></div>
+                                                            <div style="width: 256px; height: 256px; position: absolute; left: 175px; top: 127px;"></div>
+                                                            <div style="width: 256px; height: 256px; position: absolute; left: 431px; top: -129px;"></div>
+                                                            <div style="width: 256px; height: 256px; position: absolute; left: 431px; top: 127px;"></div>
+                                                            <div style="width: 256px; height: 256px; position: absolute; left: -81px; top: -129px;"></div>
+                                                            <div style="width: 256px; height: 256px; position: absolute; left: -81px; top: 127px;"></div>
+                                                            <div style="width: 256px; height: 256px; position: absolute; left: 687px; top: -129px;"></div>
+                                                            <div style="width: 256px; height: 256px; position: absolute; left: 687px; top: 127px;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="position: absolute; z-index: 0; left: 0px; top: 0px;">
+                                                    <div style="overflow: hidden; width: 698px; height: 240px;">
+                                                        <img src="http://maps.googleapis.com/maps/api/js/StaticMapService.GetMapImage?1m2&amp;1i1457314&amp;2i2927362&amp;2e1&amp;3u14&amp;4m3&amp;1u1396&amp;2u480&amp;3e2&amp;5m4&amp;1e0&amp;5sen-US&amp;6sus&amp;10b1&amp;token=92218" style="width: 698px; height: 240px;">
+                                                    </div>
+                                                </div>
+                                                <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
+                                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 1;">
+                                                        <div style="width: 256px; height: 256px; position: absolute; left: 175px; top: -129px;">
+                                                            <img src="http://mt1.googleapis.com/vt?lyrs=m@255083510&amp;src=apiv3&amp;hl=en-US&amp;x=2847&amp;y=5717&amp;z=14&amp;scale=2&amp;style=47,37%7Csmartmaps" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                        </div>
+                                                        <div style="width: 256px; height: 256px; position: absolute; left: 175px; top: 127px;">
+                                                            <img src="http://mt1.googleapis.com/vt?lyrs=m@255124895&amp;src=apiv3&amp;hl=en-US&amp;x=2847&amp;y=5718&amp;z=14&amp;scale=2&amp;style=47,37%7Csmartmaps" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                        </div>
+                                                        <div style="width: 256px; height: 256px; position: absolute; left: 431px; top: -129px;">
+                                                            <img src="http://mt0.googleapis.com/vt?lyrs=m@255083510&amp;src=apiv3&amp;hl=en-US&amp;x=2848&amp;y=5717&amp;z=14&amp;scale=2&amp;style=47,37%7Csmartmaps" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                        </div>
+                                                        <div style="width: 256px; height: 256px; position: absolute; left: 431px; top: 127px;">
+                                                            <img src="http://mt0.googleapis.com/vt?lyrs=m@255083510&amp;src=apiv3&amp;hl=en-US&amp;x=2848&amp;y=5718&amp;z=14&amp;scale=2&amp;style=47,37%7Csmartmaps" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                        </div>
+                                                        <div style="width: 256px; height: 256px; position: absolute; left: -81px; top: -129px;">
+                                                            <img src="http://mt0.googleapis.com/vt?lyrs=m@255021405&amp;src=apiv3&amp;hl=en-US&amp;x=2846&amp;y=5717&amp;z=14&amp;scale=2&amp;style=47,37%7Csmartmaps" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                        </div>
+                                                        <div style="width: 256px; height: 256px; position: absolute; left: -81px; top: 127px;">
+                                                            <img src="http://mt0.googleapis.com/vt?lyrs=m@255122166&amp;src=apiv3&amp;hl=en-US&amp;x=2846&amp;y=5718&amp;z=14&amp;scale=2&amp;style=47,37%7Csmartmaps" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                        </div>
+                                                        <div style="width: 256px; height: 256px; position: absolute; left: 687px; top: -129px;">
+                                                            <img src="http://mt1.googleapis.com/vt?lyrs=m@255060993&amp;src=apiv3&amp;hl=en-US&amp;x=2849&amp;y=5717&amp;z=14&amp;scale=2&amp;style=47,37%7Csmartmaps" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                        </div>
+                                                        <div style="width: 256px; height: 256px; position: absolute; left: 687px; top: 127px;">
+                                                            <img src="http://mt1.googleapis.com/vt?lyrs=m@255083024&amp;src=apiv3&amp;hl=en-US&amp;x=2849&amp;y=5718&amp;z=14&amp;scale=2&amp;style=47,37%7Csmartmaps" draggable="false" style="width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;">
+                                            <a target="_blank" href="http://maps.google.com/maps?ll=47.66582,-117.42893&amp;z=14&amp;t=m&amp;hl=en-US&amp;gl=US&amp;mapclient=apiv3" title="Click to see this area on Google Maps" style="position: static; overflow: visible; float: none; display: inline;">
+                                                <div style="width: 62px; height: 26px; cursor: pointer;">
+                                                    <img src="http://maps.gstatic.com/mapfiles/api-3/images/google_white2_hdpi.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 62px; height: 26px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 163px; bottom: 0px; width: 122px;">
+                                            <div draggable="false" class="gm-style-cc" style="-webkit-user-select: none;">
+                                                <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                                                    <div style="width: 1px;"></div>
+                                                    <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div>
+                                                </div>
+                                                <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right;">
+                                                    <a style="color: rgb(68, 68, 68); text-decoration: none; cursor: pointer; display: none;">
+                                                    Map Data</a>
+                                                    <span style="">
+                                                    Map data ©2014 Google</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="background-color: white; padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none; width: 256px; height: 148px; position: absolute; left: 199px; top: 30px;">
+                                            <div style="padding: 0px 0px 10px; font-size: 16px;">
+                                                Map Data
+                                            </div>
+                                            <div style="font-size: 13px;">
+                                                Map data ©2014 Google
+                                            </div>
+                                            <div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000; cursor: pointer;">
+                                                <img src="http://maps.gstatic.com/mapfiles/api-3/images/mapcnt3.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                            </div>
+                                        </div>
+                                        <div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;">
+                                            <div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">
+                                                Map data ©2014 Google
+                                            </div>
+                                        </div>
+                                        <div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; position: absolute; -webkit-user-select: none; right: 93px; bottom: 0px;">
+                                            <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                                                <div style="width: 1px;"></div>
+                                                <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div>
+                                            </div>
+                                            <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right;">
+                                                <a href="http://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank" style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">
+                                                Terms of Use</a>
+                                            </div>
+                                        </div>
+                                        <div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; position: absolute; right: 0px; bottom: 0px;">
+                                            <div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;">
+                                                <div style="width: 1px;"></div>
+                                                <div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div>
+                                            </div>
+                                            <div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right;">
+                                                <a target="_new" title="Report errors in the road map or imagery to Google" href="http://maps.google.com/maps?ll=47.66582,-117.42893&amp;z=14&amp;t=m&amp;hl=en-US&amp;gl=US&amp;mapclient=apiv3&amp;skstate=action:mps_dialog$apiref:1&amp;output=classic" style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); text-decoration: none; position: relative;">
+                                                Report a map error</a>
+                                            </div>
+                                        </div>
+                                        <div class="gmnoprint" draggable="false" controlwidth="32" controlheight="84" style="margin: 5px; -webkit-user-select: none; position: absolute; left: 0px; top: 0px;">
+                                            <div controlwidth="32" controlheight="40" style="cursor: url(http://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8, default; position: absolute; left: 0px; top: 0px;">
+                                                <div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px; top: 0px;">
+                                                    <img src="http://maps.gstatic.com/mapfiles/api-3/images/cb_scout2_hdpi.png" draggable="false" style="position: absolute; left: -9px; top: -102px; width: 1028px; height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                </div>
+                                                <div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;">
+                                                    <img src="http://maps.gstatic.com/mapfiles/api-3/images/cb_scout2_hdpi.png" draggable="false" style="position: absolute; left: -107px; top: -102px; width: 1028px; height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                </div>
+                                                <div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;">
+                                                    <img src="http://maps.gstatic.com/mapfiles/api-3/images/cb_scout2_hdpi.png" draggable="false" style="position: absolute; left: -58px; top: -102px; width: 1028px; height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                </div>
+                                                <div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;">
+                                                    <img src="http://maps.gstatic.com/mapfiles/api-3/images/cb_scout2_hdpi.png" draggable="false" style="position: absolute; left: -205px; top: -102px; width: 1028px; height: 214px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                </div>
+                                            </div>
+                                            <div class="gmnoprint" controlwidth="0" controlheight="0" style="opacity: 0.6; display: none; position: absolute;">
+                                                <div title="Rotate map 90 degrees" style="width: 22px; height: 22px; overflow: hidden; position: absolute; cursor: pointer;">
+                                                    <img src="http://maps.gstatic.com/mapfiles/api-3/images/mapcnt3_hdpi.png" draggable="false" style="position: absolute; left: -38px; top: -360px; width: 59px; height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                </div>
+                                            </div>
+                                            <div class="gmnoprint" controlwidth="20" controlheight="39" style="position: absolute; left: 6px; top: 45px;">
+                                                <div style="width: 20px; height: 39px; overflow: hidden; position: absolute;">
+                                                    <img src="http://maps.gstatic.com/mapfiles/api-3/images/mapcnt3_hdpi.png" draggable="false" style="position: absolute; left: -39px; top: -401px; width: 59px; height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;">
+                                                </div>
+                                                <div title="Zoom in" style="position: absolute; left: 0px; top: 2px; width: 20px; height: 17px; cursor: pointer;"></div>
+                                                <div title="Zoom out" style="position: absolute; left: 0px; top: 19px; width: 20px; height: 17px; cursor: pointer;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="gmnoprint" style="margin: 5px; z-index: 0; position: absolute; cursor: pointer; right: 0px; top: 0px;">
+                                            <div class="gm-style-mtc" style="float: left;">
+                                                <div draggable="false" title="Show street map" style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 1px 6px; border-bottom-left-radius: 2px; border-top-left-radius: 2px; -webkit-background-clip: padding-box; background-clip: padding-box; border: 1px solid rgba(0, 0, 0, 0.14902); -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; min-width: 24px; font-weight: 500;">
+                                                    Map
+                                                </div>
+                                                <div style="background-color: white; z-index: -1; padding-top: 2px; -webkit-background-clip: padding-box; background-clip: padding-box; border-width: 0px 1px 1px; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-right-color: rgba(0, 0, 0, 0.14902); border-bottom-color: rgba(0, 0, 0, 0.14902); border-left-color: rgba(0, 0, 0, 0.14902); -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; position: absolute; left: 0px; top: 19px; text-align: left; display: none;">
+                                                    <div draggable="false" title="Show street map with terrain" style="color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 3px 8px 3px 5px; direction: ltr; text-align: left; white-space: nowrap;">
+                                                        <span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(198, 198, 198); border-top-left-radius: 1px; border-top-right-radius: 1px; border-bottom-right-radius: 1px; border-bottom-left-radius: 1px; width: 13px; height: 13px; vertical-align: middle;">
+                                                            <div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden; display: none;">
+                                                                <img src="http://maps.gstatic.com/mapfiles/mv/imgs8.png" draggable="false" style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; width: 68px; height: 67px;">
+                                                            </div>
+                                                        </span>
+                                                        <label style="vertical-align: middle; cursor: pointer;">
+                                                        Terrain</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="gm-style-mtc" style="float: left;">
+                                                <div draggable="false" title="Show satellite imagery" style="direction: ltr; overflow: hidden; text-align: center; position: relative; color: rgb(86, 86, 86); font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 1px 6px; border-bottom-right-radius: 2px; border-top-right-radius: 2px; -webkit-background-clip: padding-box; background-clip: padding-box; border-width: 1px 1px 1px 0px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-top-color: rgba(0, 0, 0, 0.14902); border-right-color: rgba(0, 0, 0, 0.14902); border-bottom-color: rgba(0, 0, 0, 0.14902); -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; min-width: 43px;">
+                                                    Satellite
+                                                </div>
+                                                <div style="background-color: white; z-index: -1; padding-top: 2px; -webkit-background-clip: padding-box; background-clip: padding-box; border-width: 0px 1px 1px; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-right-color: rgba(0, 0, 0, 0.14902); border-bottom-color: rgba(0, 0, 0, 0.14902); border-left-color: rgba(0, 0, 0, 0.14902); -webkit-box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; position: absolute; right: 0px; top: 19px; text-align: left; display: none;">
+                                                    <div draggable="false" title="Zoom in to show 45 degree view" style="color: rgb(184, 184, 184); font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 3px 8px 3px 5px; direction: ltr; text-align: left; white-space: nowrap; display: none;">
+                                                        <span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(241, 241, 241); border-top-left-radius: 1px; border-top-right-radius: 1px; border-bottom-right-radius: 1px; border-bottom-left-radius: 1px; width: 13px; height: 13px; vertical-align: middle;">
+                                                            <div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden; display: none;">
+                                                                <img src="http://maps.gstatic.com/mapfiles/mv/imgs8.png" draggable="false" style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; width: 68px; height: 67px;">
+                                                            </div>
+                                                        </span>
+                                                        <label style="vertical-align: middle; cursor: pointer;">
+                                                        45°</label>
+                                                    </div>
+                                                    <div draggable="false" title="Show imagery with street names" style="color: rgb(0, 0, 0); font-family: Roboto, Arial, sans-serif; -webkit-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 3px 8px 3px 5px; direction: ltr; text-align: left; white-space: nowrap;">
+                                                        <span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(198, 198, 198); border-top-left-radius: 1px; border-top-right-radius: 1px; border-bottom-right-radius: 1px; border-bottom-left-radius: 1px; width: 13px; height: 13px; vertical-align: middle;">
+                                                            <div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden;">
+                                                                <img src="http://maps.gstatic.com/mapfiles/mv/imgs8.png" draggable="false" style="position: absolute; left: -52px; top: -44px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; width: 68px; height: 67px;">
+                                                            </div>
+                                                        </span>
+                                                        <label style="vertical-align: middle; cursor: pointer;">
+                                                        Labels</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ContentFooter">
+                                <div class="Right">
+                                    <div title="Toggle the visibility of this map" id="" class="PrecapButton Instructive HideShow TextOnly Enabled">
+                                        <span>
+                                        Hide Map</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div title="Delete this Section..." id="" class="PrecapButton SectionDelete DeleteButton_L Size-Icon Enabled ">
+                            <span>
+                            &nbsp;</span>
+                        </div>
+                        <div class="DeleteConfirmBox" style="opacity: 0; visibility: hidden;">
+                            <span class="DeleteConfirmText Text">
+                            delete section?</span>
+                            <div title="" id="" class="PrecapButton DeleteConfirm Text TextOnly Disabled">
+                                <span>
+                                yes, delete</span>
+                            </div>
+                            <div title="" id="" class="PrecapButton DeleteCancel Text TextOnly Enabled">
+                                <span>
+                                nevermind</span>
+                            </div>
+                        </div>
+                    </section>
+ -->
+                    <!-- GROUP SECTION -->
+                    <section class="Section Group" id="Group-hs26odcf">
+                        <header>
+                            <h2 class="EditableText SectionTitle" contenteditable="false" title="">
+                                Clients
+                            </h2>
+                        </header>
+                        <div class="ContentContainer">
+                            <ul class="GroupList"></ul>
+                            <div class="ContentFooter">
+                                <div class="Left">
+                                    <div 
+                                        title="Add a new contact to this group..."
+                                        class="PrecapButton NewItemText Instructive TextOnly Enabled"
+                                        id="AddContactBtn-xyz"
+                                    >
+                                        <span>Add Contact</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div title="Delete this Section..." id="" class="PrecapButton SectionDelete DeleteButton_L Size-Icon Enabled">
+                            <span>
+                            &nbsp;</span>
+                        </div>
+                        <div class="DeleteConfirmBox" style="opacity: 0; visibility: hidden;">
+                            <span class="DeleteConfirmText Text">
+                            delete section?</span>
+                            <div title="" id="" class="PrecapButton DeleteConfirm Text TextOnly Disabled">
+                                <span>
+                                yes, delete</span>
+                            </div>
+                            <div title="" id="" class="PrecapButton DeleteCancel Text TextOnly Enabled">
+                                <span>
+                                nevermind</span>
+                            </div>
+                        </div>
+
+                        <!-- //////////////////////////////////////////////////////// -->
+                        <!-- CONTACT CHOOSER VIEW -->
+                        <div class="ContactChooser" tabindex="-1" id="ContactChooser-xyz" style="display:none; top: 30px; opacity:0;">
+                            <div class="Controls">
+                                <p class="EditableText">James Brown</p>
+                                <div class="ActionButtons">
+                                    <div title="Be DONE adding contacts" class="PrecapButton Add Size-Large Enabled Active Do DoneButton"><span>Done</span></div>
+                                    <div title="Create contact..." class="PrecapButton Add Size-Large Enabled Do CreateContactButton"><span>Create "James Brown"</span></div>
+                                </div>
+                            </div>
+                            <div class="Container">
+                                <!-- //////////////////////////////////////////////////////// -->
+                                <!-- ContactList -->
+                                <ul class="DirectoryList ContactList AutoComplete" id="templateDirectoryList" data-list="contacts">
+                                    <li class="vcard Contact Person DirectoryListItem" title="View this contact card..."><div class="Avatar">&#160;</div><span class="Name fn n"><span data-bind="firstName">Jonathan</span> <span data-bind="lastName">Appletree</span> </span> <span class="Email"><a class="email" data-bind="email">johnny@orchardville.com</a></span> <span class="Phone tel" data-bind="phone">212-443-3333</span> </li>
+                                    <li class="vcard Contact Person DirectoryListItem" title="View this contact card..."><div class="Avatar">&nbsp;</div><span class="Name fn n"><span>Susan</span> <span>Simonds</span> </span> <span class="Email"><a class="email">susan@gmail.com</a></span> <span class="Phone tel">509-555-1212</span> </li>
+                                    <li class="vcard Contact Person DirectoryListItem" title="View this contact card..."><div class="Avatar">&nbsp;</div><span class="Name fn n"><span>David</span> <span>Simonds</span> </span> <span class="Email"><a class="email">susan@gmail.com</a></span> <span class="Phone tel">509-555-1212</span> </li>
+                                    <li class="vcard Contact Person DirectoryListItem" title="View this contact card..."><div class="Avatar">&nbsp;</div><span class="Name fn n"><span>Albert</span><span>Harrison</span></span><span class="Email"><a class="email">albert@hiscompany.com</a></span><span class="Phone tel">212-123-1234</span></li>
+                                </ul>
+                                <!-- /ContactList -->
+                                <!-- //////////////////////////////////////////////////////// -->
+
+
+                                <!-- //////////////////////////////////////////////////////// -->
+                                <!-- NewContactInputView -->
+                                <div class="NewContactInputView" style="display:none; height: 0;">
+                                    <div class="AvatarUploadContainer"></div>
+                                    <form id="settingsForm" class="InputForm">
+                                        <div class="form-group">
+                                            <!-- <label for="firstName" class="control-label">First Name</label> -->
+                                            <input type="text" class="form-control" name="firstName" maxlength="50" placeholder="First Name (required)" title="We need to know your first name." required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <!-- <label for="lastName" class="control-label">Last Name</label> -->
+                                            <input type="text" class="form-control" name="lastName" maxlength="50" placeholder="Last Name (required)" title="We need to know your last name." required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <!-- <label for="email" class="control-label">Email address</label> -->
+                                            <input type="email" class="form-control" name="email" placeholder="Email (required)" title="We need to know your email address." required="required">
+                                        </div>
+                                    </form>
+                                    <div class="ActionButtons">
+                                        <div title="Save this contact" class="PrecapButton Add Size-Large Enabled Active Do SaveNewContactButton"><span>Save "James Brown"</span></div>
+                                        <div title="Cancel" class="PrecapButton Add Size-Large Enabled CancelButton"><span>Cancel</span></div>
+                                    </div>
+                                    <div class="Mask">
+                                        <div class="CheckMarkBox">
+                                            <div class="Check">v</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /NewContactInputView -->
+                                <!-- //////////////////////////////////////////////////////// -->
+                            </div>
+
+
+                        </div>
+                        <!-- /CONTACT CHOOSER VIEW -->
+                        <!-- //////////////////////////////////////////////////////// -->
+                    </section>
+                    <!-- /GROUP SECTION -->
+
+
+                    <div class="SectionGap" id="gap-hse9cpx1">
+                        <div title="Add a new Section here..." id="" class="PrecapButton AddSectionHereButton Size-Icon Enabled">
+                            <span>
+                            &nbsp;</span>
+                        </div>
+                        <div class="AddSectionHereBar" style="opacity: 0; top: 10px; visibility: hidden;">
+                            <ul class="SectionTypes">
+                                <li class="ButtonWrapper Note">
+                                    <div title="Add a Note section here..." id="" class="PrecapButton Note TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Note</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper List">
+                                    <div title="Add a List section here..." id="" class="PrecapButton List TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        List</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper Location">
+                                    <div title="Add a Location section here..." id="" class="PrecapButton Location TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Location</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper Timeline">
+                                    <div title="Add a Timeline section here..." id="" class="PrecapButton Timeline TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Timeline</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper Group">
+                                    <div title="Add a Group section here..." id="" class="PrecapButton Group TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Group</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper PhotoSet">
+                                    <div title="Add a PhotoSet section here..." id="" class="PrecapButton PhotoSet TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        PhotoSet</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper FileSet">
+                                    <div title="Add a FileSet section here..." id="" class="PrecapButton FileSet TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        FileSet</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div title="" id="" class="PrecapButton CloseButton Size-Icon Enabled">
+                                <span>
+                                x</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <section class="Section List" id="List-hr5b3tr8">
+                        <header>
+                            <h2 class="EditableText SectionTitle" contenteditable="false" title="">
+                                Main List of tasks
+                            </h2>
+                        </header>
+                        <div class="ContentContainer">
+                            <ul class="ListList">
+                                <li class="ListItem">
+                                    <div class="ListCheckbox">
+                                        <div class="PrecapCheckbox ">
+                                            ✔
+                                        </div>
+                                    </div>
+                                    <p class="EditableText ListItemText" contenteditable="false" title="">
+                                        URL Change - Investigate how to get /posts/ instead of /projects/
+                                    </p>
+                                </li>
+                                <li class="ListItem">
+                                    <div class="ListCheckbox">
+                                        <div class="PrecapCheckbox ">
+                                            ✔
+                                        </div>
+                                    </div>
+                                    <p class="EditableText ListItemText" contenteditable="false" title="">
+                                        Footer Visual changes. 
+                                    </p>
+                                </li>
+                                <li class="ListItem">
+                                    <div class="ListCheckbox">
+                                        <div class="PrecapCheckbox ">
+                                            ✔
+                                        </div>
+                                    </div>
+                                    <p class="EditableText ListItemText" contenteditable="false" title="">
+                                        Footer newsletter subscriber form
+                                    </p>
+                                </li>
+                                <li class="ListItem">
+                                    <div class="ListCheckbox">
+                                        <div class="PrecapCheckbox ">
+                                            ✔
+                                        </div>
+                                    </div>
+                                    <p class="EditableText ListItemText" contenteditable="false" title="">
+                                        Japanese post testing ??? 
+                                    </p>
+                                </li>
+                            </ul>
+                            <div class="ContentFooter">
+                                <div class="Left">
+                                    <div title="Add a new item to this list..." id="" class="PrecapButton NewItemText Instructive TextOnly Enabled">
+                                        <span>
+                                        Add Item</span>
+                                    </div>
+                                </div>
+                                <div class="Right">
+                                    <div title="Toggle the visibility of completed items" id="" class="PrecapButton Instructive HideShow TextOnly Enabled" style="display: none;">
+                                        <span>
+                                        Hide Completed</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div title="Delete this Section..." id="" class="PrecapButton SectionDelete DeleteButton_L Size-Icon Enabled">
+                            <span>
+                            &nbsp;</span>
+                        </div>
+                        <div class="DeleteConfirmBox" style="opacity: 0; visibility: hidden;">
+                            <span class="DeleteConfirmText Text">
+                            delete section?</span>
+                            <div title="" id="" class="PrecapButton DeleteConfirm Text TextOnly Disabled">
+                                <span>
+                                yes, delete</span>
+                            </div>
+                            <div title="" id="" class="PrecapButton DeleteCancel Text TextOnly Enabled">
+                                <span>
+                                nevermind</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="SectionGap" id="gap-hse9cpx2">
+                        <div title="Add a new Section here..." id="" class="PrecapButton AddSectionHereButton Size-Icon Enabled">
+                            <span>
+                            &nbsp;</span>
+                        </div>
+                        <div class="AddSectionHereBar" style="opacity: 0; top: 10px; visibility: hidden;">
+                            <ul class="SectionTypes">
+                                <li class="ButtonWrapper Note">
+                                    <div title="Add a Note section here..." id="" class="PrecapButton Note TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Note</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper List">
+                                    <div title="Add a List section here..." id="" class="PrecapButton List TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        List</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper Location">
+                                    <div title="Add a Location section here..." id="" class="PrecapButton Location TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Location</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper Timeline">
+                                    <div title="Add a Timeline section here..." id="" class="PrecapButton Timeline TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Timeline</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper Group">
+                                    <div title="Add a Group section here..." id="" class="PrecapButton Group TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Group</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper PhotoSet">
+                                    <div title="Add a PhotoSet section here..." id="" class="PrecapButton PhotoSet TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        PhotoSet</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper FileSet">
+                                    <div title="Add a FileSet section here..." id="" class="PrecapButton FileSet TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        FileSet</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div title="" id="" class="PrecapButton CloseButton Size-Icon Enabled">
+                                <span>
+                                x</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <section class="Section Note" id="Note-hrxxsv04">
+                        <header>
+                            <h2 class="EditableText SectionTitle" contenteditable="false" title="">
+                                Current Status
+                            </h2>
+                        </header>
+                        <div class="ContentContainer">
+                            <div class="EditableText NoteBody" contenteditable="false" title="">
+                                <p class="p1">
+                                    Still need footer PSD from Jake.<br>
+                                    Still need MadMimi login from Jake (or embed code).
+                                </p>
+                                <p class="p1">
+                                    HAVE received new social buttons. Probably need to make @2x versions of these.
+                                </p>
+                                <p class="p1">
+                                    Not sure if the Japanese post is there yet. Need to log in to see.
+                                </p>
+                            </div>
+                        </div>
+                        <div title="Delete this Section..." id="" class="PrecapButton SectionDelete DeleteButton_L Size-Icon Enabled">
+                            <span>
+                            &nbsp;</span>
+                        </div>
+                        <div class="DeleteConfirmBox" style="opacity: 0; visibility: hidden;">
+                            <span class="DeleteConfirmText Text">
+                            delete section?</span>
+                            <div title="" id="" class="PrecapButton DeleteConfirm Text TextOnly Disabled">
+                                <span>
+                                yes, delete</span>
+                            </div>
+                            <div title="" id="" class="PrecapButton DeleteCancel Text TextOnly Enabled">
+                                <span>
+                                nevermind</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="SectionGap" id="gap-hse9cpx3">
+                        <div title="Add a new Section here..." id="" class="PrecapButton AddSectionHereButton Size-Icon Enabled">
+                            <span>
+                            &nbsp;</span>
+                        </div>
+                        <div class="AddSectionHereBar" style="opacity: 0; top: 10px; visibility: hidden;">
+                            <ul class="SectionTypes">
+                                <li class="ButtonWrapper Note">
+                                    <div title="Add a Note section here..." id="" class="PrecapButton Note TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Note</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper List">
+                                    <div title="Add a List section here..." id="" class="PrecapButton List TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        List</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper Location">
+                                    <div title="Add a Location section here..." id="" class="PrecapButton Location TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Location</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper Timeline">
+                                    <div title="Add a Timeline section here..." id="" class="PrecapButton Timeline TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Timeline</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper Group">
+                                    <div title="Add a Group section here..." id="" class="PrecapButton Group TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        Group</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper PhotoSet">
+                                    <div title="Add a PhotoSet section here..." id="" class="PrecapButton PhotoSet TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        PhotoSet</span>
+                                    </div>
+                                </li>
+                                <li class="ButtonWrapper FileSet">
+                                    <div title="Add a FileSet section here..." id="" class="PrecapButton FileSet TextOnly Enabled">
+                                        <i class="Icon">
+                                        </i>
+                                        <span>
+                                        FileSet</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div title="" id="" class="PrecapButton CloseButton Size-Icon Enabled">
+                                <span>
+                                x</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section class="Section Footer">
+                    <div title="" id="" class="PrecapButton ArchivePrecapTrigger TextOnly Enabled">
+                        <span>
+                        archive this precap</span>
+                    </div>
+                    <div title="" id="" class="PrecapButton DeletePrecapTrigger TextOnly Enabled">
+                        <span>
+                        delete this precap</span>
+                    </div>
+                </section>
+            </article>
+        </div>
+
+

@@ -62,6 +62,7 @@ section.PhotoSet {
 .PrecapPopover.AssetViewer {
 	padding-bottom: 5px;
 	position: fixed;
+	display: none;
 
 	.Inner {
 		height: 100%;

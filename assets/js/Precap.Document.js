@@ -33,11 +33,11 @@ Precap.Document = new Class({
     ,_setupEvents: function() {
         this.addEvent('document:ready', function(){
             // TODO: rejigger sorting...
-            // if (this.options.sortable && Object.getLength(this.getSections()) > 1) {
-            //  this.refreshSortables();    
-            // } else {
-            //  this.disableSortables();
-            // }
+             if (this.options.sortable && Object.getLength(this.getSections()) > 1) {
+              this.refreshSortables();    
+             } else {
+              this.disableSortables();
+             }
         }.bind(this));
 
         this.addEvent('add:section', function(sectionType, sectionGap){
@@ -65,7 +65,6 @@ Precap.Document = new Class({
             ,properties: {title:'Edit the name of this precap...'}
             ,allowLineBreaks: false
             ,placeholderText: 'Name your precap'
-            ,returnHTML: false
             ,deactivateOn: 'enter'
             ,onClean: function() {
                 this.save();
@@ -80,7 +79,6 @@ Precap.Document = new Class({
             ,tag: 'div'
             ,properties: {title:'Edit the description of this precap...'}
             ,placeholderText: 'Describe your precap'
-            ,returnHTML: false
             ,onBlur: function(et) {
                 var val = et.getValue();
                 if (val != this._data.description) this.save(val);
@@ -134,20 +132,22 @@ Precap.Document = new Class({
         this._sectionsContainer.grab(sg);
 
         // Loop through sections and build each section
-        this._data.sections.each(function(sectionData, index, sectionsArray) {
+        if (this._data.sections) {
+            this._data.sections.each(function(sectionData, index, sectionsArray) {
 
-            // build and add the section and next sectionGap
-            var newSection = this._buildSection(sectionData);
-            var newSectionGap = this._createSectionGap();
+                // build and add the section and next sectionGap
+                var newSection = this._buildSection(sectionData);
+                var newSectionGap = this._createSectionGap();
 
-            this._addToPageIndex(newSection.id, newSection.toElement(), 'section');
-            this._addToPageIndex(newSectionGap.id, newSectionGap.toElement(), 'gap');
+                this._addToPageIndex(newSection.id, newSection.toElement(), 'section');
+                this._addToPageIndex(newSectionGap.id, newSectionGap.toElement(), 'gap');
 
-            this._sectionsContainer.adopt(
-                newSection
-                ,newSectionGap
-            );
-        }, this);
+                this._sectionsContainer.adopt(
+                    newSection
+                    ,newSectionGap
+                );
+            }, this);
+        }
 
         this.fireEvent('document:ready', this);
     }
@@ -375,17 +375,21 @@ Precap.Document = new Class({
             this._sortables.detach();
             delete this._sortables;         
         }
-        this._data.sections.each(function(section) {
-            this._sections[section.id].fireEvent('hideMoveButton');
-        }, this);
+        if (this._data.sections) {
+            this._data.sections.each(function(section) {
+                this._sections[section.id].fireEvent('hideMoveButton');
+            }, this);
+        }
     }
 
     ,loadMaps: function(firstLoad) {
-        this._data.sections.each(function(section) {
-            if (section.type == 'Location') {
-                this._sections[section.id].loadMap(null, firstLoad);
-            }
-        }, this);
+        if (this._data.sections) {
+            this._data.sections.each(function(section) {
+                if (section.type == 'Location') {
+                    this._sections[section.id].loadMap(null, firstLoad);
+                }
+            }, this);
+        }
     }
 
     ,toElement: function() {

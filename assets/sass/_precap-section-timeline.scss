@@ -1,61 +1,65 @@
 
 section.Timeline {
-	.Day {
-		position: relative;
-		.Day-Date {
-			display: block;
-			margin-bottom: 6px;
-			cursor: pointer;
-			}
-		.HiddenDateInput {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 200px;
-			height: 20px;
-			border: 0;
-			outline: 0;
-			cursor: pointer;
-			@include opacity(0);
-			}
-	}
+    .Day {
+        position: relative;
+        .Day-Date {
+            border: none;
+            outline: 0;
+            margin-bottom: 6px;
+            width: 33%;
 
-	.TimelineItem {
-		clear: left;
-		padding-top: 10px;
-		display: table;
-		width: 100%;
+            &:focus {
+                outline: 0;
+            }
+        }
+    }
 
-		.TimeSpan {
-			width: 26%;
-			display: table-cell;
-			vertical-align: top;
-			cursor: pointer;
-			&.Active {
-				color: #008cf8;
-			}
-			.Empty {
-				display: none;
-				color: #aaa;
-				font-style: italic;
-				font-weight: 600;
-				}
+    .TimelineItem {
+        clear: left;
+        padding-top: 10px;
+        display: table;
+        width: 100%;
 
-			> time {
-				// width: 35%;
-				display: inline-block;
-			}
+        .TimeSpan {
+            width: 26%;
+            display: table-cell;
+            vertical-align: top;
+            cursor: pointer;
+            &.Active {
+                color: #008cf8;
+            }
+            .Empty {
+                display: none;
+                color: #aaa;
+                font-style: italic;
+                font-weight: 600;
+                }
 
-			> span {
-				display: inline-block;
-				margin: 0 8px;
-			}
-		}
+            > time {
+                // width: 35%;
+                display: inline-block;
+            }
 
-		.TimelineItemText {
-			vertical-align: top;
-			display: table-cell;
-			vertical-align: bottom;
-		}
-	}
+            > input {
+                border: none;
+                outline: 0;
+                width: 60px;
+                text-align: right;
+                &:focus {
+                    outline: 0;
+                }
+            }
+
+            > span {
+                display: inline-block;
+                margin: 0 8px;
+            }
+        }
+
+        .TimelineItemText {
+            vertical-align: top;
+            display: table-cell;
+            vertical-align: bottom;
+        }
+    }
 }

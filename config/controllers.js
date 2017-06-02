@@ -62,7 +62,7 @@ module.exports.controllers = {
      * `actions` are enabled by default, and are OK for production-- however,
      * you must take great care not to inadvertently expose unsafe controller logic to GET requests.
      */
-    actions: true,
+    actions: false,
 
 
     
@@ -94,7 +94,7 @@ module.exports.controllers = {
      *
      * `shortcuts` are enabled by default, but SHOULD BE DISABLED IN PRODUCTION!!!!!
      */
-    shortcuts: true,
+    shortcuts: false,
 
 
 

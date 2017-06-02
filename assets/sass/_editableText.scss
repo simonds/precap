@@ -1,14 +1,15 @@
 .EditableText {
 	cursor: text;
 	border-bottom: 1px dashed transparent;
-	white-space: pre-wrap;		
+	// white-space: pre-wrap;		
 	
-	&.Active {
+	&.Active, &.active {
 		// background-color: #e6f3ff;
 		border-bottom-color: #008CF8;
 	}
 
 	&.Active,
+	&.active,
 	&:hover {
 		// border-bottom-color: #008CF8;
 		}

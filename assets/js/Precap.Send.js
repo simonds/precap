@@ -278,28 +278,30 @@ Precap.Send = new Class({
         // build the full list...
         this._data.sections.each(function(sec){
             if (sec.type == 'Group') {
-                sec.contacts.each(function(c){
-                    this._sendToList.grab(
-                        new Element('li', {
-                            events: {
-                                click: function(){
-                                    c.checkbox.toggle();
+                if (sec.contacts && sec.contacts.length) {
+                    sec.contacts.each(function(c){
+                        this._sendToList.grab(
+                            new Element('li', {
+                                events: {
+                                    click: function(){
+                                        c.checkbox.toggle();
+                                    }
                                 }
-                            }
-                        }).adopt(
-                            c.checkbox = new Precap.Checkbox({
-                                checked: true
-                                ,onToggle: function(checked){
-                                    c.selected = checked;
-                                    this._adjustAllButton();
-                                }.bind(this)
-                            })
-                            ,new Element('span', {html: c.firstName + ' ' + c.lastName})
-                        )
-                    );
-                    this._sendToCheckboxes.push(c.checkbox);
-                    c.selected = true;
-                }, this);
+                            }).adopt(
+                                c.checkbox = new Precap.Checkbox({
+                                    checked: true
+                                    ,onToggle: function(checked){
+                                        c.selected = checked;
+                                        this._adjustAllButton();
+                                    }.bind(this)
+                                })
+                                ,new Element('span', {html: c.firstName + ' ' + c.lastName})
+                            )
+                        );
+                        this._sendToCheckboxes.push(c.checkbox);
+                        c.selected = true;
+                    }, this);
+                }
             }
         }, this);
     }

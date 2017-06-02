@@ -71,7 +71,7 @@ Precap.Toolbar = new Class({
 			this._sendButton
 			,this._newPrecapButton.setProperties({title:'Coming soon!'}).disable()
 			,this._myPrecapsButton
-			,this._directoryButton.setProperties({title:'Coming soon!'}).disable()
+			,this._directoryButton
 			,this._settingsButton.setProperties({title:'Coming soon!'}).disable()
 		);
 

@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js"></script>
+
+
+<div class="container">
+
+    <div class="col-sm-4" style="margin: auto;">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Change Your Password</h3>
+        </div>
+        <div class="panel-body">
+            <form action="/reset" id="resetForm" method="POST">
+            <input type="hidden" name="verificationCode" value="<%- verificationCode %>" />
+            <input type="hidden" name="csrf" value="<%= _csrf %>" />
+
+            <div class="form-group">
+                <label for="password" class="control-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" minlength="6" placeholder="(required, at least 6 characters)" title="A password is required." value="" required />
+            </div>
+            <div class="form-group">
+                <label for="passwordConfirm" class="control-label">Confirm Password</label>
+                <input type="password" class="form-control" name="passwordConfirm" minlength="6" placeholder="(required, at least 6 characters)" title="A matching password is required." value="" required />
+            </div>
+
+            <div><button class="btn btn-lg btn-primary btn-block">Reset Password</button></div>
+
+            </form>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+<style>
+small {color: #a94442;}
+</style>
+
+<script>
+    $("#resetForm").validate({
+        onfocusout: true,
+        focusInvalid: true,
+        validClass: "has-success",
+        errorClass: "has-error",
+        errorElement: "small",
+        errorPlacement: function(error, element) {
+            // if the input has a prepend or append element, put the validation msg after the parent div
+            if(element.parent().hasClass('input-prepend') || element.parent().hasClass('input-append')) {
+                error.insertAfter(element.parent());        
+            // else just place the validation message immediatly after the input
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).parent().addClass(errorClass).removeClass(validClass);
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).parent().removeClass(errorClass).addClass(validClass);
+        },
+        rules: {
+            passwordConfirm: {
+                equalTo: "#password"
+            }
+        },
+
+        messages: {
+            password: {
+              maxlength: 'You need to use a password that is at least six characters long.'
+            },
+            passwordConfirm: {
+                equalTo: "Both passwords must match."
+            },
+        },
+
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+</script>

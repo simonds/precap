@@ -131,8 +131,10 @@ module.exports = function (grunt) {
   grunt.loadTasks(depsPath + '/grunt-contrib-watch/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-uglify/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-cssmin/tasks');
-  grunt.loadTasks(depsPath + '/grunt-contrib-less/tasks');
-  grunt.loadTasks(depsPath + '/grunt-contrib-coffee/tasks');
+  //grunt.loadTasks(depsPath + '/grunt-contrib-less/tasks');
+  grunt.loadTasks('node_modules/grunt-compass/tasks');
+  grunt.loadTasks('node_modules/grunt-contrib-sass/tasks');
+  //grunt.loadTasks(depsPath + '/grunt-contrib-coffee/tasks');
 
   // Project configuration.
   grunt.initConfig({
@@ -144,7 +146,7 @@ module.exports = function (grunt) {
           {
           expand: true,
           cwd: './assets',
-          src: ['**/*.!(coffee)'],
+          src: ['**/*.!(coffee|scss)'],
           dest: '.tmp/public'
         }
         ]
@@ -199,6 +201,46 @@ module.exports = function (grunt) {
           ext: '.css'
         }
         ]
+      }
+    },
+
+    sass: {
+      dev: {
+        options: {
+          style: 'expanded' //Set your prefered style for development here.
+        },
+        files: [{
+          expand: true,
+          cwd: 'assets/sass/',
+          src: ['*.scss', '*.sass'], // Feel free to remove a format if you do not use it.
+          dest: '.tmp/public/styles/',
+          ext: '.css'
+        }, {
+          expand: true,
+          cwd: 'assets/linker/styles/',
+          src: ['*.scss', '*.sass'], // Feel free to remove a format if you do not use it.
+          dest: '.tmp/public/linker/styles/',
+          ext: '.css'
+        }
+        ]
+      }
+    },
+
+    compass: {
+      dev: {
+          src: 'assets/sass',
+          dest: '.tmp/public/styles/',
+          linecomments: true,
+          forcecompile: true,
+          debugsass: true
+      },
+      prod: {
+          src: 'assets/sass',
+          dest: '.tmp/public/styles/',
+          outputstyle: 'compressed',
+          linecomments: false,
+          forcecompile: true,
+          debugsass: false
       }
     },
     
@@ -422,9 +464,11 @@ module.exports = function (grunt) {
   grunt.registerTask('compileAssets', [
     'clean:dev',
     'jst:dev',
-    'less:dev',
-    'copy:dev',    
-    'coffee:dev'
+    //'less:dev',
+    'compass:dev',
+    //'sass:dev',
+    'copy:dev',
+    //'coffee:dev'
   ]);
 
   grunt.registerTask('linkAssets', [
@@ -452,7 +496,9 @@ module.exports = function (grunt) {
   grunt.registerTask('prod', [
     'clean:dev',
     'jst:dev',
-    'less:dev',
+    //'less:dev',
+    'compass:prod',
+    'sass:dev',
     'copy:dev',
     'coffee:dev',
     'concat',

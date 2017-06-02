@@ -45,7 +45,6 @@ Precap.Section.List = new Class({
     ,_buildHeader: function() {
         this._title = new EditableText(this._data.name, {
             tag: 'h2'
-            ,returnHTML: false
             ,placeholderText: 'A Note Section'
             ,className: 'SectionTitle'
             ,deactivateOn: 'enter'
@@ -138,7 +137,6 @@ Precap.Section.List = new Class({
             )
             ,item.editable = new EditableText(item.text, {
                 className: 'ListItemText'
-                ,returnHTML: false
                 ,allowLineBreaks: false
                 ,allowTabbing: false
                 ,activateOn: 'click'

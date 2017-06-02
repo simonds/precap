@@ -9,11 +9,11 @@ Precap.BSheet = new Class({
 		,title: ''
 		,actionButtons: null // [array] of button objects
 		,closeButton: true
+		// onClose: function(){} // if closeButton is true
 	}
 
 	,initialize: function(options){
 		this.setOptions();
-		// this._buildFraming();
 	}
 
 	,_buildFraming: function(){

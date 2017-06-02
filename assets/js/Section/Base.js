@@ -44,7 +44,6 @@ Precap.Section.Base = new Class({
         this._title = new EditableText(this._data.name, {
             tag: 'h2'
             ,placeholderText: 'A New '+this._data.type
-            ,returnHTML: false
             ,className: 'SectionTitle'
             ,deactivateOn: ['enter', 'tab']
             ,allowLineBreaks: false
@@ -116,7 +115,7 @@ Precap.Section.Base = new Class({
         });
 
         actions.push(
-            // this._moveButton,
+            this._moveButton,
             this._deleteButton
             ,confirmBox.adopt(
                 deleteConfirmText

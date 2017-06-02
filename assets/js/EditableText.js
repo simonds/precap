@@ -14,7 +14,7 @@ var EditableText = new Class({
 		,placeholderOnEmpty: true
 		,saveEmptyValue: false
 		,escToBlur: true
-		,returnHTML: true
+		,returnHTML: false
 		,activateOnInit: false
 		,activeClass: 'Active'
 		,activateOn: 'mousedown'    // [string] mousedown, mouseup, click
@@ -238,7 +238,20 @@ var EditableText = new Class({
 		};
 	}
 
-	,_bindKeys: function(){
+	,_bindInputEvents: function(){
+		if (this.$events.keyup) {
+			this.html.addEvent('keyup', function(){
+				this.fireEvent('keyup', [this.getValue(), this]);
+			}.bind(this));
+		}
+		this.html.addEvents({
+			keyup: function(){
+				this.fireEvent('keyup', [this.getValue(), this]);
+			}.bind(this)
+			,keydown: function(){
+				this.fireEvent('keydown', [this.getValue(), this]);
+			}.bind(this)
+		});
 		Mousetrap.bind(this._keyboardKeys);
 	}
 
@@ -287,7 +300,7 @@ var EditableText = new Class({
 			}
 		}
 
-		this._bindKeys();
+		this._bindInputEvents();
 
 		this._textAtActivation = this.getValue();
 

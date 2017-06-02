@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Precap</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="shortcut icon" href="/favicon.ico"/>
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/precap-touch-icon-retina.png"/>
+        <meta name="apple-mobile-web-app-title" content="Precap"/>
+
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/stylesheets/bootstrap-datetimepicker.css" media="screen, projection, print" rel="stylesheet" type="text/css"/>
+        <link href="/stylesheets/precap-compiled.css" media="screen, projection, print" rel="stylesheet" type="text/css"/>
+        <!--[if IE]>
+        <link href="/stylesheets/precap-ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+        <![endif]-->
+
+        <script type="text/javascript" src="/js/socket.io.js"></script>
+        <script type="text/javascript" src="/js/sails.io.js"></script>
+        <script type="text/javascript" src="/js/app.js"></script>
+
+    </head>
+
+    <body>
+        <div class="container xxxxx">
+            <script type="text/x-handlebars">
+                <div class="Canvas">
+                    <div class="PrecapLogo">Precap</div>
+                    {{outlet}}
+                </div>
+            </script>
+            <!-- {{animated-outlet name='main'}} -->
+        </div>
+        <%- body %>
+
+        <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-39556625-2']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
+
+        <!-- Start CDN Library Load
+        <script src="//code.jquery.com/jquery-2.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js"></script>
+        <script src="//api.filepicker.io/v1/filepicker.js"></script>
+        <script src="//builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v1.3.0.js" type="text/javascript" charset="utf-8"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.4.0/ember.js" type="text/javascript" charset="utf-8"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/ember-data.js/1.0.0-beta.6/ember-data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/ember-resource.js/1.0/ember-resource.min.js" type="text/javascript" charset="utf-8"></script>
+
+        //cdn.jsdelivr.net/jquery/2.1.0/jquery.min.js
+        //cdn.jsdelivr.net/emberjs/1.4.0/ember.min.js
+
+        End CDN Library Load -->
+
+        <!-- Start Non-CDN Library Load -->
+        <script src="/js/libraries/jquery-2.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/jquery.easing.1.3.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/bootstrap-3.1.1.min.js"></script>
+        <script src="/js/libraries/jquery.validate-1.11.1.min.js"></script>
+        <script src="/js/libraries/jquery.validate-1.11.1.additional-methods.min.js"></script>
+        <!--<script src="/js/libraries/filepicker-1.0.min.js"></script>-->
+        <script src="/js/libraries/typeahead.bundle.js" type="text/javascript" charset="utf-8"></script>
+
+        <script type="text/javascript">
+        (function(a){if(window.filepicker){return}var b=a.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===a.location.protocol?"https:":"http:")+"//api.filepicker.io/v1/filepicker.js";var c=a.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d={};d._queue=[];var e="pick,pickMultiple,pickAndStore,read,write,writeUrl,export,convert,store,storeUrl,remove,stat,setKey,constructWidget,makeDropPane".split(",");var f=function(a,b){return function(){b.push([a,arguments])}};for(var g=0;g<e.length;g++){d[e[g]]=f(e[g],d._queue)}window.filepicker=d})(document); 
+        </script>
+
+        <script src="/js/libraries/handlebars-v1.3.0.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/ember-1.4.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/ember-data-1.0b6.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/ember-resource-1.0.min.js" type="text/javascript" charset="utf-8"></script>
+        <!-- End Non-CDN Library Load -->
+
+        <script src="/js/ember/libraries/sails-adapter.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/libraries/debounce.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/libraries/autosaving.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/libraries/ember-animate.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/libraries/ember-typeahead.min.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="/js/libraries/spin/spin.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/moment.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/mousetrap.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/howler/howler.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/libraries/bootstrap/bootstrap-datetimepicker.min.js" type="text/javascript" charset="utf-8"></script>
+        <!-- <script src="/js/libraries/jquery.scrollTo.min.js" type="text/javascript" charset="utf-8"></script> -->
+
+
+        <script src="/js/ember/application.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="/js/ember/libraries/ember-contenteditable-view.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="/js/ember/models/contact.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/models/inkFilepickerFile.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/models/model.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/models/precap.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/models/user.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="/js/ember/router/router.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="/js/ember/routes/precap.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/routes/precapDirectory.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/routes/precapFind.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/routes/precapSend.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/routes/precapSettings.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="/js/ember/controllers/application.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/controllers/filepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/controllers/imageviewer.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/controllers/map.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/controllers/precap.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/controllers/precapContactGroup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/controllers/precapDirectory.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/controllers/precapFileset.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/controllers/precapFind.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/controllers/precapImageset.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/controllers/precapList.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/controllers/precapSend.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/controllers/precapSettings.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/controllers/precapTimeline.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="/js/ember/views/date.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/views/imageviewerImage.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/views/imageViewer.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/views/listItemContainer.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/views/map.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/views/precapDirectory.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/views/precapFind.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/views/precapSend.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/views/precapSettings.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/views/precaps.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/views/precap.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/views/sections.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/views/time.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/views/contactChooser.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="/js/ember/components/sectionGapComponent.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/components/sendItemComponent.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/js/ember/components/toolbarListComponent.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="/js/ember/helpers/helpers.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+        <script src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false" type="text/javascript" charset="utf-8"></script>
+
+        <script type="text/x-handlebars" id="application" data-template-name="precap">
+        {{partial 'toolbar'}}
+        <article class="Precap">
+            <section class="Section BasicInfo">
+                {{view Ember.ContenteditableView
+                    classNames="EditableText Name mousetrap"
+                    placeholderText="Name your precap"
+                    title="Edit the name of this precap..."
+                    editable=true
+                    allowLineBreaks=false
+                    tagName="h1"
+                    valueBinding="name"
+                }}
+
+                {{view App.DateView
+                    title="Set a date for this precap..."
+                    valueBinding="date"
+                }}
+
+                {{view Ember.ContenteditableView
+                    classNames="EditableText Description mousetrap"
+                    placeholderText="Describe your precap"
+                    title="Edit the description of this precap..."
+                    editable=true
+                    allowLineBreaks=false
+                    tagName="div"
+                    valueBinding="description"
+                }}
+            </section>
+
+            {{view App.SectionsView}}
+
+            <section class="Section Footer">
+                <div class="PrecapButton ArchivePrecapTrigger TextOnly Enabled" {{action 'archivePrecap'}}><span>archive this precap</span></div>
+                <div class="PrecapButton DeletePrecapTrigger TextOnly Enabled" {{action 'deletePrecap'}}><span>delete this precap</span></div>
+            </section>
+        </article>
+        {{outlet 'bsheet'}}
+        {{outlet 'modal'}}
+        <div id="BodyMask" style="display: none;"></div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="components/section-gap">
+        <div title="Add a new Section here..." class="PrecapButton AddSectionHereButton Size-Icon Enabled"  {{bind-attr class="hideButton:BarVisible"}} {{action 'showAddSectionHere' on='click'}}><span>&nbsp;</span></div>
+        <div class="AddSectionHereBar" {{bind-attr class="showBar:show"}}>
+            <ul class="SectionTypes">
+                <li class="ButtonWrapper Note">
+                    <div title="Add a Note section here..." class="PrecapButton Note TextOnly Enabled" {{action 'createNoteSection' on='click'}}><i class="Icon"></i><span>Note</span></div>
+                </li>
+                <li class="ButtonWrapper List">
+                    <div title="Add a List section here..." class="PrecapButton List TextOnly Enabled" {{action 'createListSection' on='click'}}><i class="Icon"></i><span>List</span></div>
+                </li>
+                <li class="ButtonWrapper Location">
+                    <div title="Add a Location section here..." class="PrecapButton Location TextOnly Enabled" {{action 'createLocationSection' on='click'}}><i class="Icon"></i><span>Location</span></div>
+                </li>
+                <li class="ButtonWrapper Timeline">
+                    <div title="Add a Timeline section here..." class="PrecapButton Timeline TextOnly Enabled" {{action 'createTimelineSection' on='click'}}><i class="Icon"></i><span>Timeline</span></div>
+                </li>
+                <li class="ButtonWrapper Group">
+                    <div title="Add a Group section here..." class="PrecapButton Group TextOnly Enabled" {{action 'createGroupSection' on='click'}}><i class="Icon"></i><span>Group</span></div>
+                </li>
+                <li class="ButtonWrapper PhotoSet">
+                    <div title="Add a PhotoSet section here..." class="PrecapButton PhotoSet TextOnly Enabled" {{action 'createPhotosetSection' on='click'}}><i class="Icon"></i><span>PhotoSet</span></div>
+                </li>
+                <li class="ButtonWrapper FileSet">
+                    <div title="Add a FileSet section here..." class="PrecapButton FileSet TextOnly Enabled" {{action 'createFilesetSection' on='click'}}><i class="Icon"></i><span>FileSet</span></div>
+                </li>
+            </ul>
+            <div class="PrecapButton CloseButton Size-Icon Enabled" {{action 'hideAddSectionHere' on='click'}}><span>x</span></div>
+        </div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="_sectionLocation">
+        <section class="Section Location">
+            <header>
+                {{view Ember.ContenteditableView
+                    classNames="EditableText SectionTitle mousetrap"
+                    editable=true
+                    allowLineBreaks=false
+                    tagName="h2"
+                    valueBinding="name"
+                }}
+                <input type="text" {{bind-attr placeholder=address}} class="LocationAddress Populated" autocomplete="off">
+            </header>
+            <div class="ContentContainer">
+                <div class="LocationMap">
+                    {{view App.MapView}}
+                </div>
+                <div class="ContentFooter">
+                    <div class="Right">
+                        <div title="Toggle the visibility of this map" class="PrecapButton Instructive HideShow TextOnly Enabled" {{action 'mapVisibilityToggle'}}><span>{{#if view.isHidden}}Show{{else}}Hide{{/if}} Map</span></div>
+                    </div>
+                </div>
+            </div>
+            <div title="Delete this Section..." class="PrecapButton SectionDelete DeleteButton_L Size-Icon Enabled"><span>&nbsp;</span>
+            </div>
+            <div class="DeleteConfirmBox" style="opacity: 0; visibility: hidden;"><span class="DeleteConfirmText Text">delete section?</span>
+                <div class="PrecapButton DeleteConfirm Text TextOnly Disabled"><span>yes, delete</span></div>
+                <div class="PrecapButton DeleteCancel Text TextOnly Enabled"><span>nevermind</span></div>
+            </div>
+        </section>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="_sectionGroup">
+        <section class="Section Group">
+            <header>
+                {{view Ember.ContenteditableView
+                    classNames="EditableText SectionTitle mousetrap"
+                    editable=true
+                    placeholderText="My Group"
+                    allowLineBreaks=false
+                    tagName="h2"
+                    valueBinding="name"
+                }}
+            </header>
+            <div class="ContentContainer">
+                <ul class="GroupList">
+                {{#each item in items}}
+
+                {{/each}}
+                </ul>
+                <div class="ContentFooter">
+                    <div class="Left">
+                        <div title="Add a new person to this group..." class="PrecapButton NewItemText Instructive TextOnly Enabled" {{action 'openContactChooser' this.view}}><span>Add Contact</span></div>
+                    </div>
+                </div>
+            </div>
+            <div title="Delete this Section..." class="PrecapButton SectionDelete DeleteButton_L Size-Icon Enabled"><span>&nbsp;</span>
+            </div>
+            <div class="DeleteConfirmBox" style="opacity: 0; visibility: hidden;"><span class="DeleteConfirmText Text">delete section?</span>
+                <div class="PrecapButton DeleteConfirm Text TextOnly Disabled"><span>yes, delete</span></div>
+                <div class="PrecapButton DeleteCancel Text TextOnly Enabled"><span>nevermind</span></div>
+            </div>
+
+            {{view App.ContactChooserView
+                controllerName="contactChooserController"
+            }}
+
+                {{#if controller.contactchooserToRender}}
+                {{partial controller.contactchooserToRender}}
+                {{/if}}
+        </section>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="_contactchooser">
+            <div class="Controls">
+                <!--<p class="EditableText">James Brown</p>-->
+                <input class="typeahead" type="text" placeholder="Start typing contact's name">
+                <div class="ActionButtons">
+                    <div title="Be DONE adding contacts" class="PrecapButton Add Size-Large Enabled Active Do DoneButton" {{action 'closeContactChooser'}}><span>Done</span></div>
+                    <div title="Create contact..." class="PrecapButton Add Size-Large Enabled Do CreateContactButton"><span>Create "James Brown"</span></div>
+                </div>
+            </div>
+            <div class="Container" style="display:none;">
+                <ul class="DirectoryList ContactList AutoComplete" id="templateDirectoryList" data-list="contacts">
+                    <li class="vcard Contact Person DirectoryListItem" title="View this contact card..."><div class="Avatar">&#160;</div><span class="Name fn n"><span data-bind="firstName">Jonathan</span> <span data-bind="lastName">Appletree</span> </span> <span class="Email"><a class="email" data-bind="email">johnny@orchardville.com</a></span> <span class="Phone tel" data-bind="phone">212-443-3333</span> </li>
+                    <li class="vcard Contact Person DirectoryListItem" title="View this contact card..."><div class="Avatar">&nbsp;</div><span class="Name fn n"><span>Susan</span> <span>Simonds</span> </span> <span class="Email"><a class="email">susan@gmail.com</a></span> <span class="Phone tel">509-555-1212</span> </li>
+                    <li class="vcard Contact Person DirectoryListItem" title="View this contact card..."><div class="Avatar">&nbsp;</div><span class="Name fn n"><span>David</span> <span>Simonds</span> </span> <span class="Email"><a class="email">susan@gmail.com</a></span> <span class="Phone tel">509-555-1212</span> </li>
+                    <li class="vcard Contact Person DirectoryListItem" title="View this contact card..."><div class="Avatar">&nbsp;</div><span class="Name fn n"><span>Albert</span> <span>Harrison</span></span><span class="Email"><a class="email">albert@hiscompany.com</a></span><span class="Phone tel">212-123-1234</span></li>
+                </ul>
+
+                <div class="NewContactInputView" style="display:none; height: 0;">
+                    <div class="AvatarUploadContainer"></div>
+                    <form id="settingsForm" class="InputForm">
+                        <div class="form-group">
+                            <!-- <label for="firstName" class="control-label">First Name</label> -->
+                            <input type="text" class="form-control" name="firstName" maxlength="50" placeholder="First Name (required)" title="We need to know your first name." required="required">
+                        </div>
+                        <div class="form-group">
+                            <!-- <label for="lastName" class="control-label">Last Name</label> -->
+                            <input type="text" class="form-control" name="lastName" maxlength="50" placeholder="Last Name (required)" title="We need to know your last name." required="required">
+                        </div>
+                        <div class="form-group">
+                            <!-- <label for="email" class="control-label">Email address</label> -->
+                            <input type="email" class="form-control" name="email" placeholder="Email (required)" title="We need to know your email address." required="required">
+                        </div>
+                    </form>
+                    <div class="ActionButtons">
+                        <div title="Save this contact" class="PrecapButton Add Size-Large Enabled Active Do SaveNewContactButton"><span>Save "James Brown"</span></div>
+                        <div title="Cancel" class="PrecapButton Add Size-Large Enabled CancelButton"><span>Cancel</span></div>
+                    </div>
+                    <div class="Mask">
+                        <div class="CheckMarkBox">
+                            <div class="Check">v</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="_sectionList">
+        <section class="Section List">
+            <header>
+                {{view Ember.ContenteditableView
+                    classNames="EditableText SectionTitle mousetrap"
+                    editable=true
+                    allowLineBreaks=false
+                    tagName="h2"
+                    valueBinding="name"
+                }}
+            </header>
+            <div class="ContentContainer">
+                <ul class="ListList">
+                {{#each item in items}}
+                    <li class="ListItem">
+                        <div class="ListCheckbox">
+                            {{view App.ListItemContainerView
+                                completed=item.completed
+                                item=item
+                            }}
+                        </div>
+                        {{view Ember.ContenteditableView
+                            classNames="EditableText ListItemText mousetrap"
+                            editable=true
+                            allowLineBreaks=false
+                            enterToNew=true
+                            tagName="p"
+                            valueBinding="item.text"
+                            sectionType="List"
+                        }}
+                    </li>
+                {{/each}}
+                </ul>
+                <div class="ContentFooter">
+                    <div class="Left">
+                        <div title="Add a new item to this list..." class="PrecapButton NewItemText Instructive TextOnly Enabled" {{action 'addListItem' items}}><span>Add Item</span>
+                        </div>
+                    </div>
+                    <div class="Right">
+                        <div title="Toggle the visibility of completed items" class="PrecapButton Instructive HideShow TextOnly Enabled" style="display: none;"><span>Hide Completed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div title="Delete this Section..." class="PrecapButton SectionDelete DeleteButton_L Size-Icon Enabled"><span>&nbsp;</span>
+            </div>
+            <div class="DeleteConfirmBox" style="opacity: 0; visibility: hidden;"><span class="DeleteConfirmText Text">delete section?</span>
+                <div class="PrecapButton DeleteConfirm Text TextOnly Disabled"><span>yes, delete</span></div>
+                <div class="PrecapButton DeleteCancel Text TextOnly Enabled"><span>nevermind</span></div>
+            </div>
+        </section>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="_sectionNote">
+        <section class="Section Note">
+            <header>
+                {{view Ember.ContenteditableView
+                    classNames="EditableText SectionTitle mousetrap"
+                    editable=true
+                    allowLineBreaks=false
+                    tagName="h2"
+                    valueBinding="name"
+                }}
+            </header>
+            <div class="ContentContainer">
+                {{view Ember.ContenteditableView
+                    classNames="EditableText NoteBody mousetrap"
+                    editable=true
+                    allowLineBreaks=true
+                    tagName="div"
+                    valueBinding="body"
+                }}
+            </div>
+            <div title="Delete this Section..." class="PrecapButton SectionDelete DeleteButton_L Size-Icon Enabled"><span>&nbsp;</span>
+            </div>
+            <div class="DeleteConfirmBox" style="opacity: 0; visibility: hidden;"><span class="DeleteConfirmText Text">delete section?</span>
+                <div class="PrecapButton DeleteConfirm Text TextOnly Disabled"><span>yes, delete</span></div>
+                <div class="PrecapButton DeleteCancel Text TextOnly Enabled"><span>nevermind</span></div>
+            </div>
+        </section>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="_sectionTimeline">
+        <section class="Section Timeline">
+            <header>
+                {{view Ember.ContenteditableView
+                    classNames="EditableText SectionTitle mousetrap"
+                    title="Edit the title for this timeline..."
+                    editable=true
+                    allowLineBreaks=false
+                    tagName="h2"
+                    valueBinding="name"
+                }}
+            </header>
+            <div class="ContentContainer">
+                <div class="Day">
+                    {{view App.DateView
+                        title="Set the date for this timeline..."
+                        valueBinding="date"
+                        classNames="Day-Date"
+                        isFullFormatted=true
+                    }}
+                    <ol class="TimelineList">
+                    {{#each item in items}}
+                        <li class="TimelineItem">
+                            <div class="TimeSpan">
+                                {{view App.TimeView
+                                    title="Change the start time for this item..."
+                                    data-timestamp=item.startTime
+                                }}
+                                <span> – </span>
+                                {{view App.TimeView
+                                    title="Change the end time for this item..."
+                                    data-timestamp=item.endTime
+                                }}
+                            </div>
+                            {{view Ember.ContenteditableView
+                                classNames="EditableText TimelineItemText mousetrap"
+                                title=""
+                                editable=true
+                                allowLineBreaks=false
+                                enterToNew=true
+                                tagName="p"
+                                valueBinding="item.text"
+                                sectionType="Timeline"
+                            }}
+                        </li>
+                    {{/each}}
+                    </ol>
+                </div>
+                <div class="ContentFooter">
+                    <div class="Left">
+                        <div title="Add a new entry to this timeline..." class="PrecapButton NewItemText Instructive TextOnly Enabled" {{action 'addTimelineItem' items date}}><span>Add Entry</span></div>
+                    </div>
+                </div>
+            </div>
+            <div title="Delete this Section..." class="PrecapButton SectionDelete DeleteButton_L Size-Icon Enabled"><span>&nbsp;</span></div>
+            <div class="DeleteConfirmBox" style="opacity: 0; visibility: hidden;">
+                <span class="DeleteConfirmText Text">delete section?</span>
+                <div class="PrecapButton DeleteConfirm Text TextOnly Disabled"><span>yes, delete</span></div>
+                <div class="PrecapButton DeleteCancel Text TextOnly Enabled"><span>nevermind</span></div>
+            </div>
+        </section>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="_sectionPhotoset">
+        <section class="Section PhotoSet">
+            <header>
+                {{view Ember.ContenteditableView
+                    classNames="EditableText SectionTitle mousetrap"
+                    title="Edit the title for this photoset..."
+                    editable=true
+                    allowLineBreaks=false
+                    tagName="h2"
+                    valueBinding="name"
+                }}
+            </header>
+            <div class="ContentContainer">
+                <ul class="AssetSetAssets Photos">
+                    {{#each photo in photos}}
+                    <li class="Asset Photo" title="View this asset larger...">
+                        <a {{action 'viewImage' photo }}><img {{bind-attr src=photo.sizes.square_165.url}} {{bind-attr width=photo.sizes.square_165.width}} {{bind-attr height=photo.sizes.square_165.height}} {{bind-attr alt=photo.caption}} /></a>
+                    </li>
+                    {{/each}}
+                    <li title="Add a new asset..." class="AddAsset NewTrigger" {{action 'addFile' 'image' photos}}>
+                        <span class="Text">+</span></li>
+                </ul>
+            </div>
+            <div title="Delete this Section..." class="PrecapButton SectionDelete DeleteButton_L Size-Icon Enabled"><span>&nbsp;</span></div>
+            <div class="DeleteConfirmBox" style="opacity: 0; visibility: hidden;">
+                <span class="DeleteConfirmText Text">delete section?</span>
+                <div class="PrecapButton DeleteConfirm Text TextOnly Disabled"><span>yes, delete</span></div>
+                <div class="PrecapButton DeleteCancel Text TextOnly Enabled"><span>nevermind</span></div>
+            </div>
+        </section>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="_sectionFileset">
+        <section class="Section FileSet">
+            <header>
+                {{view Ember.ContenteditableView
+                    classNames="EditableText SectionTitle mousetrap"
+                    title="Edit the title for this fileset..."
+                    editable=true
+                    allowLineBreaks=false
+                    tagName="h2"
+                    valueBinding="name"
+                }}
+            </header>
+            <div class="ContentContainer">
+                <ul class="AssetSetAssets Files">
+                    {{#each file in files}}
+                    <li class="Asset File" title="Download this file..." {{action 'downloadFile' file.url}}>
+                        <div class="Icon"><span class="Ext">{{file.ext}}</div>
+                        <div class="FileName">{{file.filename}}</div>
+                    </li>
+                    {{/each}}
+                    <li title="Add a new asset..." class="AddAsset NewTrigger" {{action 'addFile' 'text' files}}><span class="Text">+</span></li>
+                </ul>
+            </div>
+            <div title="Delete this Section..." class="PrecapButton SectionDelete DeleteButton_L Size-Icon Enabled"><span>&nbsp;</span></div>
+            <div class="DeleteConfirmBox" style="opacity: 0; visibility: hidden;">
+                <span class="DeleteConfirmText Text">delete section?</span>
+                <div class="PrecapButton DeleteConfirm Text TextOnly Disabled"><span>yes, delete</span></div>
+                <div class="PrecapButton DeleteCancel Text TextOnly Enabled"><span>nevermind</span></div>
+            </div>
+        </section>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="Imageviewer">
+            <div class="Inner">
+                <div class="Photo">
+                    {{view App.ImageviewerImageView
+                        src=sizes.max_900.url
+                    }}
+                </div>
+                <footer>
+                    {{view Ember.ContenteditableView
+                        classNames="EditableText Caption"
+                        placeholder="add a caption"
+                        editable=true
+                        allowLineBreaks=false
+                        tagName="div"
+                        valueBinding="caption"
+                    }}
+                    <div class="ActionsContainer">
+                        <span class="DeleteConfirmText" style="display:none;">delete this image?</span>
+                        <button class="DeleteAssetButton">delete</button>
+                        <button class="DeleteConfirm" style="display:none;">yes, delete</button>
+                        <button class="DeleteCancel" style="display:none;">nevermind</button>
+                    </div>
+                </footer>
+            </div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="_toolbar">
+        <div class="Toolbar">
+            <ul class="ActionButtons">
+                <li class="Trigger">
+                    <div title="Send this precap..." class="PrecapButton SendButton" {{action 'showSend' on='click'}}><i class="Icon">&nbsp;</i><span>send</span></div>
+                </li>
+                <li class="Trigger">
+                    <div title="Coming soon!" class="PrecapButton NewPrecapButton" {{action 'newPrecap' on='click'}}><i class="Icon">&nbsp;</i><span>new precap</span></div>
+                </li>
+                <li class="Trigger">
+                    <div title="View list of precaps..." class="PrecapButton MyPrecapsButton" {{action 'showFind' on='click'}}><i class="Icon">&nbsp;</i><span>my precaps</span></div>
+                </li>
+                <li class="Trigger">
+                    <div title="View all contacts..." class="PrecapButton DirectoryButton" {{action 'showDirectory' on='click'}}><i class="Icon">&nbsp;</i><span>directory</span></div>
+                </li>
+                <li class="Trigger">
+                    <div title="Update Settings..." class="PrecapButton SettingsButton TextOnly" {{action 'showSettings' on='click'}}><span>settings</span></div>
+                </li>
+            </ul>
+        </div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="precap/find">
+        <div class="BSheetContainer" style="margin-left: 924px;">
+            <article class="BSheet DocumentChooser">
+                <header>
+                    <h1>My Precaps</h1>
+                    <div class="HeaderControls">
+                        <!--<div class="PrecapMenuButton"><div class="Icon">&gt;</div><span class="Label"><span class="SortedByType">Name</span></span></div>-->
+                        <div class="SearchInput"><div class="Icon">&nbsp;</div><input type="Text" placeholder="Search"></div>
+                        <div class="PrecapListViewButtons">
+                            <div title="View Archive" class="PrecapButton Size-Icon Enabled ArchiveButton_S"><span>A</span></div>
+                            <div title="View Calendar" class="PrecapButton Size-Icon Enabled CalendarButton_S"><span>C</span></div>
+                            <div title="View List" class="PrecapButton Size-Icon Enabled ListButton_S Active"><span>L</span></div>
+                        </div>
+                    </div>
+                </header>
+                <div class="PrecapButton CloseX_L Size-Icon Enabled " {{action 'hide' on='click'}}><span>&nbsp;</span></div>
+                <div class="ContentContainer">
+                    <div class="PrecapListView">
+                        {{name}}
+                        <ul class="PrecapList">
+                            {{#each}}
+                            <li class="PrecapListItem" {{action 'select' this}}>
+                                <div class="Info">
+                                    <div class="PrecapName">{{name}}</div>
+                                    <div class="PrecapDetails">{{formattedDate date}}</div>
+                                </div>
+                                <div class="Action">
+                                    <div title="Archive this Precap..." class="PrecapButton ArchiveButton_L Size-Icon Enabled"><span>&nbsp;</span></div>
+                                </div>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    <div class="PrecapCalendarView"></div>
+                    <div class="PrecapListView Archive">
+                        <ul class="PrecapList"></ul>
+                    </div>
+                </div>
+            </article>
+        </div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="precap/send">
+        <div class="BSheetContainer" style="margin-left: 924px;">
+            <article class="BSheet SendView TwoColumn">
+                <header>
+                    <h1>Send this precap...</h1>
+                    <div class="ActionButtons">
+                        <div class="PrecapButton Send Size-Xlarge Enabled Active" {{action 'send' on='click'}}><span>Send</span></div>
+                        <div class="PrecapButton Preview Size-Xlarge Enabled" {{action 'preview' on='click'}}><span>Preview</span></div>
+                    </div>
+                </header>
+                <div class="PrecapButton CloseX_L Size-Icon Enabled" {{action 'hide' on='click'}}><span>&nbsp;</span></div>
+                <div class="ContentContainer">
+                    <div class="Column SectionsToInclude">
+                        <h3>Sections to include:<div class="PrecapButton Size-Small Enabled Active"><span>all</span></div></h3>
+                        <ul class="SectionsToIncludeList">
+                        {{#each item in sections}}
+                            {{send-item section=item itemAdd='itemAdd' itemRemove='itemRemove'}}
+                        {{/each}}
+                        </ul>
+                    </div>
+                    <div class="Column SendTo">
+                        <h3>Deliver to:</h3>
+                        <div class="Group">
+                            <h5 class="GroupHead">People on this precap:
+                                <div class="PrecapButton Size-Small Enabled Active"><span>all</span></div>
+                            </h5>
+                            <ul class="SendToList Col1"></ul>
+                        </div>
+                        <div class="Group">
+                            <h5 class="GroupHead">Other Recipients:</h5>
+                            <div class="PrecapInput Text OneLine Buttons">
+                                {{input type='text' value=email action='recipientAdd' placeholder='name@domain.com'}}
+                                <div class="PrecapButton Add Size-Medium Enabled Do"><span {{action 'recipientAdd'}}>Add</span></div>
+                            </div>
+
+                            <ul class="SendToList Col1">
+                                {{#each email in deliverTo}}
+                                <li><div class="PrecapButton Size-Icon Enabled "><i class="Icon CloseX_S" {{action 'recipientRemove'}}>&nbsp;</i><span>X</span></div><span>{{email}}</span></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        <div class="Group">
+                            <h5 class="GroupHead">Subject:</h5>
+                            <div class="PrecapInput Text OneLine"><input placeholder="Type your message subject here"></div>
+                        </div>
+                        <div class="Group">
+                            <h5 class="GroupHead">Additional Note:</h5>
+                            <div class="PrecapInput Text MultiLine">
+                                <div class="Inner"><textarea></textarea></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="components/send-item">
+            <div class="SelectionIndicator" {{action 'click' section}}>v</div>
+            <div class="Icon">x</div>
+            <div class="SectionDetails">
+                <div class="Title">{{section.name}}</div>
+                <div class="Detail">Details go here.</div>
+            </div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="directoryList">
+        <ul class="DirectoryTabIndex" id="templateDirectoryTabIndex" data-list="letters">
+            <li data-bind="." style="display: inline;list-style-type: none;padding-right: 10px;"></li>
+        </ul>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="precap/directory">
+        <div class="BSheetContainer" style="margin-left: 924px;">
+            <article class="BSheet DirectoryView">
+                <header>
+                    <h1>Directory</h1>
+                </header>
+                <div class="PrecapButton CloseX_L Size-Icon Enabled" {{action 'hide' on='click'}}><span>&nbsp;</span></div>
+                <div class="ContentContainer">
+                    <ul class="DirectoryTabIndex">
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">A</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">B</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">C</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">D</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">E</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">F</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">G</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">H</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">I</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">J</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">K</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">L</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">M</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">N</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">O</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">P</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">Q</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">R</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">S</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">T</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">U</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">V</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">W</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">X</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">Y</li>
+                        <li style="display: inline; list-style-type: none; padding-right: 10px;">Z</li>
+                    </ul>
+                    <ul class="DirectoryList" id="templateDirectoryList">
+                        {{#each}}
+                        <li class="vcard Contact Person DirectoryListItem" title="View this contact card...">
+                            <div class="Avatar">&#160;</div>
+                            <span class="Name fn n">
+                                {{firstName}} {{lastName}}
+                            </span>
+                            <span class="Email"><a class="email">{{email}}</a></span>
+                            <span class="Phone tel">{{phone}}</span>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </article>
+        </div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="precap/settings">
+        <div class="BSheetContainer" style="margin-left: 924px;">
+            <article class="BSheet Settings">
+                <header>
+                    <h1>Settings</h1>
+                </header>
+                <div class="PrecapButton CloseX_L Size-Icon Enabled " {{action 'hide' on='click'}}><span>&nbsp;</span></div>
+                <div class="ContentContainer">
+                    {{#each}}
+                    <form id="settingsForm">
+                    <div class="form-group">
+                        <label for="firstName" class="control-label">First Name</label>
+                        {{input type="text" class="form-control" name="firstName" maxlength="50" placeholder="(required)" title="We need to know your first name." value=firstName required="required" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" class="control-label">Last Name</label>
+                        {{input type="text" class="form-control" name="lastName" maxlength="50" placeholder="(required)" title="We need to know your last name." value=lastName required="required" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email address</label>
+                        {{input type="email" class="form-control" name="email" placeholder="(required)" title="We need to know your email address." value=email required="required" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="control-label">Password</label>
+                        {{input type="password" class="form-control" id="password" name="password" minlength="6" placeholder="(required, at least 6 characters)" title="A password is required." required="required" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordConfirm" class="control-label">Confirm Password</label>
+                        {{input type="password" class="form-control" name="passwordConfirm" minlength="6" placeholder="(required, at least 6 characters)" title="A matching password is required." required="required" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="address1" class="control-label">Street Address</label>
+                        {{input type="text" class="form-control" name="address1" placeholder="(required)" title="We need to know your address." value=address1 required="required" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="address2" class="control-label">Unit, Apt, etc.</label>
+                        {{input type="text" class="form-control" name="address2" value=address2 }}
+                    </div>
+                    <div class="form-group">
+                        <label for="city" class="control-label">City</label>
+                        {{input type="text" class="form-control" name="city" placeholder="(required)" title="We need to know your city." value=city required="required" }}
+                    </div>
+                    <div class="form-group">
+                        <label for="state" class="control-label">State</label>
+                        {{view Ember.Select
+                            classNames="form-control"
+                            name="state"
+                            title="We need to know your state."
+                            prompt="Select a State (required)"
+                            content=states
+                            optionValuePath="content.abbreviation"
+                            optionLabelPath="content.name"
+                            value=state
+                            required="required"
+                        }}
+                    </div>
+                    <div class="form-group">
+                        <label for="zip" class="control-label">Zip Code</label>
+                        {{input type="text" class="form-control" name="zip" placeholder="(required)" title="We need to know your zip code." value=zip required="required" }}
+                    </div>
+                    <div class="form-group"><button class="btn btn-lg btn-primary btn-block" {{action 'update' on='click'}}>Update</button></div>
+                    </form>
+                    {{/each}}
+                </div>
+            </article>
+        </div>
+
+        <style>
+            small {color: #a94442;}
+        </style>
+
+        </script>
+
+    </body>
+</html>

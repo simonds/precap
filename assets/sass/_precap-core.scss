@@ -1,4 +1,4 @@
-*{margin:0;padding:0;} fieldset,img{border:0;} ol,ul{list-style:none;} a:active,a:focus{outline:0;} h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+*{margin:0;padding:0;} fieldset,img{border:0;} ol,ul{list-style:none;} a:active,a:focus{outline:0;} h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;margin:0;padding:0;}
 
 html {
 	width:  100%;
@@ -25,7 +25,9 @@ strong, b {font-weight: 600;}
 ::selection {
 	background-color:#67aaff;
 	}
-
+*[tabindex="-1"] {
+	outline: 0;
+}
 
 .Canvas {
 	width: 904px;
@@ -33,8 +35,8 @@ strong, b {font-weight: 600;}
 	z-index: 0;
 	}
 	.PrecapLogo {
-		color: #fff;
-		// color: #444;
+		color: rgb(25,0,0);
+		@include opacity(0.5);
 		font-size: 24px;
 		line-height: 1;
 		font-family: $headerFontFamily;
@@ -113,6 +115,10 @@ strong, b {font-weight: 600;}
 	// @include box-shadow(rgba(0, 0, 0, 0.6) 0px 0px 4px); 
 	padding: 50px 0px 20px;
 	z-index: 100;
+}
+
+.is-hidden {
+	display:none;
 }
 
 

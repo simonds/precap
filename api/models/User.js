@@ -6,7 +6,8 @@
  * @docs    :: http://sailsjs.org/#!documentation/models
  */
 
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt'),
+    crypto = require('crypto');
 
 module.exports = {
 
@@ -18,24 +19,33 @@ module.exports = {
       type: 'string',
       minLength: 1,
       maxLength: 50,
-      required: true
+      required: true,
+      defaultsTo: '-----'
     },
 
     lastName: {
       type: 'string',
       minLength: 1,
       maxLength: 50,
-      required: true
+      required: true,
+      defaultsTo: '-----'
     },
 
     fullName: function() {
-      return this.firstName + ' ' + this.lastName
+      return this.firstName + ' ' + this.lastName;
+    },
+
+    userName: {
+      type: 'string',
+      minLength: 5,
+      maxLength: 20,
+      required: false
     },
 
     password: {
       type: 'string',
       minLength: 6,
-      required: true
+      required: false
     },
 
     email: {
@@ -49,7 +59,8 @@ module.exports = {
       
     address1: {
       type: 'string',
-      required: true
+      required: true,
+      defaultsTo: '-----'
     },
 
     address2: {
@@ -58,12 +69,14 @@ module.exports = {
 
     city: {
       type: 'string',
-      required: true
+      required: true,
+      defaultsTo: '-----'
     },
 
     state: {
       type: 'string',
-      required: true
+      required: true,
+      defaultsTo: '-----'
     },
 
     country: {
@@ -74,14 +87,49 @@ module.exports = {
     zip: {
       type: 'regex',
       required: true,
-      regex: '/(^\d{5}$)|(^\d{5}-\d{4}$)/'
+      regex: /(^\d{5}$)|(^\d{5}-\d{4}$)/,
+      defaultsTo: '00000'
     },
 
-     toJSON: function(){
+    emailVerified: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
+    emailVerificationCode: {
+      type: 'string'
+    },
+
+    loginAuthenticationCode: {
+      type: 'string'
+    },
+
+    hasLoggedIn: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
+    isActive: {
+      type: 'boolean',
+      defaultsTo: true
+    },
+
+    isResettingPassword: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
+    toJSON: function(){
        var obj = this.toObject();
        delete obj.password;
+       delete obj.emailVerified;
+       delete obj.emailVerificationCode;
+       delete obj.hasLoggedIn;
+       delete obj.isActive;
+       delete obj.isResettingPassword;
+       delete obj.loginAuthenticationCode;
        return obj;
-     }
+    }
   },
 
   validation_messages: {
@@ -98,7 +146,7 @@ module.exports = {
       type: 'This doesn\'t appear to be a properly formatted email address.'
     },
     password: {
-      required: 'A password is required.',
+      //required: 'A password is required.',
       minLength: 'You need to use a password that is at least six characters long.'
     },
     address1: {
@@ -121,8 +169,25 @@ module.exports = {
     bcrypt.hash(values.password, 10, function(err, hash) {
       if(err) return next(err);
       values.password = hash;
-      next();
+      crypto.randomBytes(48, function(ex, buf) {
+        values.emailVerificationCode = buf.toString('hex');
+        next();
+      });
     });
+  },
+
+  beforeUpdate: function(values, next) {
+    if (values.password) {
+      bcrypt.hash(values.password, 10, function(err, hash) {
+        if(err) return next(err);
+        values.password = hash;
+        crypto.randomBytes(48, function(ex, buf) {
+          values.emailVerificationCode = buf.toString('hex');
+          next();
+        });
+      });      
+    }
   }
+
 
 };

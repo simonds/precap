@@ -1,62 +1,123 @@
+.ContactChooser {
+    .Controls {
+        .ActionButtons {
+            position: absolute;
+            right: 0;
+            top: 0;
+            overflow: hidden;
+
+            .PrecapButton {
+                float: right;
+                margin-left: 0.75em;
+            }
+        }
+    }
+
+    .Container {
+        @include box-shadow(rgba(0, 0, 0, 0.5) 0px 0px 8px);
+        max-height: 200px;
+        overflow: auto;
+
+        .ContactList {
+            .Contact {
+                padding: 10px;
+                }
+            .Contact.Selected {
+                @include background(linear-gradient(#008cf8 25%,#2b6ee1));
+
+                > span, 
+                .Email .email {
+                    color: #fff;
+                    }
+            }
+            .Contact:hover {
+                background: #eee;
+            }
+            .Contact.Selected:hover {
+                background: #2b6ee1;
+            }
+        }
+
+        .NewContactInputView {
+            background: #fff;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 3.5em 1em 1em;
+
+            .ActionButtons {
+                position: absolute;
+                bottom: 1em;
+                right: 0;
+                width: 50%;
+
+
+                .PrecapButton {
+                    float: right;
+                    margin-right: 1em;
+                    margin-top: 1em;
+                    }
+            }
+
+            .AvatarUploadContainer {
+                height: 100%;
+                width: 22.5%;
+                float: left;
+                background: #eeeeee url(/images/contact_blank.svg) no-repeat center center;
+                background-size: 112% auto;
+                background-position: center bottom;
+                }
+
+            .InputForm {
+                float: left;
+                width: 75%;
+                margin-left: 2.5%;
+                }
+
+            .Mask {
+                display:none;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: #000;
+                opacity: 0;
+            }
+            .Mask .CheckMarkBox {
+                height: 50%;
+                top: 25%;
+                position: absolute;
+                left: 40%;
+                width: 20%;
+                @include perspective(1000);
+
+                .Check {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-image: url(/images/check_wht.svg);
+                    background-size: 100% 100%;
+                    background-position: center center;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-indent: 100%;
+                    @include opacity(0);
+                    @include transform(rotateZ(0deg) scale(0.5));
+                    @include transform-style(preserve-3d);
+                    @include transition(all 0.3s ease-out);
+                }
+                &.Rotate .Check {
+                    @include transform(rotateZ(-720deg) scale(1));
+                    @include opacity(1);
+                    // @include rotateZ(-720deg);
+                }
+            }
+        }
+    }
+}
 
 section.Group {
-	.Contact {
-		font-weight: 300;
-		padding: 4px 4px 4px 0;
-		cursor: default;
-		.Avatar {
-			display: inline-block;
-			cursor: pointer;
-			vertical-align: middle;
-			width:  40px;
-			height: 40px;
-			margin-right: 8px;
-			background-image:url(../images/precap-sprite.png);
-			background-color:lightgray;
-			background-repeat:no-repeat;
-			// overflow: hidden;text-indent: 100%;white-space: nowrap;
-			@include border-radius(20px);
-
-			img {
-				width: 40px;
-				height: 40px;
-				}
-			}
-		&.Person .Avatar {
-			background-position: -150px -233px;
-			}
-		&.Person:hover .Avatar {
-			background-position: -150px -256px;
-			}
-		&.Company .Avatar {
-			background-position: -150px -279px;
-			}
-		&.Company:hover .Avatar {
-			background-position: -150px -302px;	
-			}
-
-		& > span {
-			padding-right: 14px;
-		}
-
-		.Name 	{
-			font-weight: 600;
-			font-size: 16px;
-			cursor: pointer;
-			}
-			.Name:hover {
-				text-decoration: underline;
-				}
-		.Title 	{font-style: italic;}
-		.Email 	{
-			.email {
-				text-decoration: none;
-				}
-			.email:hover {
-				text-decoration: underline;
-				}
-		}
-	}
 	.NewPersonGutter {
 		padding-top: 5px;
 		padding-left: 32px;

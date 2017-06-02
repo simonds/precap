@@ -57,7 +57,6 @@ Precap.Section.Location = new Class({
             tag: 'h2'
             ,className: 'SectionTitle'
             ,allowLineBreaks: false
-            ,returnHTML: false
             ,deactivateOn: 'enter'
             ,onDeactivate: function(editable, hasChanged){
                 this.save();
