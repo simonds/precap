@@ -11,7 +11,7 @@ var staging = {
   'default': 'mongo',
   mongo: {
     module: 'sails-mongo',
-    url: "mongodb://precap:g3tprecapped@ds033469.mongolab.com:33469/af_precap-staging-marksimonds",
+    url: "mongodb://heroku_app20825683:g0tprecapped@ds061268.mlab.com:61268/heroku_app20825683",
     schema: true
   }
 };
